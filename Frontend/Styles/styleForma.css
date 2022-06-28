@@ -1,0 +1,43 @@
+.form-group {
+    background-color: #E5E5E5;
+    border-color: #D8D6D6;
+    border-width: 5px;
+    border-radius: 0%;
+    text-align: left;
+    width: 100%;
+}
+
+#insert{
+    float: right;
+    margin: 20px;
+    color: #E5E5E5;
+}
+
+form{
+    border: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+form:active{
+    outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none; 
+}
+.form-control{
+    border-color: black;
+    border-width: 1px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    background-color: #ffffff;
+}
+.lokacija, textarea{
+    border-color: black;
+    border-width: 1px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 10px;
+    width: 100%;
+}

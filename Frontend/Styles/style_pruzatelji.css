@@ -1,0 +1,36 @@
+h1{
+    font-size: 1em;
+    padding: 1em;
+    color: #595959;
+}
+
+.btn{
+    border-color: #D8D6D6;
+    border-width: 2px; 
+    border-radius: 0%;
+    color: #595959;
+}
+
+.text-center{
+    padding: 1em;
+    margin: 1em; 
+}
+
+#results{
+    font-size: 10px;
+    text-align: center;
+    color: #595959;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+    color: #595959;
+}
+
+#admin{
+    padding: 0.5em;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+}

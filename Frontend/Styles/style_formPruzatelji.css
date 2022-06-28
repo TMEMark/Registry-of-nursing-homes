@@ -1,0 +1,190 @@
+        /*grid*/
+        nav{grid-area: a;}
+        div .container{grid-area: b;}
+        form{grid-area:c;}
+    
+        div .grid{
+            display: grid;
+            grid-template-areas: 
+            "a a a a"
+            "b c c c"
+            "b c c c"
+            ;
+        }
+    
+        *{
+            margin: 0;
+            padding: 0;
+            outline: none;
+            
+        }
+        body {
+          font-family: 'Poppins', sans-serif;
+          min-height: 100vh;
+          background-color: #E5E5E5;
+        }
+/*form*/
+
+.card {
+  padding: .5rem;
+  max-width: 80%;
+  margin: 0 auto;
+  animation: fade 250ms ease-in-out forwards;
+  top: 50%;
+  right: 50%;
+}
+
+.form-group {
+  display: flex;
+    gap: 0.25em;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*.form-group:last-child {
+  margin: 0;
+}*/
+
+.form-group > label {
+  font-weight: bold;
+  font-size: .8em;
+  color: #333;
+}
+
+.form-group > input {
+  border: 1px solid #333;
+  border-radius: .25em;
+  font-size: 1rem;
+  padding: .25em;
+}
+
+.step-title {
+  margin: 10%;
+  text-align: center;
+}
+
+h4{
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.card.active {
+  animation: slide 250ms 125ms ease-in-out both;
+}
+
+.multi-step-form {
+  overflow: hidden;
+  position: relative;
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/*navbar*/
+#logoIZVOR{
+  position:absolute;
+  margin-top: -70px;
+  margin-left: 250px;
+}
+
+#logoRMU{
+  margin-top: 10px;
+
+}
+
+nav{
+  margin-right: 100%;
+}
+
+/*sidebar*/
+#sidebar {
+  position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #EFEFEF;
+  text-align: center;
+  overflow-x: hidden;
+  margin-top: 0%;
+}
+#sidebar .nav a{
+  color: #595959;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+#sidebar .nav a:hover{
+  background: none;
+  color: #7d8488;
+} 
+.nav{
+  border: none;
+  position: fixed;
+}
+.nav td{
+   width: 20px;
+   padding: 0.5em;
+   border-top-left-radius: 50px;
+   border-top-right-radius: 50px;
+   border-bottom-left-radius: 50px;
+   border-bottom-right-radius: 50px;
+}
+#logout{
+  color: white;
+  text-decoration: none;
+}
+.d-block{
+  padding-left:100px;
+}
+.container{
+  padding-left: 210px;
+}
+thead{
+  border: 1px;
+  border-color: #595959;
+}
+.container-fluid{
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background-color: black;
+}
+
+#admin{
+  padding: 0.5em;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+

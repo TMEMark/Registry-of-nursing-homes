@@ -1,0 +1,138 @@
+#logo, #logoRMU, #logoIZVOR{
+    height: 50px;
+    width: 250px;
+}
+#logoIZVOR{
+    position: absolute;
+    top: 25px;
+    left: 160px;
+}
+li{
+    text-align: center;
+}
+a:link, a:visited{
+    color: white;
+    text-decoration: none;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #E5E5E5;
+}
+#logo_ESF{
+    width: 50%;
+    height: 50%;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+}
+.icon{
+    height: 80px;
+    width: 100px;
+    float: right;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.footerData{
+    text-align: center;
+}
+.footerData a{
+    color: #595959;
+}
+h1{
+    margin-top: 25%;
+    margin-bottom: 1em;
+    float: center;
+}
+.icon{
+    margin-top: 130px;
+}
+div h3{
+    margin-top: 40%;
+}
+
+@media (min-width: 1445px){
+      #sidebar {
+        position: fixed;
+        top: 10%;
+        left: 250px;
+        width: 250px;
+        height: 90%;
+        margin-left: -250px;
+        margin-top: 14px;
+        overflow-y: auto;
+        background: #EFEFEF;
+        text-align: center;
+      }
+      #sidebar .nav a{
+        color: #595959;
+        font-size: 14px;
+        padding: 16px 24px;
+      }
+      #sidebar .nav a:hover{
+        background: none;
+        color: #7d8488;
+      } 
+      #sidebar #admin{
+        margin-top: 3em;
+      }
+      #sidebar p{
+          margin-bottom: 2em;
+      }
+     .nav{
+         border: none;
+     }
+     .nav td{
+        width: 20px;
+        padding: 0.5em;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
+     #logout{
+        color: white;
+        text-decoration: none;
+    }
+    .d-block{
+        padding-left:100px;
+    }
+    .container{
+        padding-left: 210px;
+    }
+    thead{
+        border: 1px;
+        border-color: #595959;
+    }
+}
+@media (max-width: 1444px){
+    #search{
+        margin-top: 120px;
+        width: 30%;
+        text-align: center;
+    }
+    #pruzatelj{
+        float: left;
+    }
+    #usluga{
+        float: left;
+    }
+    #kategorija{
+        float: left;
+    }
+
+    #celija_pruzatelji{
+        float: left;
+    }
+    #celija_usluge{
+        float: left;
+    }
+    #celija_kategorije{
+        float: left;
+    }
+    #celija_admini{
+        float: left;
+    }
+
+}

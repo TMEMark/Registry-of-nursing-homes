@@ -1,0 +1,35 @@
+#more{
+    color: #595959;
+    text-decoration: underline;
+}
+
+.form-control{
+    padding: 1em;
+}
+
+.form-select{
+    padding: 1em;
+    width: 150px;
+    text-align: center;
+    display: block;
+    margin: 10px auto;
+}
+
+@media (max-width: 1444px){
+    #zupanija, #usluga, #kategorija{
+        float: left;
+    }
+    input #prikazi{
+        float: right;
+    }
+}
+
+.searchInput{
+    border-radius: 30px;
+
+}
+
+/*#search{
+    margin-top: 5em;
+}*/
+

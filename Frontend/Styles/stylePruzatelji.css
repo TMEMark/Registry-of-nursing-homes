@@ -1,0 +1,62 @@
+h1{
+    font-size: 1em;
+    padding: 1em;
+    color: #595959;
+}
+
+.btn{
+    border-color: #000000;
+    margin:10px;
+    border-radius: 20px;
+    border-width: 1px;
+    color: #595959;
+}
+
+.submit{
+    border-color: #000000;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    border-width: 1px;
+    color: #595959;
+}
+.submit:hover{
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.text-center{
+    padding: 1em;
+    margin: 1em; 
+}
+
+p{
+    margin: 0;
+    padding: 0;
+    color: #595959;
+}
+
+#admin{
+    padding: 0.5em;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+@media (max-width: 1444px){
+    #pruzatelji, #usluge, #kategorije, #admin{
+        color: #000000;
+        font-weight: 500;
+        margin: 40px;
+    }
+ 
+    .nav td{
+     border-top-left-radius: 20px;
+     border-top-right-radius: 20px;
+     border-bottom-left-radius: 20px;
+     border-bottom-right-radius: 20px;
+     border-width: 2px;
+     }
+
+
+}
