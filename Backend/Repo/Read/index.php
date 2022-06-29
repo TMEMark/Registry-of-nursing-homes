@@ -70,13 +70,14 @@ function selectLok(){
 
 function selectPruzUslKat(){
     global $db;
-    $query = ("SELECT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+    $query = ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
     FROM usluge u
     INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
     INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
     INNER JOIN lokacija l ON l.idLokacije = p.lokacija
     INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-    INNER JOIN kategorije k ON k.idKategorija = puk.kategorija");
+    INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
+    GROUP BY p.naziv_pruzatelja");
     $statement = $db->prepare($query);
     $statement->execute();
     $array = $statement->fetchAll();

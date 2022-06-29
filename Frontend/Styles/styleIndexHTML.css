@@ -1,0 +1,159 @@
+@media (min-width: 1025px) {
+
+/* Everything for section with landingpageOne id*/   
+    .header{grid-area: a;}
+    .headline{grid-area: b;}
+    .logo{grid-area: c;}
+    .menu{grid-area: d;}
+
+    #landingpageOne {
+        display: grid;
+        grid-template-areas:
+        "a . . ."
+        ". b ."
+        ;
+    }
+
+    .header {
+        display: grid;
+        grid-template-areas: 
+        "c d d"
+        ;
+    }
+
+    ul li{
+        display:inline-block;
+        text-align: right;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        color: #e5e7ec;
+        margin-top: -10px;
+    }
+
+    ul{
+        padding-left: 60%;
+        margin-left: 20px;
+        margin-top: 5%;
+    }
+
+    li{
+        margin-right: 20px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    #landingpageOne{
+        background-color: #303030;
+    }
+
+    .headline{
+        text-align: center;
+        margin-left: -25%;
+    }
+
+    h1{
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 54px;
+        line-height: 96px;
+        color: #e5e7ec;
+        margin-top: 15%;
+    }
+
+    h3{
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 54px;
+        color: #e5e7ec;
+        margin-bottom: 20%;
+    }
+
+    body{
+        font-family: 'Poppins';
+    }
+
+    #logo{
+        height: 70.97px;
+        margin-top: 15px;
+ 
+    }
+
+    .header img{
+        position: absolute;
+        margin-left: -15%;
+    }
+
+    /* Everything for section with landingpageTwo id*/ 
+    #landingpageTwo{
+        color: #2B3C75;
+        margin-left: 10%;
+        margin-bottom: 10%;
+    }
+
+    .misijaVizija{grid-area: a;}
+    .animation{grid-area: b;}
+
+    #landingpageTwo {
+        display: grid;
+        grid-template-areas:
+        "a a a b"
+        ;
+    }
+
+    .projekt{
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 42px;
+    }
+    
+    .agregator{
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 54px;
+    }
+
+    .pristup{
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        margin-top: -15px;
+    }
+
+    .link a{
+        text-decoration: none;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        color: #EB6E39;
+    }
+
+    /* Everything for section with landingpageThree id*/
+    #landingpageThree{
+        color: #2B3C75;
+        margin-left: 10%;
+        margin-bottom: 10%;
+    }
+
+    .opis1{
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 42px;
+    }
+    .opis2{
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 54px;
+    }
+}

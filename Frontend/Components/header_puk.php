@@ -24,26 +24,7 @@
        </div>
 
        <div class="container">
-        <div class="row">
-          <div class="col-4 col-lg-6 col-xl-6" id="results1">
-            <?php
-            //$query = $db->query("SELECT COUNT(*) FROM pruzatelji");
-            //$data = $query->fetchAll();
-            ?>
-            x rezultata od <!--<?php echo $data[0][0] ?>-->
-          </div>
-          <div class="col-8 col-lg-6 col-xl-6" id="results2">
-            Rezultati po stranici:
-            <select>
-              <option selected>-</option>
-              <option value="3">3</option>
-              <option value="5">5</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-
-
-        </div>
+       
       </div>
 
       

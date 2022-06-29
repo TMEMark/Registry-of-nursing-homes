@@ -1,0 +1,47 @@
+nav{grid-area: a;}
+.ilustracija {grid-area: b;}
+.content {grid-area: c;}
+
+@media(min-width:1445px){
+body{
+    display: grid;
+    grid-template-areas: 
+    "a a a a"
+    "b b c c"
+    "b b c c";
+}
+
+form{
+    float:right;
+    padding-top: 10em;
+  }
+  .illustr{
+    float: left;
+    padding-top: 10em;
+    height: 70%;
+    width: 80%;
+    padding-left: 5em;
+  }
+}
+  @media(max-width:1444px){
+    body{
+      display: grid;
+      grid-template-areas: 
+      "a a"
+      "c c"
+      "c c";
+  }
+  .illustr{
+    display: none;
+  }
+  }
+
+  @media(min-width:768px) and (max-width:1445px){
+    label, input[name="naziv_usl"]{
+      margin-left: 50px;
+    }
+
+    input[type="submit"], button{
+      width: 40%;
+    }
+  }

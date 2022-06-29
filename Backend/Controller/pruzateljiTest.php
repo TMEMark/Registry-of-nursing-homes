@@ -39,8 +39,9 @@ if(isset($_POST['idPruz']) && $_POST['idPruz'] > 0){
     $long = $_POST['long'];
     $lat = $_POST['lat'];
     $lokacija = $_POST['lokacija'];
+    
     updatePruzatelj($idPruz, $nazivPruzatelja, $oib, $email, $adresa, $kontakt, $URL, $radnVr, $napomena, $long, $lat, $lokacija);
-    header("Location:../../Frontend/Pages/pruzatelji.php");
+    header("Location:../../Frontend/Pages/form_pruzateljiUsluge.php");
 }
 
 
