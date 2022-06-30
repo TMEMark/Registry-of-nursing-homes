@@ -3,7 +3,7 @@ include "../../Backend/Controller/LoginSystem/session.php";
 require "../Components/header.html";
 require "../Components/dropdown_menu.html";
 require "../Components/header.html";
-require "../Components/header_admin.html";
+require "../Components/header_admin.php";
 require "../../Backend/select.php";
 
 if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){

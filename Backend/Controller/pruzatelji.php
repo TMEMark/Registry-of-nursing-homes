@@ -14,7 +14,6 @@ if (isset($_POST['idPruz']) && $_POST['idPruz'] == ""){
     $lat = $_POST['lat'];
     $lokacija = $_POST['lokacija'];
     $oib = $_POST['oib'];
-
     insertPruzatelj($nazivPruzatelja, $email, $adresa, $kontakt, $URL, $radnVr, $napomena, $long, $lat, $lokacija, $oib);
     header("Location:../../Frontend/Pages/form_pruzateljiUsluge.php?div=2");
 }   

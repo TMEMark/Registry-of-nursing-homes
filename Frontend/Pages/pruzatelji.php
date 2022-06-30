@@ -2,7 +2,7 @@
 include "../../Backend/Controller/LoginSystem/session.php";
 require "../Components/header.html";
 require "../Components/dropdown_menu.html";
-require "../Components/header_admin.html";
+require "../Components/header_admin.php";
 require "../Components/header_puk.php";
 require "../../Backend/select.php";
 ?>

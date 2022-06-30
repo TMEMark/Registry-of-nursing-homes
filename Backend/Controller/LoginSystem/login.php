@@ -9,6 +9,7 @@ if(empty($username) || empty($password)){
 }elseif(login($username,$password) > 0){
     session_start();
     $_SESSION["logedIn"] = true;
+    $_SESSION["user"] = $username;
     header("Location:../../../Frontend/Pages/pruzatelji.php");
 }else{
     header("Location:../../../Frontend/Pages/form_login.php?data=wrong");

@@ -3,7 +3,7 @@ include "../../Backend/Controller/LoginSystem/session.php";
 require "../Components/header.html";
 require "../Components/dropdown_menu.html";
 require "../Components/header.html";
-require "../Components/header_admin.html";
+require "../Components/header_admin.php";
 require "../../Backend/select.php";
 
 if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
@@ -84,7 +84,7 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
               $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
               
               if(strpos($fullUrl, "data=empty")){
-                echo "<p class='erMsg'> Ispunite sva polja. </p>";
+                echo "<p class='erMsg'> Ispunite sva polja s minimalno 3 znaka. Lozinka minimalno 8 znakova. </p>";
                 exit();
               }
 

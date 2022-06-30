@@ -4,7 +4,7 @@ require "../../Backend/Controller/LoginSystem/session.php";
 require "../Components/header.html";
 require "../../Backend/select.php";
 require "../Components/dropdown_menu.html";
-require "../Components/header_admin.html";
+require "../Components/header_admin.php";
 require "../Components/header_puk.php";
 
 ?>
