@@ -3,9 +3,14 @@
       <div id="sidebar" class="">
         <img src="../Components/assets/user.svg" alt="admin" id="admin">
 <pre>
+<?php 
+
+print_r($_SESSION);
+?>
 </pre>
         <?php 
-        echo $_SESSION["user"];
+
+        echo "Admin ".$_SESSION['user'];
         ?>
 
         <form class="form-inline">

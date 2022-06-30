@@ -13,13 +13,44 @@ h1{
 }
 
 .submit{
-    border-color: #000000;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    border-width: 1px;
-    color: #595959;
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 40%;
 }
+
+@media ((min-width:992px) and (max-width: 1200px)){
+.submit{
+    width: 40px;
+}
+}
+
+.button-31:hover,
+.button-31:focus {
+  opacity: .75;
+}
+
 .submit:hover{
     background-color: #6c757d;
     color: #fff;
@@ -39,24 +70,24 @@ p{
 #admin{
     padding: 0.5em;
     margin: 10px;
+    margin-top: 150px;
     width: 50px;
     height: 50px;
 }
 
 @media (max-width: 1444px){
-    #pruzatelji, #usluge, #kategorije, #admin{
+   #pruzatelji, #usluge, #kategorije, #admin{
         color: #000000;
         font-weight: 500;
-        margin: 40px;
+        margin-left: 20px;
     }
  
     .nav td{
-     border-top-left-radius: 20px;
-     border-top-right-radius: 20px;
-     border-bottom-left-radius: 20px;
-     border-bottom-right-radius: 20px;
-     border-width: 2px;
-     }
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        }
 
 
 }
