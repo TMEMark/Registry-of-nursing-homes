@@ -48,14 +48,20 @@
 
         @media(max-width:1444px){
           .illustr{
-            width: 40%;
-            height: 40%;
+            display: none;
           }
           form{
             margin-right: 200px;
           }
-
         }
+
+        @media (min-width: 1445px) {
+          form{
+            padding-top: 200px !important;
+            float: none !important;
+          }
+          }
+          
       
 /*form*/
 
