@@ -1,9 +1,9 @@
+<link rel="stylesheet" href="../Styles/styleUsluge.css">
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
 require "../Components/header.html";
-require "../Components/dropdown_menu.html";
-require "../Components/header.html";
-require "../Components/header_admin.php";
+//require "../Components/dropdown_menu.html";
+//require "../Components/header.html";
 require "../../Backend/select.php";
 
 
@@ -23,6 +23,10 @@ if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
 </div>
 </nav>
 
+<div class="ilustracija">
+  <img src="../Components/assets/ilustracija2.png" alt="Ilustracija" class="illustr">
+</div>
+
 <div class="content">
     <div class="container">
       <div class="row">
@@ -31,7 +35,6 @@ if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
             <div class="col-md-12 col-lg-12 col-sm-12">
               <div class="mb-4">
               <h3>Dodajte novu uslugu</h3>
-              <p class="mb-4">Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</p>
             </div>
             <form action="../../Backend/Controller/usluge.php" method="post">
 

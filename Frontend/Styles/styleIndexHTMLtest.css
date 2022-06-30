@@ -21,7 +21,6 @@
         "landingpageOne landingpageOne landingpageOne landingpageOne"
         "landingpageTwo landingpageTwo landingpageTwo landingpageTwo"
         "landingpageThree landingpageThree landingpageThree landingpageThree"
-        "landingpageFour landingpageFour landingpageFour landingpageFour" 
         ;
     }
 
@@ -265,15 +264,6 @@
         grid-area: image;
     }
 
-    .animation > img {
-        margin-top: 100px ;
-    }
-
-    .image > img {
-        margin-top: 100px ;
-        margin-left: 50px;
-    }
-
     #hh {
         font-size:30px;
         color: white;
@@ -304,47 +294,7 @@
 
     .button:hover{
         opacity:1;
-    }
-    
-    #landingpageFour {
-        grid-area: landingpageFour;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-gap: 80px;
-        grid-template-areas:
-        "decs1 image desc2"
-        "decs1 image desc2"
-        ;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo{
-        grid-area: desc1;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo > p{
-        margin-left: 50px;
-        font-size: 16px;
-        text-align: left;
-    }
-
-    #landingpageFour > .img {
-        grid-area: image; 
-    }
-
-    #landingpageFour > .img > img{
-        height: 200px; 
-    }
-
-    #landingpageFour > .desc2 > .conInfo{
-        grid-area: desc2;
-    }
-
-    #landingpageFour > .desc2 > .conInfo > p{
-        margin-right: 50px;
-        font-size: 16px;
-        text-align: right;
-    }
+    }  
       
 }
 
@@ -373,7 +323,6 @@
         "landingpageOne landingpageOne landingpageOne landingpageOne"
         "landingpageTwo landingpageTwo landingpageTwo landingpageTwo"
         "landingpageThree landingpageThree landingpageThree landingpageThree"
-        "landingpageFour landingpageFour landingpageFour landingpageFour" 
         ;
     }
 
@@ -616,15 +565,6 @@
     #landingpageThree > .image {
         grid-area: image;
     }
-    
-    .animation > img {
-        margin-top: 100px ;
-    }
-
-    .image > img {
-        margin-top: 200px ;
-        margin-left: 50px;
-    }
 
     #hh {
         font-size:30px;
@@ -656,47 +596,7 @@
 
     .button:hover{
         opacity:1;
-    }
-    
-    #landingpageFour {
-        grid-area: landingpageFour;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-gap: 80px;
-        grid-template-areas:
-        "decs1 image desc2"
-        "decs1 image desc2"
-        ;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo{
-        grid-area: desc1;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo > p{
-        font-size: 16px;
-        margin-left: 50px;
-        text-align: left;
-    }
-
-    #landingpageFour > .img {
-        grid-area: image; 
-    }
-
-    #landingpageFour > .img > img{
-        height: 200px; 
-    }
-
-    #landingpageFour > .desc2 > .conInfo{
-        grid-area: desc2;
-    }
-
-    #landingpageFour > .desc2 > .conInfo > p{
-        font-size: 16px;
-        margin-right: 50px;
-        text-align: right;
-    }
+    }  
       
 }
 
@@ -727,7 +627,6 @@
         "landingpageOne landingpageOne landingpageOne landingpageOne"
         "landingpageTwo landingpageTwo landingpageTwo landingpageTwo"
         "landingpageThree landingpageThree landingpageThree landingpageThree"
-        "landingpageFour landingpageFour landingpageFour landingpageFour" 
         ;
     }
 
@@ -1001,47 +900,7 @@
 
     .button:hover{
         opacity:1;
-    }
-    
-    #landingpageFour {
-        grid-area: landingpageFour;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-gap: 80px;
-        grid-template-areas:
-        "decs1 image desc2"
-        "decs1 image desc2"
-        ;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo{
-        grid-area: desc1;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo > p{
-        font-size: 14px;
-        margin-left: 50px;
-        text-align: left;
-    }
-
-    #landingpageFour > .img {
-        grid-area: image; 
-    }
-
-    #landingpageFour > .img > img{
-        height: 100px; 
-    }
-
-    #landingpageFour > .desc2 > .conInfo{
-        grid-area: desc2;
-    }
-
-    #landingpageFour > .desc2 > .conInfo > p{
-        font-size: 14px;
-        margin-right: 50px;
-        text-align: right;
-    }
+    }  
       
 }
 
@@ -1071,7 +930,6 @@
         "landingpageOne landingpageOne landingpageOne landingpageOne"
         "landingpageTwo landingpageTwo landingpageTwo landingpageTwo"
         "landingpageThree landingpageThree landingpageThree landingpageThree"
-        "landingpageFour landingpageFour landingpageFour landingpageFour" 
         ;
     }
 
@@ -1102,41 +960,29 @@
         margin-top: 40px;
     }
 
-    .header > .logo > img {
-        height: 50px;
-    }
-
     .header > .menu {
-        position:fixed;
-        left: -100%;
-        top: 90px;
-        gap: 0;
-        flex-direction: column;
-        background-color: rgba(32, 32, 32, 0.521);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-    }
-    
-    .header > .menu.active {
-        left: 0;
+        grid-column: 4;
+        margin-top: 50px;
+        position: relative;
     }
 
     .header > .menu > a{
         font-size: 14px;
         text-decoration: none;
+        margin-left: 25px;
         color: rgb(250, 249, 249);
         opacity: 0.8;
-        display: block;
-        margin-top: 25px;
     }
 
     .header > .menu > #landing {
         opacity: 1;
+        border-bottom: 3px solid rgb(235,110,57);
     }
 
     .header > .menu > a:hover {
         opacity: 1;
+        border-bottom: 3px solid rgb(235,110,57);
+      
     }
       
     .header > .menu > a::before {
@@ -1144,36 +990,6 @@
         height: 3px;
         content: "";
         position: absolute;
-    }
-
-    .header >  .hamburger {
-        grid-column: 4;
-        display: block;
-        cursor: pointer;
-        margin-top: 40px;
-        position: fixed;
-        right: 20px;
-    }
-
-    .header > .hamburger.active .bar:nth-child(2){
-        opacity: 0;
-    }
-
-    .header > .hamburger.active .bar:nth-child(1){
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .header > .hamburger.active .bar:nth-child(3){
-        transform: translateY(-12px) rotate(-45deg);
-    }
-
-    .header > .hamburger > .bar{
-        display: block;
-        width: 25px;
-        height: 5px;
-        margin: 5px 0;
-        transition: 0.3s ease;
-        background-color: white;
     }
 
     .headline{
@@ -1303,16 +1119,6 @@
         grid-area: ilustration;
     }
 
-    .animation > img {
-        margin-top: 100px ;
-        height: 200px;
-    }
-
-    .image > img {
-        margin-top: 100px ;
-        margin-left: 50px;
-    }
-
     #landingpageThree {
         background-color: rgb(237, 237, 237);
         grid-area: landingpageThree;
@@ -1367,12 +1173,6 @@
         grid-area: image;
     }
 
-    .image > img {
-        margin-top: 200px ;
-        margin-left: 50px;
-        height: 200px;
-    }
-
     #hh {
         font-size:30px;
         color: white;
@@ -1403,47 +1203,7 @@
 
     .button:hover{
         opacity:1;
-    }
-    
-    #landingpageFour {
-        grid-area: landingpageFour;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-gap: 80px;
-        grid-template-areas:
-        "decs1 image desc2"
-        "decs1 image desc2"
-        ;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo{
-        grid-area: desc1;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo > p{
-        font-size: 14px;
-        margin-left: 50px;
-        text-align: left;
-    }
-
-    #landingpageFour > .img {
-        grid-area: image; 
-    }
-
-    #landingpageFour > .img > img{
-        height: 100px; 
-    }
-
-    #landingpageFour > .desc2 > .conInfo{
-        grid-area: desc2;
-    }
-
-    #landingpageFour > .desc2 > .conInfo > p{
-        font-size: 14px;
-        margin-right: 50px;
-        text-align: right;
-    }
+    }   
       
 }
 
@@ -1473,7 +1233,6 @@
         "landingpageOne landingpageOne landingpageOne landingpageOne"
         "landingpageTwo landingpageTwo landingpageTwo landingpageTwo"
         "landingpageThree landingpageThree landingpageThree landingpageThree"
-        "landingpageFour landingpageFour landingpageFour landingpageFour" 
         ;
     }
 
@@ -1504,41 +1263,32 @@
         margin-top: 40px;
     }
     
-    .header > .logo > img {
-        height: 50px;
+    img {
+        height: 40px;
     }
 
     .header > .menu {
-        position:fixed;
-        left: -100%;
-        top: 90px;
-        gap: 0;
-        flex-direction: column;
-        background-color: rgba(32, 32, 32, 0.521);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-    }
-    
-    .header > .menu.active {
-        left: 0;
+        grid-column: 4;
+        margin-top: 50px;
+        position: relative;
     }
 
     .header > .menu > a{
         font-size: 14px;
         text-decoration: none;
+        margin-left: 25px;
         color: rgb(250, 249, 249);
         opacity: 0.8;
-        display: block;
-        margin-top: 25px;
     }
 
     .header > .menu > #landing {
         opacity: 1;
+        border-bottom: 3px solid rgb(235,110,57);
     }
 
     .header > .menu > a:hover {
         opacity: 1;
+        border-bottom: 3px solid rgb(235,110,57);
       
     }
       
@@ -1547,36 +1297,6 @@
         height: 3px;
         content: "";
         position: absolute;
-    }
-
-    .header >  .hamburger {
-        grid-column: 4;
-        display: block;
-        cursor: pointer;
-        margin-top: 40px;
-        position: fixed;
-        right: 20px;
-    }
-
-    .header > .hamburger.active .bar:nth-child(2){
-        opacity: 0;
-    }
-
-    .header > .hamburger.active .bar:nth-child(1){
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .header > .hamburger.active .bar:nth-child(3){
-        transform: translateY(-12px) rotate(-45deg);
-    }
-
-    .header > .hamburger > .bar{
-        display: block;
-        width: 25px;
-        height: 5px;
-        margin: 5px 0;
-        transition: 0.3s ease;
-        background-color: white;
     }
 
     .headline{
@@ -1605,7 +1325,7 @@
 
     }
     .headline > .text > #quotePt2 {
-        margin-left: 140px;
+        margin-left: 10px;
         font-size:14px;
     }
 
@@ -1613,13 +1333,13 @@
         grid-column: 2;
         grid-row: 2;
         margin-top: 50px;
-        margin-left: 190px;;
+        margin-left: 260px;
         
       }
       .mousey {
-        width: 2px;
-        padding: 8px 12px;
-        height: 30px;
+        width: 3px;
+        padding: 10px 15px;
+        height: 35px;
         border: 2px solid rgb(250, 249, 249);
         border-radius: 25px;
         opacity: 0.75;
@@ -1651,7 +1371,7 @@
         "text text ilustration ilustration"
         "text text ilustration ilustration"
         ;
-        margin-left: 10px;
+        margin-left: 50px;
     }
 
     .about {
@@ -1707,11 +1427,6 @@
         grid-area: ilustration;
     }
 
-    .animation > img {
-        margin-top: 100px ;
-        height: 150px;
-    }
-
     #landingpageThree {
         background-color: rgb(237, 237, 237);
         grid-area: landingpageThree;
@@ -1729,7 +1444,7 @@
     #landingpageThree > .about {
         grid-area: desc;
         color: rgb(43, 60, 118);
-        padding-top: 100px;
+        padding-top: 200px;
     }
 
     #landingpageThree > .about > .heading {
@@ -1766,19 +1481,8 @@
         grid-area: image;
     }
 
-    .animation > img {
-        margin-top: 100px ;
-        height: 150px;
-    }
-
-    .image > img {
-        margin-top: 100px ;
-        margin-left: 10px;
-        height: 150px;
-    }
-
     #hh {
-        font-size:20px;
+        font-size:30px;
         color: white;
     }
 
@@ -1787,8 +1491,8 @@
         position: fixed;
         bottom: 16px;
         right:32px;
-        width:40px;
-        height:40px;
+        width:70px;
+        height:70px;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -1807,47 +1511,7 @@
 
     .button:hover{
         opacity:1;
-    }
-    
-    #landingpageFour {
-        grid-area: landingpageFour;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-gap: 80px;
-        grid-template-areas:
-        "decs1 image desc2"
-        "decs1 image desc2"
-        ;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo{
-        grid-area: desc1;
-    }
-
-    #landingpageFour > .desc1 >.basicInfo > p{
-        font-size: 12px;
-        margin-left: 50px;
-        text-align: left;
-    }
-
-    #landingpageFour > .img {
-        grid-area: image; 
-    }
-
-    #landingpageFour > .img > img{
-        height: 50px; 
-    }
-
-    #landingpageFour > .desc2 > .conInfo{
-        grid-area: desc2;
-    }
-
-    #landingpageFour > .desc2 > .conInfo > p{
-        font-size: 12px;
-        margin-right: 50px;
-        text-align: right;
-    }
+    }   
       
 }
 

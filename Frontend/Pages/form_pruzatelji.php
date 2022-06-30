@@ -57,78 +57,32 @@ $idPruzUslKat = "";
   <title>Unos pružatelja</title>
 </head>
 <body>
+
 <div class="grid">
   
 <!--navbar-->
-<nav>
-<div class="container-fluid">
+<nav class="navbar fixed-top py-4 navbar-dark bg-dark"> 
+        <div class="container-fluid">
          <div class="d-none d-lg-block d-xl-block">
-          <a href="../Pages/index.php"><img src="../Components/assets/LogoRazvoj.svg" alt="Logo" id="logoRMU"></a>
+          <a href="index.php"><img src="../Components/assets/LogoRazvoj.svg" alt="Logo" id="logoRMU"></a>
          </div>
          <div class="d-none d-lg-block d-xl-block">
-          <a href="../Pages/pruzatelji.php"><img src="../Components/assets/IzvorLogo.svg" alt="Logo" id="logoIZVOR"></a>
+          <a href="pruzatelji.php"><img src="../Components/assets/IzvorLogo.svg" alt="Logo" id="logoIZVOR"></a>
         </div>
 </nav>
 
 
 <!--sidebar-->
-<div class="container d-none d-lg-block">
-    <div id="viewport">
-      <div id="sidebar" class="">
-        <img src="../Components/assets/user.svg" alt="admin" id="admin">
-        <p>ADMIN</p>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search"  style="font-family: 'Font Awesome 5 Free'; font-weight: 700" placeholder=" &#xf002; Search" aria-label="Search">
-        </form>
-        
-        <table class="nav">
-
-          <tr>
-            <td id="celija_pruzatelji">
-              <a href="pruzatelji.php" id="pruzatelji"><img src="../Components/assets/home.svg" id="ikona_pruzatelji"/></a>
-            </td>
-            <td>
-              <a href="pruzatelji.php" id="pruzatelji">PRUŽATELJI</a>
-            </td>
-          </tr>
-
-          <tr>
-            <td id="celija_usluge">
-              <a href="usluge.php"><img src="../Components/assets/open-hand.svg" id="ikona_usluge"/></a>
-            </td>
-            <td>
-              <a href="usluge.php" id="usluge">USLUGE</a>
-            </td>
-          </tr>
-
-          <tr>
-            <td id="celija_kategorije">
-              <a href="kategorije.php"><img src="../Components/assets/list-menu.svg" id="ikona_kategorije"/></a>
-            </td>
-            <td>
-              <a href="kategorije.php" id="kategorije">KATEGORIJE</a>
-            </td>
-          </tr>
-
-          <tr>
-            <td id="celija_admin">
-              <a href="admin.php"><img src="../Components/assets/admin.svg" id="ikona_admin"/></a>
-            </td>
-            <td>
-              <a href="admin.php" id="admin">ADMINI</a>
-            </td>
-          </tr>
-        </table>
-        
-      </div>
-    </div>
-  </div>
+<div class="ilustracija">
+  <img src="../Components/assets/ilustracija1.png" alt="Ilustracija" class="illustr">
+</div>
 
 
 <!--form-->
   <form data-multi-step class="multi-step-form" action="../../Backend/Controller/pruzatelji.php" method="post">
   <input type="hidden" name="idPruz" value="<?php echo $idPruz;?>">
-    <div class="card" data-step> 
+    <div class="card" data-step>
+      <h2>Dodajte pružatelja</h2>
       <h3 class="step-title">Osnovne informacije</h3>
       <h4>1. korak od 6</h4>
       <div class="form-group">
@@ -137,7 +91,7 @@ $idPruzUslKat = "";
           <span class="content-naziv">
                   Naziv pružatelja
               </span><br>
-              <input type="text" autocomplete="off" id="naziv" value="<?php echo $naziv_pruzatelja;?>" name="naziv"  required />
+              <input type="text" autocomplete="off" id="naziv" value="<?php echo $naziv_pruzatelja;?>" name="naziv" />
           </label>
           <br />
         </div>
@@ -146,7 +100,7 @@ $idPruzUslKat = "";
           <span class="content-oib">
                   OIB
           </span><br>
-          <input type="text" autocomplete="off" id="oib" value="<?php echo $oib;?>" name="oib" required />
+          <input type="text" autocomplete="off" id="oib" value="<?php echo $oib;?>" name="oib" />
           </label>
           <br />
         </div>
@@ -155,7 +109,7 @@ $idPruzUslKat = "";
           <span class="content-adresa">
                   Adresa
           </span><br>
-          <input type="text" autocomplete="off" id="adresa" value="<?php echo $adresa;?>" name="adresa" required />
+          <input type="text" autocomplete="off" id="adresa" value="<?php echo $adresa;?>" name="adresa" />
           </label>
           <br />
         </div>
@@ -165,9 +119,24 @@ $idPruzUslKat = "";
                   Županija
               </span><br>
               <select name="lokacija" id="lokacija">
+                <?php 
+                if(isset($_GET["idPruz"]) && $_GET["idPruz"] > 0){
+                  $upit = $db->query("SELECT * FROM pruzatelji");
+                  $lokacija = $upit ->fetchAll();
+                  $idPruz = $_GET["idPruz"];
+                  $lokacija = $lokacija[0]["lokacija"];
+                }else{
+                  $idPruz = "";
+                  $lokacija = "";
+                }
+                ?>
                 <option value="">Odaberi županiju</option>
-                <option value="1">Osječko-baranjska</option>
-                <option value="2">Vukovarsko-srijemska</option>
+                <option value="1" <?php 
+                echo ($lokacija == "Osječko-baranjska") ? "selected" : "";
+                ?>>Osječko-baranjska</option>
+                <option value="2" <?php 
+                echo ($lokacija == "Vukovarsko-srijemska") ? "selected" : "";
+                ?>>Vukovarsko-srijemska</option>
               </select>
           </label>
           <br />
@@ -177,10 +146,11 @@ $idPruzUslKat = "";
           <span class="content-radn_vrijeme">
                   Radno vrijeme
               </span><br>
-              <input type="text" autocomplete="off" id="radn_vrijeme" value="<?php echo $radno_vrijeme;?>" name="radn_vrijeme" required />
+              <input type="text" autocomplete="off" id="radn_vrijeme" value="<?php echo $radno_vrijeme;?>" name="radn_vrijeme" />
           </label>
           <br />
           <button type="button" data-next>Sljedeće</button>
+          <button type="button"><a href="pruzatelji.php">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -193,7 +163,7 @@ $idPruzUslKat = "";
           <span class="content-kontakt">
                   Kontakt broj
               </span><br>
-              <input type="text" autocomplete="off" id="kontakt" value="<?php echo $kontakt;?>" name="kontakt" required />
+              <input type="text" autocomplete="off" id="kontakt" value="<?php echo $kontakt;?>" name="kontakt" />
           </label>
           <br />
         </div>
@@ -202,7 +172,7 @@ $idPruzUslKat = "";
           <span class="content-email">
                   Email
               </span><br>
-              <input type="text" autocomplete="off" id="email" value="<?php echo $email;?>" name="email" required />
+              <input type="text" autocomplete="off" id="email" value="<?php echo $email;?>" name="email" />
           </label>
           <br />
         </div>
@@ -211,11 +181,12 @@ $idPruzUslKat = "";
           <span class="content-url">
                   Link mrežne stranice
               </span><br>
-              <input type="text" autocomplete="off" id="url" value="<?php echo $URL_stranice;?>" name="url" required />
+              <input type="text" autocomplete="off" id="url" value="<?php echo $URL_stranice;?>" name="url" />
           </label>
           <br />
           <button type="button" data-previous>Prethodno</button>
           <button type="button" data-next>Sljedeće</button>
+          <button type="button" data-next><a href="pruzatelji.php">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -228,7 +199,7 @@ $idPruzUslKat = "";
           <span class="content-long">
                   Longitude
               </span>
-              <input type="text" autocomplete="off" id="long" value="<?php echo $long?>" name="long" required />
+              <input type="text" autocomplete="off" id="long" value="<?php echo $long?>" name="long" />
           </label>
           <br />
         </div>
@@ -237,11 +208,12 @@ $idPruzUslKat = "";
           <span class="content-lat">
                   Latitude
               </span>
-              <input type="text" autocomplete="off" id="lat" value="<?php echo $lat;?>" name="lat" required />
+              <input type="text" autocomplete="off" id="lat" value="<?php echo $lat;?>" name="lat" />
           </label>
           <br />
           <button type="button" data-previous>Prethodno</button>
           <button type="button" data-next>Sljedeće</button>
+          <button type="button"><a href="pruzatelji.php">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -256,7 +228,7 @@ $idPruzUslKat = "";
               </span><br>
               <textarea name="napomena" id="napomena" value="<?php echo $napomena;?>" cols="30" rows="10"></textarea>
           </label><br>
-          <button type="button">Prethodno</button>
+          <button type="button" data-previous>Prethodno</button>
           <input type="submit" name="submit" value="Unos" class="submit">
           <br />
         </div>

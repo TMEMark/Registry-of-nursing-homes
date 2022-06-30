@@ -1,9 +1,9 @@
+<link rel="stylesheet" href="../Styles/styleAdmin.css">
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
 require "../Components/header.html";
-require "../Components/dropdown_menu.html";
-require "../Components/header.html";
-require "../Components/header_admin.php";
+//require "../Components/dropdown_menu.html";
+//require "../Components/header.html";
 require "../../Backend/select.php";
 
 if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
@@ -32,6 +32,9 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
 </div>
 </nav>
 
+<div class="ilustracija">
+  <img src="../Components/assets/ilustracija2.png" alt="Ilustracija" class="illustr">
+</div>
 
     <div class="container">
       <div class="row">
@@ -40,7 +43,6 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
             <div class="col-md-12 col-lg-12 col-sm-12">
               <div class="mb-4">
               <h3>Unos novog administratora</h3>
-              <p class="mb-4">Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</p>
             </div>
             <form action="../../Backend/Controller/administratori.php" method="post">
 
@@ -63,6 +65,7 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
 
             <div class="form-group">
                 <label>Uloga</label>
+                <br>
                 <select name="role" id="role">
                   <option value="">Odaberi ulogu</option>
                   <option value="1">Administrator</option>
@@ -84,7 +87,7 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
               $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
               
               if(strpos($fullUrl, "data=empty")){
-                echo "<p class='erMsg'> Ispunite sva polja s minimalno 3 znaka. Lozinka minimalno 8 znakova. </p>";
+                echo "<p class='erMsg'> Ispunite sva polja. </p>";
                 exit();
               }
 

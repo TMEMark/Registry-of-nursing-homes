@@ -5,13 +5,13 @@
           <h1 id="naslov"><strong>Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</strong></h1>
         </div>
     <div class="col-4 col-lg-6 col-xl-6">
-        <img src="../Components/assets/pruzatelji_ikona.svg" alt="Pruzatelji" class="icon">
+    <img src="../Components/assets/pruzatelji_ikona.svg" alt="Pruzatelji" class="icon" id="ikona">
     </div>
     <hr>
     </div>
 </div>
 
-<div class="row d-lg-none d-xl-none">
+<div class="row d-sm-block d-md-block d-lg-none d-xl-none">
         <form class="d-flex">
            <input style="font-family: 'Font Awesome 5 Free'; font-weight: 700;" class="form-control me-2" type="search" placeholder=" &#xf002; Search" aria-label="Search">
          </form>
@@ -23,8 +23,8 @@
          </form>
        </div>
 
-       <div class="container">
-       
+
+        </div>
       </div>
 
       

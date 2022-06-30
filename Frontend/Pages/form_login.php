@@ -27,7 +27,7 @@ require "../../Backend/select.php";
                 <input name="password" type="password" class="form-control" value="<?php ?>">
               </div>
               
-              <input type="submit" name="submit" value="Unos" class="button">
+              <input type="submit" name="submit" value="Login" class="button">
               <button type="button" class="btn btn-outline-secondary" id="quit"><a href="index.php"><img src="../Components/assets/x.svg" alt="poništavanje">Odustani</a></button>
 
             </form>
