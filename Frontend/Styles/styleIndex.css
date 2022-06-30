@@ -19,16 +19,9 @@
     #zupanija, #usluga, #kategorija{
         float: left;
     }
-
-    input[type="submit"]{
-        width: 20%;
-        margin: 10px;
+    input #prikazi{
+        float: right;
     }
-
-     a:link, a:visited {
-            color: white;
-            text-decoration: none;
-        }
 }
 
 .searchInput{
