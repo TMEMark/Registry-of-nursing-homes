@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="../Styles/styleKategorije.css">
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
 require "../Components/header.html";
-//require "../Components/dropdown_menu.html";
-//require "../Components/header.html";
+require "../Components/dropdown_menu.html";
+require "../Components/header.html";
+require "../Components/header_admin.php";
 require "../../Backend/select.php";
 
 if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
@@ -22,10 +22,6 @@ if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
 </div>
 </nav>
 
-<div class="ilustracija">
-  <img src="../Components/assets/ilustracija1.png" alt="Ilustracija" class="illustr">
-</div>
-
 <div class="content">
   <!--Marko je bio tu.-->
     <div class="container">
@@ -34,7 +30,8 @@ if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
           <div class="row justify-content-center">
             <div class="col-md-12 col-lg-12 col-sm-12">
               <div class="mb-4">
-              <h3>Dodajte novu kategoriju</h3>  
+              <h3>Dodajte novu kategoriju</h3>
+              <p class="mb-4">Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</p>
             </div>
             <form action="../../Backend/Controller/kategorije.php" method="post">
               <input type="hidden" name="id_kat" value="<?php echo $id_kat;?>">

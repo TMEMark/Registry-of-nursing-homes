@@ -1,7 +1,6 @@
 <?php
 require "../Components/header.html";
 require "../../Backend/select.php";
-require "../Components/dropdown_menu.php";
 ?>
 
     
@@ -9,52 +8,34 @@ require "../Components/dropdown_menu.php";
 
 <div class="text container d-none d-lg-block">
         <div id="viewport">
-          <div id="sidebar" style="margin-top: 100px">
-            <form method="get">
-
-              <nav aria-label="breadcrumb" id="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item active" aria-current="page"><a href="../../index.php">Home</a></li>
-                </ol>
-              </nav>
+          <div id="sidebar" class="">
+            <form method="post">
 
           <input class="form-control mr-sm-2" type="search" name="search" id="search" style="font-family: 'Font Awesome 5 Free'; font-weight: 700" placeholder=" &#xf002; Search" aria-label="Search">
 
-          <select class="form-select" class="js-example-basic-multiple" aria-label="Default select example" name="zupanija" id="zupanija">
-          <option selected><img src="../Components/assets/home.svg" alt="Županija" class="">ŽUPANIJA</option>
-          <?php 
-                foreach ($selectLok as $keyLok){
-                  $selected="";
-                  if($_GET['zupanija'] == $keyLok['naziv_lokacije']){
-                    $selected=" selected=\"selected\" ";
-                  }
-                  echo "<option " . $selected . ">" . ($keyLok['naziv_lokacije']) . "</option>";
-                };
-                ?>
-          </select>
-
-              <select class="form-select" aria-label="Default select example" name="usluga" id="usluga">
-                <option selected><img src="../Components/assets/open-hand.svg" alt="Usluge">USLUGE</option>
+              <select class="form-select" aria-label="Default select example" name="zupanija" id="zupanija">
+                <option selected><img src="../Components/assets/home.svg" alt="Županija" class="">ŽUPANIJA</option>
                 <?php 
-                foreach ($selectUsl as $keyUsl){
-                  $selected="";
-                  if($_GET['usluga'] == $keyUsl['naziv_usluge']){
-                    $selected=" selected=\"selected\" ";
-                  }
-                  echo "<option" . $selected . ">" . $keyUsl['naziv_usluge'] . "</option>";
+                foreach ($selectLok as $keyLok){
+                  echo "<option>" . ($keyLok['naziv_lokacije']) . "</option>";
                 };
                 ?>
               </select>
 
-              <select class="form-select" aria-label="Default select example" name="kategorija" id="kategorija">
-                <option selected><img src="../Components/assets/list-menu.svg" alt="Kategorije">KATEGORIJE</option>
+              <select class="form-select" aria-label="Default select example" name="usluga">
+                <option selected><img src="../Components/assets/open-hand.svg" alt="Usluge" id="usluga">USLUGE</option>
+                <?php 
+                foreach ($selectUsl as $keyUsl){
+                  echo "<option>" . $keyUsl['naziv_usluge'] . "</option>";
+                };
+                ?>
+              </select>
+
+              <select class="form-select" aria-label="Default select example" name="kategorija">
+                <option selected><img src="../Components/assets/list-menu.svg" alt="Kategorije" id="kategorija">KATEGORIJE</option>
                 <?php 
                 foreach ($selectKat as $keyKat){
-                  $selected="";
-                  if($_GET['kategorija'] == $keyKat['naziv_kategorije']){
-                  $selected=" selected=\"selected\" ";
-                }
-                echo "<option" . $selected . ">" . $keyKat['naziv_kategorije'] . "</option>";
+                  echo "<option>" . $keyKat['naziv_kategorije'] . "</option>";
                 };
                 ?>
               </select>
@@ -110,12 +91,7 @@ require "../Components/header_puk.php";
   </div>
 </div>
 
-<script>
-$(document).ready(function() {
-  $('.js-example-basic-multiple').select2();
-});
-</script>
-
 <?php
 include("../Components/footer.html");
 ?>
+

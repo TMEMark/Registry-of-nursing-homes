@@ -11,26 +11,8 @@ li{
     text-align: center;
 }
 a:link, a:visited{
-    color: black;
+    color: white;
     text-decoration: none;
-}
-.button{
-    background-color: #222;
-    border-radius: 4px;
-    border-style: none;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.5;
-    margin: 0;
-    max-width: none;
-    min-height: 44px;
-    min-width: 10px;
-    outline: none;
-    overflow: hidden;
-    padding: 9px 20px 8px;
-    width: 30%;
 }
 body{
     font-family: 'Poppins', sans-serif;
@@ -70,20 +52,15 @@ div h3{
     margin-top: 40%;
 }
 
-.breadcrumb{
-    background-color: transparent;
-    cursor: pointer;
-}
-
 @media (min-width: 1445px){
       #sidebar {
         position: fixed;
-        top: 0%;
+        top: 10%;
         left: 250px;
         width: 250px;
         height: 90%;
         margin-left: -250px;
-        margin-top: 90px;
+        margin-top: 14px;
         overflow-y: auto;
         background: #EFEFEF;
         text-align: center;
@@ -129,7 +106,7 @@ div h3{
         border-color: #595959;
     }
 }
-@media ((min-width:992px) and (max-width: 1200px)){
+@media (max-width: 1444px){
     #search{
         margin-top: 120px;
         width: 30%;
@@ -144,6 +121,7 @@ div h3{
     #kategorija{
         float: left;
     }
+
     #celija_pruzatelji{
         float: left;
     }
@@ -156,40 +134,5 @@ div h3{
     #celija_admini{
         float: left;
     }
-    #viewport{
-        margin-top: 550px;
-    }
-    .submit{
-        margin-top: 100px;
-        margin-left: -400px;
-        width: 100px;
-    }
-    h1{
-        margin-top: 40%
-    }
-    #logout{
-        color: white;
-        text-decoration: none;
-    }
-}
 
-@media(max-width:991px){
-    h1{
-        margin-top: 150px;
-    }
-
-    .LogoMob{
-        width: 50%;
-        height: 50%;
-        float: left;
-    }
-
-    .navbar-toggler{
-        margin-right: 0px;
-        margin-left: auto;
-    }
-
-    .navbar-nav a{
-        color: white;
-    }
 }

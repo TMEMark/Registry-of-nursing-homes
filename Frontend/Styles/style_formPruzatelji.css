@@ -1,16 +1,15 @@
         /*grid*/
         nav{grid-area: a;}
-        div .ilustracija{grid-area: b;}
-        form{grid-area: c;}
-
+        div .container{grid-area: b;}
+        form{grid-area:c;}
     
-        body{
-          display: grid;
-          grid-template-areas: 
-          "a a a a"
-          "b b c c"
-          "b b c c"
-          ;
+        div .grid{
+            display: grid;
+            grid-template-areas: 
+            "a a a a"
+            "b c c c"
+            "b c c c"
+            ;
         }
     
         *{
@@ -24,71 +23,7 @@
           min-height: 100vh;
           background-color: #E5E5E5;
         }
-
-        form{
-          float:right;
-          padding-top: 10em;
-        }
-        .illustr{
-          float: left;
-          padding-top: 10em;
-          height: 50%;
-          width: 50%;
-          padding-left: 5em;
-        }
-
-        @media(max-width:991px){
-          .illustr{
-            display: none;
-          }
-          form{
-            margin-right: 200px;
-          }
-        }
-
-        @media(max-width:1444px){
-          .illustr{
-            width: 40%;
-            height: 40%;
-          }
-          form{
-            margin-right: 200px;
-          }
-
-        }
-      
 /*form*/
-
-input[type=text] {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #000000;
-  margin-top: 10px;
-  font-family: 'Poppins', sans-serif;
-  width: 350px;
-}
-
-#lokacija{
-  position: relative;
-  border: 0.1px solid #7d8488;
-  border-radius: 20px;
-  background: #E5E5E5;
-  margin-top: 10px;
-  padding: 5px;
-  font-family: 'Poppins', sans-serif;
-  width: 350px;
-}
-
-textarea{
-  width: 350px;
-  background: transparent;
-}
-
-select option:hover{
-  background-color: #595959;
-  color: whitesmoke;
-  font-family: 'Poppins', sans-serif;
-}
 
 .card {
   padding: .5rem;
@@ -173,35 +108,42 @@ h4{
 }
 
 /*navbar*/
-#logoRMU, #logoIZVOR {
-  height: 50px;
-  width: 250px;
+#logoIZVOR{
+  position:absolute;
+  margin-top: -70px;
+  margin-left: 250px;
 }
 
-#logoIZVOR {
-  position: absolute;
-  top: 25px;
-  left: 160px;
-}
+#logoRMU{
+  margin-top: 10px;
 
-#logoRMU {
-  margin-top: 30px;
 }
 
 nav{
   margin-right: 100%;
 }
 
-nav .bg-dark {
-  --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
-}
-
-#nav, #form-inline {
-  margin-top: 10%;
-  margin-left: -10%;
-  text-align: center;
+/*sidebar*/
+#sidebar {
   position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #EFEFEF;
+  text-align: center;
+  overflow-x: hidden;
+  margin-top: 0%;
+}
+#sidebar .nav a{
+  color: #595959;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+#sidebar .nav a:hover{
+  background: none;
+  color: #7d8488;
 } 
 .nav{
   border: none;
@@ -235,7 +177,7 @@ thead{
   top: 0;
   width: 100%;
   height: 100px;
-  background-color: #222529;
+  background-color: black;
 }
 
 #admin{
@@ -245,21 +187,4 @@ thead{
   height: 50px;
 }
 
-button, input[type=submit]{
-  border: 0.1px solid #7d8488;
-  padding: 5px;
-  margin-top: 10px;
-  border-radius: 10px;
-  background: transparent;
-  font-family: 'Poppins', sans-serif;
-}
-
-a{
-  text-decoration: none;
-  color: #000000;
-}
-
-h2{
-  text-align: center;
-}
 
