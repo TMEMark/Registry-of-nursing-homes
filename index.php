@@ -18,16 +18,12 @@
                 <img src="Frontend/Components/assets/Logo.svg" alt="Logo" id="logo">
             </div>
             <div class="menu">
-                <a id="landing" href="#landingpageOne">Naslovnica</a>
-                <a id="vision" href="#landingpageTwo">O projektu</a>
-                <a id="nursing" href="#landingpageThree">Domovi</a>
+                
+                    <a id="landing" href="#landingpageOne">Naslovnica</a>
+                    <a id="vision" href="#landingpageTwo">O projektu</a>
+                    <a id="nursing" href="#landingpageThree">Domovi</a>
+                
             </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            
         </div>
 
         <div class="headline">
@@ -45,7 +41,7 @@
     </div>
 
     <div id="landingpageTwo">
-        <div data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="500" class="about">
+        <div data-aos="fade-up-right" data-aos-duration="1000"  class="about">
             <div class="heading">
                 <p>PROJEKT UDRUGE IZVOR</p>
             </div>
@@ -61,11 +57,14 @@
                 <p class="pristup">PRISTUP KONTAKTIMA I MREŽNIM STRANICAMA</p>
                 <p class="pristup">STALNI I AŽURNI PODACI O DOMOVIMA</p>
             </div>
+            <div class="learnMore">
+                <hr id="line">
+                <a id="readMore" href="#">Pročitajte više</a>
+            </div>
         </div>
 
-        <div data-aos="fade-up-left" data-aos-duration="1000" class="animation">
-            <img src="Frontend/Images/img_1.svg" alt="Neka animacija/slika">
-            <!-- All rights reserved to creator of SVG taken from: https://www.svgrepo.com/svg/284782/grandmother and modified according to page desing requirements -->
+        <div class="animation">
+            <img src="" alt="Neka animacija/slika">
         </div>
     </div>
 
@@ -89,29 +88,8 @@
                 <a id="readMore" href="Frontend/Pages/index.php">Istražite pružatelje</a>
             </div>
         </div>
-        <div data-aos="fade-up-right" data-aos-duration="1000" class="image">
-            <img src="Frontend/Images/img_2.svg" alt="Neka animacija/slika">
-            <!-- All rights reserved to creator of SVG taken from: https://www.svgrepo.com/svg/97453/home and modified according to page desing requirements -->
-        </div>
-    </div>
-
-    <div id="landingpageFour">
-        <div class="desc1">
-            <div class="basicInfo">
-                <p>Ženska udruga "IZVOR"</p>
-                <p><i class="fa-solid fa-location-dot"></i> Vlatka Mačeka 20, 31 207 TENJA</p>
-                <p><i class="fa-solid fa-phone"></i> Tel/fax: ** 00 385 (0) 31 290 433</p>
-            </div>
-        </div>
-        <div class="img">
-        <img src="Frontend/Components/assets/Logo_ESF.png" alt="Logo_ESF" id="logo_ESF">
-        </div>
-        <div class="desc2">
-            <div class="conInfo">
-                <p><i class="fa-solid fa-phone-volume"></i> SOS telefon /0800 200 151</p>
-                <p><a href="mailto:zenska.udruga.izvor@gmail.com"><i class="fa-solid fa-envelope"></i> zenska.udruga.izvor@gmail.com</a></p>
-                <p><i class="fa-brands fa-skype"></i>zenskaudrugaIZVOR</p>
-            </div>
+        <div class="image">
+            <img src="" alt="Neka animacija/slika">
         </div>
     </div>
     <a href="#" class="button">
@@ -139,19 +117,5 @@ btn.on('click', function(e) {
   e.preventDefault();
   $('html, body').animate({scrollTop:0}, '300');
 });
-</script>
-<script>
-    const hamburger = document.querySelector(".hamburger");
-    const menu = document.querySelector(".menu");
-
-    hamburger.addEventListener('click', () =>{
-        hamburger.classList.toggle("active");
-        menu.classList.toggle("active");
-    })
-
-    document.querySelectorAll("a").forEach(n => n. addEventListener('click', () =>{
-        hamburger.classList.remove("active");
-        menu.classList.remove("active");
-    }))
 </script>
 </html>
