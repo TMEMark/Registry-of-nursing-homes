@@ -68,8 +68,10 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
                 <br>
                 <select name="role" id="role">
                   <option value="">Odaberi ulogu</option>
-                  <option value="1">Administrator</option>
-                  <option value="2">Moderator</option>
+                  <option value="1" <?php 
+                  echo ($role == "1") ? "selected" : "" ?>>Administrator</option>
+                  <option value="2" <?php 
+                  echo ($role == "2") ? "selected" : "" ?>>Moderator</option>
                 </select>
             </div>
 

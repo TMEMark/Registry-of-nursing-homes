@@ -119,23 +119,12 @@ $idPruzUslKat = "";
                   Županija
               </span><br>
               <select name="lokacija" id="lokacija">
-                <?php 
-                if(isset($_GET["idPruz"]) && $_GET["idPruz"] > 0){
-                  $upit = $db->query("SELECT * FROM pruzatelji");
-                  $lokacija = $upit ->fetchAll();
-                  $idPruz = $_GET["idPruz"];
-                  $lokacija = $lokacija[0]["lokacija"];
-                }else{
-                  $idPruz = "";
-                  $lokacija = "";
-                }
-                ?>
                 <option value="">Odaberi županiju</option>
                 <option value="1" <?php 
-                echo ($lokacija == "Osječko-baranjska") ? "selected" : "";
+                echo ($lokacija == "Osječko baranjska") ? "selected" : "";
                 ?>>Osječko-baranjska</option>
                 <option value="2" <?php 
-                echo ($lokacija == "Vukovarsko-srijemska") ? "selected" : "";
+                echo ($lokacija == "Vukovarsko srijemska") ? "selected" : "";
                 ?>>Vukovarsko-srijemska</option>
               </select>
           </label>
