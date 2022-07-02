@@ -74,9 +74,9 @@ require "../Components/header_puk.php";
 <div class="container overflow-hidden">
   <div class="row gx-5">
         <?php
-          if(isset($_POST["pruzatelj"]) || isset($_POST["usluga"]) || isset($_POST["kategorija"]) || isset($_POST["search"])){
+          if(isset($_GET["pruzatelj"]) || isset($_GET["usluga"]) || isset($_GET["kategorija"]) || isset($_GET["search"])){
             foreach($selectPruzUslKat as $key){
-              if ($key["naziv_lokacije"] == $_POST["zupanija"] || $key["naziv_usluge"] == $_POST["usluga"] || $key["naziv_kategorije"] == $_POST["kategorija"] || $key["naziv_pruzatelja"] == $_POST["search"]) {
+              if ($key["naziv_lokacije"] == $_GET["zupanija"] || $key["naziv_usluge"] == $_GET["usluga"] || $key["naziv_kategorije"] == $_GET["kategorija"] || $key["naziv_pruzatelja"] == $_GET["search"]) {
                 echo "<div class='col'>";
                 echo "<div class='p-3 border bg-light'>";
                 echo "<p>" . "<b>" . $key["naziv_pruzatelja"] . "</b>" . "</p>";
