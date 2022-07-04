@@ -64,6 +64,11 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
             </div>
 
             <div class="form-group">
+                <label>Lozinka</label>
+                <input name="lozinka" type="text" class="form-control" value="<?php echo $lozinka; ?>">
+            </div>
+
+            <div class="form-group">
                 <label>Uloga</label>
                 <br>
                 <select name="role" id="role">
@@ -73,11 +78,6 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
                   <option value="2" <?php 
                   echo ($role == "2") ? "selected" : "" ?>>Moderator</option>
                 </select>
-            </div>
-
-            <div class="form-group">
-                <label>Lozinka</label>
-                <input name="lozinka" type="text" class="form-control" value="<?php echo $lozinka; ?>">
             </div>
               
             <input type="submit" name="submit" value="Unos" class="submit">

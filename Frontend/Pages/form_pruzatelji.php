@@ -121,11 +121,11 @@ $idPruzUslKat = "";
               <select name="lokacija" id="lokacija">
                 <option value="">Odaberi županiju</option>
                 <option value="1" <?php 
-                echo ($lokacija == "Osječko baranjska") ? "selected" : "";
-                ?>>Osječko-baranjska</option>
+                echo ($lokacija == "Osječko-baranjska županija") ? "selected" : "";
+                ?>>Osječko-baranjska županija</option>
                 <option value="2" <?php 
-                echo ($lokacija == "Vukovarsko srijemska") ? "selected" : "";
-                ?>>Vukovarsko-srijemska</option>
+                echo ($lokacija == "Vukovarsko-srijemska županija") ? "selected" : "";
+                ?>>Vukovarsko-srijemska županija</option>
               </select>
           </label>
           <br />

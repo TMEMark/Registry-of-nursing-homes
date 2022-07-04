@@ -21,14 +21,18 @@
     }
 
     input[type="submit"]{
-        width: 20%;
+        width: 30%;
         margin: 10px;
     }
 
-     a:link, a:visited {
+    a:link, a:visited {
             color: white;
             text-decoration: none;
         }
+    
+    #sn a, #mail a {
+        color: #595959 !important;
+    }
 }
 
 .searchInput{
