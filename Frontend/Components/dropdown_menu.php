@@ -15,14 +15,14 @@
     <li>
     <?php
 
-    if(isset($_SESSION['admin']) == true)
+    if(isset($_SESSION['logedIn']) == 1)
     {
         echo '<a href="../../Backend/Controller/LoginSystem/logout.php" class="d-none d-lg-block" id="logout" style="
         color: white;
         text-decoration: none;
     ">Odjava</p> </a>';
     }
-    if(isset($_SESSION['admin']) == false)
+    if(isset($_SESSION['logedIn']) == 0)
     {
         echo '<a href="http://localhost/Registry-of-nursing-homes/Frontend/Pages/form_login.php" id="login" style="
         color: white;

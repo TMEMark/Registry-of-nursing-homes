@@ -171,6 +171,9 @@ div h3{
         color: white;
         text-decoration: none;
     }
+    .breadcrumb{
+        margin-top: -150px;
+    }
 }
 
 @media(max-width:991px){
@@ -191,5 +194,8 @@ div h3{
 
     .navbar-nav a{
         color: white;
+    }
+    .breadcrumb{
+        margin-top: -150px;
     }
 }
