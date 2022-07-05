@@ -1,4 +1,4 @@
-<div class="container d-none d-md-none d-lg-block">
+<div class="container d-none d-sm-none d-md-none d-lg-block">
     <div id="viewport">
       <div id="sidebar" class="">
         <img src="../Components/assets/user.svg" alt="admin" id="admin">

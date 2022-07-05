@@ -11,13 +11,19 @@
     </div>
 </div>
 
-<div class="row d-sm-block d-md-block d-lg-none d-xl-none">
-        <form class="d-flex">
-           <input style="font-family: 'Font Awesome 5 Free'; font-weight: 700;" class="form-control me-2" type="search" placeholder=" &#xf002; Search" aria-label="Search">
-         </form>
+  <div class="row d-sm-block d-md-block d-lg-none d-xl-none">
+        <div id="viewport">
+          <div id="sidebar" style="margin-top: 100px">
+            <form method="get">
 
+              <nav aria-label="breadcrumb" id="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page"><a href="../../index.php" id="home">Home</a></li>
+                </ol>
+              </nav>
 
-       <div id="show-hide">
+              <input class="form-control mr-sm-2" type="search" name="search" id="search" style="font-family: 'Font Awesome 5 Free'; font-weight: 700" placeholder=" &#xf002; Search" aria-label="Search">
+
        <select class="form-select" class="js-example-basic-multiple" aria-label="Default select example" name="zupanija" id="zupanija">
           <option selected><img src="../Components/assets/home.svg" alt="Županija" class="">ŽUPANIJA</option>
           <?php 
@@ -61,7 +67,6 @@
             <a href="index.php"><button type="button" class="btn btn-outline-secondary"><img src="../Components/assets/x.svg" alt="poništavanje">Poništi filtere</button></a>
               </div>
 
-       </div>
 
         </div>
       </div>

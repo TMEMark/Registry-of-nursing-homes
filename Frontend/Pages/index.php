@@ -14,7 +14,7 @@ require "../Components/dropdown_menu.php";
 
               <nav aria-label="breadcrumb" id="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item active" aria-current="page"><a href="../../index.php">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="../../index.php" id="home">Home</a></li>
                 </ol>
               </nav>
 
@@ -73,7 +73,7 @@ require "../Components/header_puk.php";
 ?>
 
 <div class="container overflow-hidden">
-  <div class="row gx-5">
+  <div class="row gx-5" id="div-pruz">
         <?php
           if(isset($_GET["pruzatelj"]) || isset($_GET["usluga"]) || isset($_GET["kategorija"]) || isset($_GET["search"])){
             foreach($selectPruzUslKat as $key){

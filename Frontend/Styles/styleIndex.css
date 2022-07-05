@@ -26,13 +26,21 @@
     }
 
     a:link, a:visited {
-            color: white;
+            color: #eee;
             text-decoration: none;
         }
     
     #sn a, #mail a {
         color: #595959 !important;
     }
+    #home{
+        color: #595959 !important;
+        margin-top: 100px;
+    }
+}
+
+#div-pruz{
+    flex-direction: column;
 }
 
 .searchInput{
