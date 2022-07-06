@@ -37,6 +37,12 @@
         color: #595959 !important;
         margin-top: 100px;
     }
+    #quit a{
+        color: #595959;
+    }
+    .ui-menu > li{
+        width: 1000px;
+    }
 }
 
 #div-pruz{
@@ -52,3 +58,11 @@
     margin-top: 5em;
 }*/
 
+.ui-menu > li{
+    background-color: rgb(222, 226, 230);
+    list-style-type: none;
+}
+
+.ui-helper-hidden-accessible{
+    display: none;
+}

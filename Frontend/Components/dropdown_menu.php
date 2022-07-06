@@ -20,14 +20,14 @@
         echo '<a href="../../Backend/Controller/LoginSystem/logout.php" class="d-none d-lg-block" id="logout" style="
         color: white;
         text-decoration: none;
-    ">Odjava</p> </a>';
+    ">Odjava</a>';
     }
     if(isset($_SESSION['logedIn']) == 0)
     {
         echo '<a href="http://localhost/Registry-of-nursing-homes/Frontend/Pages/form_login.php" id="login" style="
         color: white;
         text-decoration: none;
-    ">Prijava</p></a>';;
+    ">Prijava</a>';;
     }
     
 ?>    
