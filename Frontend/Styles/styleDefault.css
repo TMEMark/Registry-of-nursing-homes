@@ -173,6 +173,7 @@ div h3{
     #logout{
         color: white;
         text-decoration: none;
+        display: block;
     }
     .breadcrumb{
         margin-top: -150px;
@@ -200,6 +201,11 @@ div h3{
     }
     .breadcrumb{
         margin-top: -150px;
+    }
+    #logout{
+        color: white;
+        text-decoration: none;
+        display: block;
     }
 
 }

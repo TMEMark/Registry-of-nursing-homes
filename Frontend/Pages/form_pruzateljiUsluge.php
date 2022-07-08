@@ -96,11 +96,19 @@ $idPruzUslKat = "";
                     Usluga
                 </span><br>
                 <select name="usluga[]" class="js-example-basic-multiple"  id="usluga" multiple="multiple">
+                  <?php
+                  $queryUsluge = $db->query("SELECT * FROM usluge u
+                  INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga");
+                  $Usluge = $queryUsluge ->fetchAll(); 
+                  ?>
                   <option value="">Odaberi uslugu</option>
-                  <option value="1">Trajni smještaj</option>
-                  <option value="2">Privremeni i povremeni</option>
-                  <option value="3">Dnevni boravak u domu</option>
-                  <option value="4">Probno stanovanje</option>
+                  <?php
+                  foreach($Usluge as $usluga){
+                  ?>
+                  <option value="<?php $usluga["idUsluge"] ?>"><?php $usluga["naziv_usluge"] ?></option>
+                  <?php
+                    }
+                  ?>
                 </select>
             </label>
             <br>
