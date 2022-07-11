@@ -1,11 +1,14 @@
 <?php
 require "../Components/header.html";
 require "../../Backend/select.php";
-
-$query = $db->query ( 
-"SELECT * FROM lokacija l 
-INNER JOIN pruzatelji p ON l.idLokacije =  p.lokacija
-WHERE idPruz =" . $_GET["id"]);
+$query = $db->query ("SELECT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+FROM usluge u
+INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
+INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
+INNER JOIN lokacija l ON l.idLokacije = p.lokacija
+INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
+INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
+WHERE p.idPruz = " . $_GET["id"]);
 $results = $query -> fetchAll();
 ?>
 
@@ -19,7 +22,7 @@ $results = $query -> fetchAll();
           <div class="row">
             <div>
               <div class="mb-4">
-              <h3 style="margin-top:160px; margin-left:50px"><?php echo $selectPruzUslKat[0]["naziv_pruzatelja"]; ?></h3>
+              <h3 style="margin-top:160px; margin-left:50px"><?php echo $results[0]["naziv_pruzatelja"]; ?></h3>
               <p class="mb-4" style="margin-top:30px; margin-left:50px">Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</p>
             </div>
 
@@ -31,8 +34,8 @@ $results = $query -> fetchAll();
                     <p><b>RADNO VRIJEME:</b> <?php echo $results[0]["radno_vrijeme"]; ?> </p>
                     <p><b>WEB:</b> <?php echo $results[0]["URL_stranice"]; ?> </p>
                     <p><b>NAPOMENA:</b> <?php echo $results[0]["napomena"]; ?> </p>
-                    <p><b>USLUGE:</b> <!--<?php echo $results[0]["naziv_usluge"]; ?> </p>-->
-                    <p><b>KATEGORIJE:</b> <!--<?php echo $results[0]["naziv_kategorije"]; ?> </p>-->
+                    <p><b>USLUGE:</b> <?php echo $results[0]["naziv_usluge"]; ?> </p>
+                    <p><b>KATEGORIJE:</b> <?php echo $results[0]["naziv_kategorije"]; ?> </p>
                 </div>
 
            
