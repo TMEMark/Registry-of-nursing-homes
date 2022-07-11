@@ -1,10 +1,5 @@
-$(function() {
 
-    var pruzatelj = [
-        "PRIMUM",
-        "STARČEVIĆ",
-        "ĐURIĆ"
-     ];
+$(function() {
 
     $( "#search" ).autocomplete({
        source: pruzatelj

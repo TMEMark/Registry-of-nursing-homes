@@ -12,6 +12,13 @@ require "../Components/header_puk.php";
 <div class="container"><a href="form_admin.php">
   <img src="../Components/assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
 </div>
+<style>
+    @media (max-width:991px){
+    #viewport{
+        display: none;
+    }
+}
+</style> 
 
 <?php 
 foreach ($selectAdminUloge as $admin){
