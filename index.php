@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="Frontend/Styles/styleIndexHTMLtest.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/464e80c499.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -109,7 +110,7 @@
         <div class="desc2">
             <div class="conInfo">
                 <p><i class="fa-solid fa-phone-volume"></i> SOS telefon /0800 200 151</p>
-                <p><a href="mailto:zenska.udruga.izvor@gmail.com"><i class="fa-solid fa-envelope"></i> zenska.udruga.izvor@gmail.com</a></p>
+                <p><i class="fa-solid fa-envelope"><a href="mailto:zenska.udruga.izvor@gmail.com"></i> zenska.udruga.izvor@gmail.com</a></p>
                 <p><i class="fa-brands fa-skype"></i>zenskaudrugaIZVOR</p>
             </div>
         </div>
