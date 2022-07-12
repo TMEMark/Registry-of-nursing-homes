@@ -33,7 +33,26 @@
 ?>    
     </ul>
 </div>
+<div class="d-none d-sm-none d-md-none d-lg-none d-xl-block">
+<?php
 
+if(isset($_SESSION['logedIn']) == 1)
+{
+    echo '<a href="../../Backend/Controller/LoginSystem/logout.php" class="d-none d-lg-block" id="logout" style="
+    color: white;
+    text-decoration: none;
+">Odjava</a>';
+}
+if(isset($_SESSION['logedIn']) == 0)
+{
+    echo '<a href="http://localhost/Registry-of-nursing-homes/Frontend/Pages/form_login.php" id="login" style="
+    color: white;
+    text-decoration: none;
+">Prijava</a>';;
+}
+
+?>
+<div>
 </div>    
 </nav>
 
