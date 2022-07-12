@@ -205,6 +205,6 @@ div h3{
     #logout{
         color: white;
         text-decoration: none;
-        display: block;
+        display: block!important;
     }
 }
