@@ -42,8 +42,9 @@ $results = $query -> fetchAll();
             </div>
           </div>
         </div>
-        
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d88999.78297627486!2d15.967846399999997!3d45.806387199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d7eab57cb9cf%3A0xd73c20080fa84ffe!2sPark%20Maksimir!5e0!3m2!1shr!2shr!4v1655485119829!5m2!1shr!2shr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="float:right"></iframe>
+
+        <div id="map"></div>  
+     
       </div>
     </div>
     
@@ -52,7 +53,32 @@ $results = $query -> fetchAll();
 
   </div>
 
-      
+  <script>
+    function initMap(){
+      //Map options
+      var options = {
+        zoom: 8,
+        center: { lat:45.55111, lng:-18.69389} // koordinate Osijeka
+      }
+
+      // New map
+      var map = new google.maps.Map(document.getElementById('map'), options);
+
+      //Add marker  
+      var marker = new.google.maps.Marker({
+        <?php foreach($results as $latlng){ ?>
+        position: {lat: <?php echo $latlng["latitude"] ?>, lng: <?php echo $latlng["longitude"] ?>}
+        <?php } ?>
+        map: map
+        })
+    }
+
+  </script>
+  <script async defer
+        src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyD7wZDyRlKax4zKMn2PtGI4PbWOWFNG4dQ&callback=initMap">
+        
+  </script> 
+
 
 <?php
 include("../Components/footer.html");

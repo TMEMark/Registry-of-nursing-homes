@@ -208,3 +208,10 @@ div h3{
         display: block!important;
     }
 }
+
+#map{
+    height: 400px;
+    width: 100%;
+    margin-top: 30px;
+    
+}
