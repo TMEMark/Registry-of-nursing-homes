@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="Frontend/Styles/styleIndexHTMLtest.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/464e80c499.js" crossorigin="anonymous"></script>
 </head>
@@ -21,7 +24,7 @@
             <div class="menu">
                 <a id="landing" href="#landingpageOne">Naslovnica</a>
                 <a id="vision" href="#landingpageTwo">O projektu</a>
-                <a id="nursing" href="#landingpageThree">Domovi</a>
+                <a id="nursing" href="Frontend/Pages/index.php">Domovi</a>
             </div>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -48,19 +51,19 @@
     <div id="landingpageTwo">
         <div data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="500" class="about">
             <div class="heading">
-                <p>PROJEKT UDRUGE IZVOR</p>
+                <p style = "font-family: 'Lora', serif;">PROJEKT ŽENSKE UDRUGE IZVOR</p>
             </div>
             <div class="desc">
-                <p>Agregator svih dostupnih pružatelja usluga </p>
+                <p >Agregator svih dostupnih pružatelja usluga </p>
                 <p>za stare i nemoćne na prostorima</p>    
                 <p>Osječko baranjske županije i</p>
                 <p>Vukovarsko srijemske</p>
             </div>
             
             <div class="quickNotes">
-                <p class="pristup">JEDNOSTAVAN PRISTUP INFORMACIJAMA O USLUGAMA</p>
-                <p class="pristup">PRISTUP KONTAKTIMA I MREŽNIM STRANICAMA</p>
-                <p class="pristup">STALNI I AŽURNI PODACI O DOMOVIMA</p>
+                <p class="pristup" style = "font-family: 'Lora', serif;">JEDNOSTAVAN PRISTUP INFORMACIJAMA O USLUGAMA</p>
+                <p class="pristup" style = "font-family: 'Lora', serif;">PRISTUP KONTAKTIMA I MREŽNIM STRANICAMA</p>
+                <p class="pristup" style = "font-family: 'Lora', serif;">STALNI I AŽURNI PODACI O DOMOVIMA</p>
             </div>
         </div>
 
@@ -76,7 +79,7 @@
                 <p>DOMOVI I USLUGE ZA STARIJE</p>
             </div>
             <div class="desc">
-                <p>Popis s više od [broj] pružatelja usluga za stare i nemoćne na prostoru
+                <p style = "font-family: 'Lora', serif;">Popis s više od [broj] pružatelja usluga za stare i nemoćne na prostoru
                     Osječko-baranjske županije i Vukovarsko srijemske
                     s ažurnim podacima o ključnim segmentima
                     njihovih usluga i kategorija u koje pripadaju. 
@@ -100,7 +103,7 @@
         <div class="desc1">
             <div class="basicInfo">
                 <p>Ženska udruga "IZVOR"</p>
-                <p><i class="fa-solid fa-location-dot"></i> Vlatka Mačeka 20, 31 207 TENJA</p>
+                <p><i class="fa-solid fa-location-dot"></i> Vladka Mačeka 20, 31 207 TENJA</p>
                 <p><i class="fa-solid fa-phone"></i> Tel/fax: ** 00 385 (0) 31 290 433</p>
             </div>
         </div>
@@ -112,6 +115,7 @@
                 <p><i class="fa-solid fa-phone-volume"></i> SOS telefon /0800 200 151</p>
                 <p><i class="fa-solid fa-envelope"><a href="mailto:zenska.udruga.izvor@gmail.com"></i> zenska.udruga.izvor@gmail.com</a></p>
                 <p><i class="fa-brands fa-skype"></i>zenskaudrugaIZVOR</p>
+                <p><a href="https://web.facebook.com/zenskaudruga.izvor/"><i class="fa-brands fa-facebook"></i> zenskaudruga.izvor</a></p>
             </div>
         </div>
     </div>

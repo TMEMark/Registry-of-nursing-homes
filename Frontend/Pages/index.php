@@ -12,12 +12,6 @@ require "../Components/dropdown_menu.php";
           <div id="sidebar" style="margin-top: 100px">
             <form method="get">
 
-              <nav aria-label="breadcrumb" id="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item active" aria-current="page"><a href="../../index.php" id="home">Home</a></li>
-                </ol>
-              </nav>
-
           <input class="form-control mr-sm-2" type="search" name="search" id="search" style="font-family: 'Font Awesome 5 Free'; font-weight: 700" placeholder=" &#xf002; Search" aria-label="Search">
 
           <select class="form-select" class="js-example-basic-multiple" aria-label="Default select example" name="zupanija" id="zupanija">

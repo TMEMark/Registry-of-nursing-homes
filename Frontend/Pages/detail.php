@@ -68,9 +68,9 @@ $results = $query -> fetchAll();
       var marker = new.google.maps.Marker({
         <?php foreach($results as $latlng){ ?>
         position: {lat: <?php echo $latlng["latitude"] ?>, lng: <?php echo $latlng["longitude"] ?>}
-        <?php } ?>
+        <?php } ?> ,
         map: map
-        })
+        });
     }
 
   </script>

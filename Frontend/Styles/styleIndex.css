@@ -33,10 +33,6 @@
     #sn a, #mail a {
         color: #595959 !important;
     }
-    #home{
-        color: #595959 !important;
-        margin-top: 100px;
-    }
     #quit a{
         color: #595959;
     }
@@ -54,9 +50,9 @@
 
 }
 
-/*#search{
-    margin-top: 5em;
-}*/
+#search{
+    margin-top: 1em;
+}
 
 .ui-menu > li{
     background-color: rgb(222, 226, 230);

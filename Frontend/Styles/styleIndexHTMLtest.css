@@ -1468,7 +1468,7 @@
 
     body {
         background-color: rgb(250, 249, 249);  
-        font-family: 'Poppins', sans-serif; 
+        font-family: 'Lora', serif; 
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 0,5fr 0,5fr 0,5fr;
