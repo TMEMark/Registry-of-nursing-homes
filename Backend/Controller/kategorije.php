@@ -10,7 +10,7 @@ require "../Repo/CUD/kategorije.php";
 
 if(isset($_POST['id_kat']) && $_POST['id_kat'] == ""){
     $nazivKat = $_POST['nazivKat'];
-    if(!preg_match("/^[a-zA-Z0-9]{5,}$/",$nazivKat)){
+    if(!preg_match("/^[a-zA-Z0-9]{2,}$/",$nazivKat)){
         header("Location:../../Frontend/Pages/form_kategorije.php?data=empty");
     }else{
         insertKategorije($nazivKat);

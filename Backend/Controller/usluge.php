@@ -10,7 +10,7 @@ require "../Repo/CUD/usluge.php";
 
 if (isset($_POST['id_usl']) && $_POST['id_usl'] == ""){
     $nazivUsl = $_POST['naziv_usl'];
-    if(!preg_match("/^[a-zA-Z0-9]{5,}$/",$nazivUsl)){
+    if(!preg_match("/^[a-zA-Z0-9]{2,}$/",$nazivUsl)){
         header("Location:../../Frontend/Pages/form_usluge.php?data=empty");
     }else{
         insertUsluge($nazivUsl);

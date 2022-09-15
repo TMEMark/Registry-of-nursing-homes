@@ -18,7 +18,7 @@ if (isset($_POST['id_admin']) && $_POST['id_admin'] == ""){
     }elseif(checkUsernameExists($username)){
         header("Location:../../Frontend/Pages/form_admin.php?username=exists");
     }else{
-        insertAdministrator ($ime, $prezime, $username, $role ,$lozinka);
+        insertAdministrator ($ime, $prezime, $username, $role ,password_hash($lozinka, PASSWORD_BCRYPT));
     header("Location:../../Frontend/Pages/admin.php");
     }
     
@@ -34,7 +34,7 @@ if(isset($_POST['id_admin']) && $_POST['id_admin'] > 0){
     if(empty($ime) || empty($prezime) || empty($username) || empty($role) || empty($lozinka)){
         header("Location:../../Frontend/Pages/form_admin.php?data=empty");
     }else{
-    updateAdministrator ($idAdmin, $ime, $prezime, $username, $role, $lozinka);
+    updateAdministrator ($idAdmin, $ime, $prezime, $username, $role, password_hash($lozinka, PASSWORD_BCRYPT));
     header("Location:../../Frontend/Pages/admin.php");
     }
 }

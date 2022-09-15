@@ -105,7 +105,7 @@ $idPruzUslKat = "";
                   <?php
                   foreach($Usluge as $usluga){
                   ?>
-                  <option value="<?php $usluga["idUsluge"] ?>"><?php $usluga["naziv_usluge"] ?></option>
+                  <option value="<?php echo $usluga["idUsluge"] ?>"><?php echo $usluga["naziv_usluge"] ?></option>
                   <?php
                     }
                   ?>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2022 at 06:45 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Sep 15, 2022 at 12:26 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,8 +41,8 @@ CREATE TABLE `administratori` (
 --
 
 INSERT INTO `administratori` (`idAdmin`, `ime_admina`, `prezime_admina`, `korisnicko_ime`, `lozinka`, `uloga`) VALUES
-(1, 'Marko', 'Buljan', 'mbuljan', '12345', 1),
-(2, 'Marija', 'Milošević', 'mmilosevic', '12345', 2);
+(4, 'Marija', 'Milošević', 'mmilosevic', '$2y$10$O2dTlT6nT8ce14v5hpwLqesrDPu2ZimrdPvILNANMLZ2GbSH6ENmy', 1),
+(5, 'Marko', 'Buljan', 'mbuljan', '$2y$10$6/xZqBbh01O0.8bimm1rvOX9DlpYuZRek.pEvvKviMTwmf0pDimeC', 1);
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,8 @@ INSERT INTO `kategorije` (`idKategorija`, `naziv_kategorije`) VALUES
 (2, 'Skrb o nepokretnim osobama'),
 (3, 'Skrb o psihički bolesnim osobama'),
 (4, 'Skrb o osobama s demencijom/Alzheimerom'),
-(5, 'Palijativna skrb');
+(5, 'Palijativna skrb'),
+(10, 'dd');
 
 -- --------------------------------------------------------
 
@@ -82,7 +83,7 @@ CREATE TABLE `lokacija` (
 --
 
 INSERT INTO `lokacija` (`idLokacije`, `naziv_lokacije`) VALUES
-(1, 'Osječko baranjska'),
+(1, 'Osje?ko baranjska'),
 (2, 'Vukovarsko srijemska');
 
 -- --------------------------------------------------------
@@ -113,19 +114,7 @@ CREATE TABLE `pruzatelji` (
 INSERT INTO `pruzatelji` (`idPruz`, `naziv_pruzatelja`, `email`, `adresa`, `kontakt`, `URL_stranice`, `radno_vrijeme`, `napomena`, `longitude`, `latitude`, `lokacija`, `oib`) VALUES
 (1, 'STARČEVIĆ - obiteljski dom za starije', 'obiteljskidomstarcevic@gmail.com', 'Josipa Kosora 9, 31207 Tenja', '095/37 77 367', 'http://www.obiteljskidomstarcevic.hr/', '', 'slogan “Obitelj-Dom-Zajednica”', '45.51906071427537', '18.724171169784814', 1, 2147483647),
 (2, 'ĐURIĆ - obiteljski dom za starije', 'email#2@gmail.com', 'Vinkovačka 42, 32010 Vukovar', '098/9376-930', '', '', '', '45.369911483737084', '18.94873200046968', 2, 2147483647),
-(3, 
-'PRIMUM - dom za starije', 
-'email#2@gmail.com', 
-'Hrvatske nezavisnosti 166, 32000 Vukovar ', 
-'032/412-966', 
-'http://www.centar-primum.hr/', 
-'', 
-'', 
-'45.33231959098914', 
-'19.016094740945267', 
-2, 
-58411215125);
-
+(3, 'PRIMUM - dom za starije', 'email#2@gmail.com', 'Hrvatske nezavisnosti 166, 32000 Vukovar ', '032/412-966', 'http://www.centar-primum.hr/', '', '', '45.33231959098914', '19.016094740945267', 2, 2147483647);
 
 -- --------------------------------------------------------
 
@@ -176,7 +165,6 @@ INSERT INTO `pruzatelji_usluge_kategorije` (`idPruzUslKat`, `pruzatelj_usluga`, 
 (4, 4, 1),
 (5, 5, 2),
 (6, 6, 3);
-
 
 -- --------------------------------------------------------
 
@@ -284,13 +272,13 @@ ALTER TABLE `usluge`
 -- AUTO_INCREMENT for table `administratori`
 --
 ALTER TABLE `administratori`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kategorije`
 --
 ALTER TABLE `kategorije`
-  MODIFY `idKategorija` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idKategorija` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `lokacija`
@@ -302,19 +290,19 @@ ALTER TABLE `lokacija`
 -- AUTO_INCREMENT for table `pruzatelji`
 --
 ALTER TABLE `pruzatelji`
-  MODIFY `idPruz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPruz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pruzatelji_usluge`
 --
 ALTER TABLE `pruzatelji_usluge`
-  MODIFY `idPruzUsl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idPruzUsl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pruzatelji_usluge_kategorije`
 --
 ALTER TABLE `pruzatelji_usluge_kategorije`
-  MODIFY `idPruzUslKat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idPruzUslKat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `uloge`
@@ -326,7 +314,7 @@ ALTER TABLE `uloge`
 -- AUTO_INCREMENT for table `usluge`
 --
 ALTER TABLE `usluge`
-  MODIFY `idUsluge` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUsluge` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

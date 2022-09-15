@@ -100,11 +100,18 @@ $idPruzUslKat = "";
                     Kategorija
                 </span><br>
                 <select name="kategorija[]" class="js-example-basic-multiple"  id="kategorija" multiple="multiple">
-                  <option value="1">Skrb o pokretnim osobama</option>
-                  <option value="2">Skrb o nepokretnim osobama</option>
-                  <option value="3">Skrb o psihički bolesnim osobama</option>
-                  <option value="4">Skrb o osobama s demencijom/Alzheimerom</option>
-                  <option value="5">Palijativna skrb</option>
+                <?php
+                  $queryKategorije = $db->query("SELECT * FROM kategorije k");
+                  $kategorije = $queryKategorije ->fetchAll(); 
+                  ?>
+                  <option value="">Odaberi kategoriju</option>
+                  <?php
+                  foreach($kategorije as $kategorija){
+                  ?>
+                  <option value="<?php echo $kategorija["idKategorija"] ?>"><?php echo $kategorija["naziv_kategorije"] ?></option>
+                  <?php
+                    }
+                  ?>
                 </select>
             </label>
             <br>

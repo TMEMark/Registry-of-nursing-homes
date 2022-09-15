@@ -1,5 +1,32 @@
 <?php
 
+//FIXME
+/* 
+$query='select';
+    $uvjeti='';
+    if($_GET['search']){
+        $uvjeti=' a.name like :searchUvjet and'; 
+    }
+
+    // očistiti zadnji end
+    if(strlen($uvjeti)>0){
+        $uvjeti=substr($uvjeti,0,strlen($uvjeti)-4);
+    }
+    //provjeriti echo da li je uvjeti bez zadnje and
+
+    global $db;
+    //$query = "SELECT * FROM pruzatelji";
+    $statement = $db->prepare($query);
+
+    if(strlen($uvjeti)>0){
+        
+    }
+    $statement->execute();
+    $array = $statement->fetchAll();
+    $statement->closeCursor();
+
+    return $array; */
+
 function  selectAdministratori(){
     global $db;
     $query = ("SELECT * FROM administratori");
@@ -36,25 +63,9 @@ function selectKategorije(){
 };
 
 function selectPruzatelji(){
-   $query='select';
-    $uvjeti='';
-    if($_GET['search']){
-        $uvjeti=' a.name like :searchUvjet and'; 
-    }
-
-    // očistiti zadnji end
-    if(strlen($uvjeti)>0){
-        $uvjeti=substr($uvjeti,0,strlen($uvjeti)-4);
-    }
-    //provjeriti echo da li je uvjeti bez zadnje and
-
     global $db;
-    //$query = "SELECT * FROM pruzatelji";
+    $query = ("SELECT * FROM pruzatelji");
     $statement = $db->prepare($query);
-
-    if(strlen($uvjeti)>0){
-        
-    }
     $statement->execute();
     $array = $statement->fetchAll();
     $statement->closeCursor();

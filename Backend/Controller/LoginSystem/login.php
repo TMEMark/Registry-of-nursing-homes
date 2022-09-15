@@ -2,11 +2,13 @@
 require "../../Database/pdo.php";
 require "../../Repo/login/login.php";
 $username = $_POST['username'];
-$password = $_POST['password'];
+$passwordUI = $_POST['password'];
 
-if(empty($username) || empty($password)){
+$login  = login($username);
+
+if(empty($username) || empty($passwordUI)){
     header("Location:../../../Frontend/Pages/form_login.php?login=empty");
-}elseif(login($username,$password) > 0){
+}elseif(password_verify($passwordUI, $login["lozinka"]) === true){
     session_start();
     $_SESSION["logedIn"] = true;
     $_SESSION["user"] = $username;
