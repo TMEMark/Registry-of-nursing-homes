@@ -36,7 +36,7 @@ function selectKategorije(){
 };
 
 function selectPruzatelji(){
-    $query='select';
+   $query='select';
     $uvjeti='';
     if($_GET['search']){
         $uvjeti=' a.name like :searchUvjet and'; 

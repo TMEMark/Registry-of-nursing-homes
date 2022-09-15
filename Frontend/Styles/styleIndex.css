@@ -62,3 +62,7 @@
 .ui-helper-hidden-accessible{
     display: none;
 }
+
+select option {
+    text-align: left !important;
+}

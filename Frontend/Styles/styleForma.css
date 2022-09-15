@@ -43,12 +43,13 @@ form:active{
 }*/
 
 input[type=text], input[type=password] {
-    background: transparent;
+    background: #D2D2D2;;
     border: none;
     border-bottom: 1px solid #000000;
     margin-top: 10px;
     font-family: 'Poppins', sans-serif;
     width: 450px;
+    height: 30px;
 }
 
 #role{
