@@ -66,3 +66,7 @@
 select option {
     text-align: left !important;
 }
+
+#add{
+    width: 35px !important;
+}

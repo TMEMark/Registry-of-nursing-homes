@@ -131,8 +131,21 @@ div h3{
     .ui-menu > li{
         width: 220px;
     }
+    .grid{
+        margin-left: 180px;
+        height: 80px;
+        width: inherit;
+        display: grid;
+        grid-template-areas:
+        ".container1 .container2"
+        ".container1 .container2";
+        justify-content: space-between;
+        justify-items: start;
+        column-gap: 3em;
+    }
+
 }
-@media ((min-width:992px) and (max-width: 1200px)){
+@media ((min-width:992px) and (max-width: 1440px)){
     #search{
         margin-top: 10px;
         width: 30%;
@@ -178,6 +191,9 @@ div h3{
     .breadcrumb{
         margin-top: -150px;
     }
+    div .container1, .container2{
+        margin-left: 180px;
+    }
 }
 
 @media(max-width:991px){
@@ -207,6 +223,9 @@ div h3{
         text-decoration: none;
         display: block!important;
     }
+    div .container1, .container2{
+        margin-left: 80px;
+    }
 }
 
 #map{
@@ -215,3 +234,4 @@ div h3{
     margin-top: 30px;
     
 }
+

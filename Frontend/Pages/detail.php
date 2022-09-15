@@ -25,19 +25,23 @@ $results = $query -> fetchAll();
               <h3 style="margin-top:160px; margin-left:50px"><?php echo $results[0]["naziv_pruzatelja"]; ?></h3>
               <p class="mb-4" style="margin-top:30px; margin-left:50px">Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</p>
             </div>
+                <div class="grid">
+                <div class="container1">
+                    <p><b>ADRESA:</b> <?php echo $results[0]["adresa"]; ?> </p> <br>
+                    <p><b>ŽUPANIJA:</b> <?php echo $results[0]["naziv_lokacije"]; ?> </p><br>
+                    <p><b>KONTAKT:</b> <?php echo $results[0]["kontakt"]; ?> </p><br>
+                    <p><b>MAIL:</b> <?php echo $results[0]["email"]; ?> </p><br>
+                    <p><b>RADNO VRIJEME:</b> <?php echo $results[0]["radno_vrijeme"]; ?> </p><br>
 
-                <div class="container" style="float:left">
-                    <p><b>ADRESA:</b> <?php echo $results[0]["adresa"]; ?> </p> 
-                    <p><b>ŽUPANIJA:</b> <?php echo $results[0]["naziv_lokacije"]; ?> </p>
-                    <p><b>KONTAKT:</b> <?php echo $results[0]["kontakt"]; ?> </p>
-                    <p><b>MAIL:</b> <?php echo $results[0]["email"]; ?> </p>
-                    <p><b>RADNO VRIJEME:</b> <?php echo $results[0]["radno_vrijeme"]; ?> </p>
-                    <p><b>WEB:</b> <?php echo $results[0]["URL_stranice"]; ?> </p>
-                    <p><b>NAPOMENA:</b> <?php echo $results[0]["napomena"]; ?> </p>
-                    <p><b>USLUGE:</b> <?php echo $results[0]["naziv_usluge"]; ?> </p>
-                    <p><b>KATEGORIJE:</b> <?php echo $results[0]["naziv_kategorije"]; ?> </p>
                 </div>
 
+                <div class="container2">
+                    <p><b>WEB:</b> <?php echo $results[0]["URL_stranice"]; ?> </p><br>
+                    <p><b>NAPOMENA:</b> <?php echo $results[0]["napomena"]; ?> </p><br>
+                    <p><b>USLUGE:</b> <?php echo $results[0]["naziv_usluge"]; ?> </p><br>
+                    <p><b>KATEGORIJE:</b> <?php echo $results[0]["naziv_kategorije"]; ?> </p>
+                </div>
+                </div>
            
             </div>
           </div>
