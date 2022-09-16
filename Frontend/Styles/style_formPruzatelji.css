@@ -253,7 +253,7 @@ thead{
   height: 50px;
 }
 
-button, input[type=submit]{
+button{
   border: 0.1px solid #7d8488;
   padding: 5px;
   margin-top: 10px;
@@ -271,3 +271,36 @@ h2{
   text-align: center;
 }
 
+#quit{
+  height: 15px;
+  position: relative;
+  margin-top: 2px;
+}
+
+#unos{
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 60%;
+}

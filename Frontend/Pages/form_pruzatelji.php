@@ -139,7 +139,7 @@ $idPruzUslKat = "";
           </label>
           <br />
           <button type="button" data-next>Sljedeće</button>
-          <button type="button"><a href="pruzatelji.php">Odustani</a></button>
+          <button type="button"><a href="pruzatelji.php"><img src="../Components/assets/x.svg" alt="poništavanje" id="quit">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -175,7 +175,7 @@ $idPruzUslKat = "";
           <br />
           <button type="button" data-previous>Prethodno</button>
           <button type="button" data-next>Sljedeće</button>
-          <button type="button" data-next><a href="pruzatelji.php">Odustani</a></button>
+          <button type="button" data-next><a href="pruzatelji.php"><img src="../Components/assets/x.svg" alt="poništavanje" id="quit">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -202,7 +202,7 @@ $idPruzUslKat = "";
           <br />
           <button type="button" data-previous>Prethodno</button>
           <button type="button" data-next>Sljedeće</button>
-          <button type="button"><a href="pruzatelji.php">Odustani</a></button>
+          <button type="button"><a href="pruzatelji.php"><img src="../Components/assets/x.svg" alt="poništavanje" id="quit">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -218,7 +218,7 @@ $idPruzUslKat = "";
               <textarea name="napomena" id="napomena" value="<?php echo $napomena;?>" cols="30" rows="10"></textarea>
           </label><br>
           <button type="button" data-previous>Prethodno</button>
-          <input type="submit" name="submit" value="Unos" class="submit">
+          <input type="submit" name="submit" value="Unos" class="submit" id="unos">
           <br />
         </div>
       </div>
@@ -251,9 +251,8 @@ $idPruzUslKat = "";
                   <option value="4">Probno stanovanje</option>
                 </select>
             </label>
-            <br>
-            <input type="submit" name="submit" value="Unos" class="submit">
-            <br>
+            <input type="submit" name="submit" value="Unos" class="submit" id="unos">
+            <br />
         </div>
     </div>
   </form>
@@ -289,7 +288,7 @@ $idPruzUslKat = "";
                 </select>
             </label>
             <br>
-            <input type="submit" name="submit" value="Unos" class="submit">
+            <input type="submit" name="submit" value="Unos" class="submit" id="unos">
             <br>
         </div>
     </div>

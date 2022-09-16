@@ -115,7 +115,7 @@ $idPruzUslKat = "";
                 </select>
             </label>
             <br>
-            <input type="submit" name="submit" value="Unos" class="submit">
+            <input type="submit" name="submit" value="Unos" class="submit" id="unos">
             <br>
         </div>
     </div>
