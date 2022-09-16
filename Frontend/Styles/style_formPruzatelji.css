@@ -291,7 +291,7 @@ h2{
   font-weight: 700;
   line-height: 1.5;
   margin: 10px;
-  margin-left:200px;
+  margin-left:250px;
   max-width: none;
   min-height: 44px;
   min-width: 10px;
@@ -304,10 +304,10 @@ h2{
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 40%;
+  width: 30%;
 }
 
-.content-usluga, .select2-selection--multiple {
-  width: 50%;
-  margin-left:150px;
-} 
+.select2-container--default .select2-selection--multiple{
+  width: 40%;
+  margin-left:250px;
+}
