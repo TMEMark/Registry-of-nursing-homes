@@ -60,6 +60,7 @@
             padding-top: 200px !important;
             float: none !important;
           }
+
           }
           
       
@@ -289,7 +290,8 @@ h2{
   font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
-  margin: 0;
+  margin: 10px;
+  margin-left:200px;
   max-width: none;
   min-height: 44px;
   min-width: 10px;
@@ -302,5 +304,10 @@ h2{
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 60%;
+  width: 40%;
 }
+
+.content-usluga, .select2-selection--multiple {
+  width: 50%;
+  margin-left:150px;
+} 

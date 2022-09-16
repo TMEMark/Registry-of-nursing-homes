@@ -45,7 +45,6 @@ foreach ($selectPruzLok as $keyPruzLok){
             <p>Web stranica: <?php echo $keyPruzLok["URL_stranice"] ?></p>
             <p>Radno vrijeme: <?php echo $keyPruzLok["radno_vrijeme"] ?></p>
             <p>Usluge:</p>
-            <p>Napomena: <?php echo $keyPruzLok["napomena"] ?></p>
           </div>
 
           <div class="col-2">
@@ -72,9 +71,6 @@ foreach ($selectPruzLok as $keyPruzLok){
               <td>Kontakt</td>
               <td>Stranica</td>
               <td>Radno vrijeme</td>
-              <td>Napomena</td>
-              <td>Longitude</td>
-              <td>Latitude</td>
               <td>Županija</td>
             </tr>
           </thead>
@@ -92,9 +88,6 @@ foreach ($selectPruzLok as $keyPruzLok){
                 <td><?php echo $keyPruzLok["kontakt"]; ?></td>
                 <td><?php echo $keyPruzLok["URL_stranice"]; ?></td>
                 <td><?php echo $keyPruzLok["radno_vrijeme"]; ?></td>
-                <td><?php echo $keyPruzLok["napomena"]; ?></td>
-                <td><?php echo $keyPruzLok["longitude"]; ?></td>
-                <td><?php echo $keyPruzLok["latitude"]; ?></td>
                 <td><?php if($keylokacija == 1){
                   echo $keyPruzLok["naziv_lokacije"];
                 }else{
