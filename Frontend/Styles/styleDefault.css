@@ -143,8 +143,8 @@ div h3{
         justify-items: start;
         column-gap: 3em;
     }
-    .form-inline .form-control{
-        margin-bottom: 15px;
+    tbody{
+        margin-top: 15px;
     }
 }
 @media ((min-width:992px) and (max-width: 1440px)){
