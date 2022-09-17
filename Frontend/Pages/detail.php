@@ -1,7 +1,7 @@
 <?php
 require "../Components/header.html";
 require "../../Backend/select.php";
-$query = $db->query ("SELECT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+$query = $db->query ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
 FROM usluge u
 INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
 INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
@@ -38,8 +38,8 @@ $results = $query -> fetchAll();
                 <div class="container2">
                     <p><b>WEB:</b> <?php echo $results[0]["URL_stranice"]; ?> </p><br>
                     <p><b>NAPOMENA:</b> <?php echo $results[0]["napomena"]; ?> </p><br>
-                    <p><b>USLUGE:</b> <?php echo $results[0]["naziv_usluge"]; ?> </p><br>
-                    <p><b>KATEGORIJE:</b> <?php echo $results[0]["naziv_kategorije"]; ?> </p>
+                    <p><b>USLUGE:</b> <?php echo $results[0]["usluge"]; ?> </p><br>
+                    <p><b>KATEGORIJE:</b> <?php echo $results[0]["kategorije"]; ?> </p>
                 </div>
                 </div>
            

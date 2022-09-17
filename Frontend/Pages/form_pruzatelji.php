@@ -121,10 +121,10 @@ $idPruzUslKat = "";
               <select name="lokacija" id="lokacija">
                 <option value="">Odaberi županiju</option>
                 <option value="1" <?php 
-                echo ($lokacija == "Osječko-baranjska") ? "selected" : "";
+                echo ($lokacija == "Osječko-baranjska županija") ? "selected" : "";
                 ?>>Osječko-baranjska županija</option>
                 <option value="2" <?php 
-                echo ($lokacija == "Vukovarsko-srijemska") ? "selected" : "";
+                echo ($lokacija == "Vukovarsko-srijemska županija") ? "selected" : "";
                 ?>>Vukovarsko-srijemska županija</option>
               </select>
           </label>
@@ -183,14 +183,6 @@ $idPruzUslKat = "";
       <h3 class="step-title">Upis na kartu</h3>
       <h4>3. korak od 6</h4>
       <div class="form-group">
-      <div class="lat">
-          <label for="lat" id="label-lat">
-          <span class="content-lat">
-                  Latitude
-              </span>
-              <input type="text" autocomplete="off" id="lat" value="<?php echo $lat;?>" name="lat" />
-          </label>
-          <br />
       <div class="long">
           <label for="long" id="label-long">
           <span class="content-long">
@@ -200,6 +192,14 @@ $idPruzUslKat = "";
           </label>
           <br />
         </div>
+        <div class="lat">
+          <label for="lat" id="label-lat">
+          <span class="content-lat">
+                  Latitude
+              </span>
+              <input type="text" autocomplete="off" id="lat" value="<?php echo $lat;?>" name="lat" />
+          </label>
+          <br />
           <button type="button" data-previous>Prethodno</button>
           <button type="button" data-next>Sljedeće</button>
           <button type="button"><a href="pruzatelji.php"><img src="../Components/assets/x.svg" alt="poništavanje" id="quit">Odustani</a></button>
@@ -215,7 +215,7 @@ $idPruzUslKat = "";
           <span class="content-naziv">
                   Napomena
               </span><br>
-              <textarea name="napomena" id="napomena" value="<?php echo $napomena;?>" cols="30" rows="10"><?php echo $napomena;?></textarea>
+              <textarea name="napomena" id="napomena" value="<?php echo $napomena;?>" cols="30" rows="10"></textarea>
           </label><br>
           <button type="button" data-previous>Prethodno</button>
           <input type="submit" name="submit" value="Unos" class="submit" id="unos">

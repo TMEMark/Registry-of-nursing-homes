@@ -3,7 +3,7 @@
 function searchTest($search,$zupanija,$usluga,$kategorija){
     global $db;
     if(isset($search) && strlen($search) > 0){
-        $querySearch = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+        $querySearch = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
         FROM usluge u
         INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
         INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
@@ -26,7 +26,7 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
     }
 
     else if(isset($zupanija) && strlen($zupanija) > 10){
-        $queryZupanija = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+        $queryZupanija = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
         FROM usluge u
         INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
         INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
@@ -49,7 +49,7 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
     }
 
     else if(isset($usluga) && strlen($usluga) > 8){
-        $queryUsluga = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+        $queryUsluga = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
         FROM usluge u
         INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
         INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
@@ -68,7 +68,7 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
         return $array2;
     }    
     else if(isset($kategorija)){
-        $queryKategorija = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+        $queryKategorija = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
         FROM usluge u
         INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
         INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
@@ -87,7 +87,7 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
         return $array3;
     }
     else{
-        $query = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+        $query = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
         FROM usluge u
         INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
         INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
@@ -234,7 +234,7 @@ function selectLok(){
 
 function selectPruzUslKat(){
     global $db;
-    $query = ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, u.naziv_usluge, k.naziv_kategorije, k.idKategorija, p.idPruz, u.idUsluge   
+    $query = ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
     FROM usluge u
     INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
     INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj

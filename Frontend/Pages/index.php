@@ -1,6 +1,6 @@
 <?php
 require "../Components/header.html";
-require "../../Backend/select.php";
+require  "../../Backend/search.php";
 require "../Components/dropdown_menu.php";
 ?>
 
@@ -10,7 +10,7 @@ require "../Components/dropdown_menu.php";
 <div class="text container d-none d-lg-block">
         <div id="viewport">
           <div id="sidebar" style="margin-top: 100px">
-            <form method="get">
+            <form action="../../Backend/Controller/search.php" method="get">
 
           <input class="form-control mr-sm-2" type="search" name="search" id="search" style="font-family: 'Font Awesome 5 Free'; font-weight: 700" placeholder=" &#xf002; Search" aria-label="Search">
 
@@ -68,51 +68,23 @@ require "../Components/header_puk.php";
 
 <div class="container overflow-hidden">
   <div class="row gx-5" id="div-pruz">
-        <?php
-          if(isset($_GET["pruzatelj"]) || isset($_GET["usluga"]) || isset($_GET["kategorija"]) || isset($_GET["search"])){
-            foreach($selectPruzUslKat as $key){
-              if ($key["naziv_lokacije"] == $_GET["zupanija"] || $key["naziv_usluge"] == $_GET["usluga"] || $key["naziv_kategorije"] == $_GET["kategorija"] || $key["naziv_pruzatelja"] == $_GET["search"]) {
-                echo "<div class='col'>";
-                echo "<div class='p-3 border bg-light'>";
-                echo "<p>" . "<b>" . $key["naziv_pruzatelja"] . "</b>" . "</p>";
-                echo "<p>" . "<b>" . $key["naziv_usluge"] . "</b>" . "</p>";
-                echo "<p>" . "<b>" . $key["naziv_kategorije"] . "</b>" . "</p>"; 
-                echo "<p>" . "<b>" . $key["naziv_lokacije"] . "</b>" . "</p>";?> 
-                <a href='detail.php?id=<?php echo $key["idPruz"] ?>' id='more'>Prikaži više</a>
-                <?php
-                echo "</div>";
-                echo "</div>";
-              };
-            };
-          }else{
-            foreach($selectPruzUslKat as $key){
-            echo "<div class='col'>";
-            echo "<div class='p-3 border bg-light'>";
-            echo "<p>" . "<b>" . $key["naziv_pruzatelja"] . "</b>" . "</p>";
-            echo "<p>" . "<b>" . $key["naziv_usluge"] . "</b>" . "</p>";
-            echo "<p>" . "<b>" . $key["naziv_kategorije"] . "</b>" . "</p>";
-            echo "<p>" . "<b>" . $key["naziv_lokacije"] . "</b>" . "</p>"; ?>
-            <a href='detail.php?id=<?php echo $key["idPruz"] ?>' id='more'>Prikaži više</a>
-            <?php
-            echo "</div>";
-            echo "</div>";
-            }
-          };
-        
-        ?>
-
+  <?php
+  foreach($searchTest as $key){
+   echo "<div class='col'>";
+   echo "<div class='p-3 border bg-light'>";
+   echo "<p>" . "<b>" . $key["naziv_pruzatelja"] . "</b>" . "</p>";
+   echo "<p>" . "<b>" . $key["usluge"] . "</b>" . "</p>";
+   echo "<p>" . "<b>" . $key["kategorije"] . "</b>" . "</p>"; 
+   echo "<p>" . "<b>" . $key["naziv_lokacije"] . "</b>" . "</p>";?> 
+   <a href='detail.php?id=<?php echo $key["idPruz"] ?>' id='more'>Prikaži više</a>
+   <?php
+   echo "</div>";
+   echo "</div>";
+  }     
+  ?>
 
   </div>
 </div>
-
-<script>
-  $('#search').select2({
-        dropdownParent: $('#sidebar')
-    });
-</script>
-
-
-
 <?php
 include("../Components/footer.html");
 ?>

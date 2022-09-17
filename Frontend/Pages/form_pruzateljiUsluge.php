@@ -97,7 +97,8 @@ $idPruzUslKat = "";
                 </span><br>
                 <select name="usluga[]" class="js-example-basic-multiple"  id="usluga" multiple="multiple">
                   <?php
-                  $queryUsluge = $db->query("SELECT * FROM usluge u");
+                  $queryUsluge = $db->query("SELECT * FROM usluge u
+                  INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga");
                   $Usluge = $queryUsluge ->fetchAll(); 
                   ?>
                   <option value="">Odaberi uslugu</option>

@@ -19,7 +19,7 @@
     <div id="landingpageOne">
         <div class="header">
             <div class="logo">
-                <img src="Frontend/Components/assets/Logo.svg" alt="Logo" id="logo">
+                <img src="Frontend/Components/assets/Logo.svg" alt="Logo" id="logo" style="width: 100%">
             </div>
             <div class="menu">
                 <a id="landing" href="#landingpageOne">Naslovnica</a>
@@ -79,7 +79,7 @@
                 <p>DOMOVI I USLUGE ZA STARIJE</p>
             </div>
             <div class="desc">
-                <p style = "font-family: 'Lora', serif;">Popis s više od [broj] pružatelja usluga za stare i nemoćne na prostoru
+                <p style = "font-family: 'Lora', serif;">Popis pružatelja usluga za stare i nemoćne na prostoru
                     Osječko-baranjske županije i Vukovarsko srijemske
                     s ažurnim podacima o ključnim segmentima
                     njihovih usluga i kategorija u koje pripadaju. 
