@@ -7,10 +7,6 @@
         <?php 
         echo $_SESSION["user"];
         ?>
-
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search"  style="font-family: 'Font Awesome 5 Free'; font-weight: 700" placeholder=" &#xf002; Search" aria-label="Search">
-        </form>
         
         <table class="nav">
 

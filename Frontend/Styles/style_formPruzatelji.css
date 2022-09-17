@@ -289,7 +289,8 @@ h2{
   font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
-  margin: 0;
+  margin: 10px;
+  margin-left:250px;
   max-width: none;
   min-height: 44px;
   min-width: 10px;
@@ -302,5 +303,10 @@ h2{
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 60%;
+  width: 30%;
+}
+
+.select2-container--default .select2-selection--multiple{
+  width: 40%;
+  margin-left:250px;
 }
