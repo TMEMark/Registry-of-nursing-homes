@@ -2,12 +2,12 @@
 require "../Components/header.html";
 require "../../Backend/select.php";
 $query = $db->query ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
-FROM usluge u
-INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
-INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
+FROM pruzatelji p
+INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
+INNER JOIN usluge u ON u.idUsluge = pu.usluga
+INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
 INNER JOIN lokacija l ON l.idLokacije = p.lokacija
-INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
 WHERE p.idPruz = " . $_GET["id"]);
 $results = $query -> fetchAll();
 ?>

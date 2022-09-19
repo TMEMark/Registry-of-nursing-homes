@@ -1436,7 +1436,7 @@
     }
 
     #landingpageFour > .img > img{
-        height: 100px; 
+        height: 70px; 
     }
 
     #landingpageFour > .desc2 > .conInfo{
@@ -1499,7 +1499,7 @@
     .header{
         grid-area: header;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
     
     .header > .logo {
@@ -1510,6 +1510,7 @@
     
     .header > .logo > img {
         height: 50px;
+        width: 100px;
     }
 
     .header > .menu {
@@ -1600,7 +1601,7 @@
     .headline > .text > h1 {
         
         font-size:36px;
-
+        text-align: center;
     }
 
     .headline > .text > #quotePt1 {
@@ -1609,7 +1610,7 @@
 
     }
     .headline > .text > #quotePt2 {
-        margin-left: 140px;
+        margin-left: 120px;
         font-size:14px;
     }
 
@@ -1645,15 +1646,15 @@
         100% { transform: translateY(15px); opacity: 0;}
       }
 
-    #landingpageTwo {
+      #landingpageTwo {
         grid-area: landingpageTwo;
         display: grid;
         grid-template-columns: 1fr 1,1fr 1,1fr 1,1fr;
         grid-template-rows: 1fr 0.5fr;
         grid-gap: 80px;
         grid-template-areas:
-        "text text ilustration ilustration"
-        "text text ilustration ilustration"
+        "text text text text"
+        "text text text text"
         ;
         margin-left: 10px;
     }
@@ -1661,6 +1662,7 @@
     .about {
         grid-area: text;
         color: rgb(43, 60, 118);
+        padding-left: 15px;
     }
 
     .about > .heading {
@@ -1709,12 +1711,16 @@
 
     .animation {
         grid-area: ilustration;
+        display: none;
+
     }
 
     .animation > img {
         margin-top: 100px ;
         height: 150px;
+        display: none;
     }
+
 
     #landingpageThree {
         background-color: rgb(237, 237, 237);
@@ -1724,8 +1730,8 @@
         grid-template-rows: auto auto;
         grid-gap: 80px;
         grid-template-areas:
-        "image image desc desc"
-        "image image desc desc"
+        "desc desc desc desc"
+        "desc desc desc desc"
         ;
         padding-right: 50px;
     }
@@ -1734,6 +1740,7 @@
         grid-area: desc;
         color: rgb(43, 60, 118);
         padding-top: 100px;
+        padding-left: 30px;
     }
 
     #landingpageThree > .about > .heading {
@@ -1766,8 +1773,8 @@
         display: inline-block;
     }
 
-    #landingpageThree > .image {
-        grid-area: image;
+     #landingpageThree > .image {
+        display: none;
     }
 
     .animation > img {
@@ -1784,7 +1791,7 @@
     #hh {
         font-size:20px;
         color: white;
-    }
+    } 
 
     .button {
         background: rgb(235,110,57);
@@ -1816,13 +1823,11 @@
     #landingpageFour {
         grid-area: landingpageFour;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-gap: 80px;
         grid-template-areas:
-        "decs1 image desc2"
-        "decs1 image desc2"
-        ;
+        "desc1"
+        "desc2"
+        "image";
+        justify-items: center;
     }
 
     #landingpageFour > .desc1 >.basicInfo{
@@ -1831,8 +1836,7 @@
 
     #landingpageFour > .desc1 >.basicInfo > p{
         font-size: 12px;
-        margin-left: 50px;
-        text-align: left;
+        text-align: center;
     }
 
     #landingpageFour > .img {
@@ -1841,6 +1845,7 @@
 
     #landingpageFour > .img > img{
         height: 50px; 
+        margin-top: 15px;
     }
 
     #landingpageFour > .desc2 > .conInfo{
@@ -1849,8 +1854,7 @@
 
     #landingpageFour > .desc2 > .conInfo > p{
         font-size: 12px;
-        margin-right: 50px;
-        text-align: right;
+        text-align: center;
     }
       
 }

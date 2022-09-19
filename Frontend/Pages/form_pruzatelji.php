@@ -225,6 +225,26 @@ $idPruzUslKat = "";
     </div>
   </form>
   
+  <div class="results">
+  <h2>Form Data</h2>
+  <pre></pre>
+</div>
+  <script>
+      function handleFormSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        const formJSON = Object.fromEntries(data.entries());
+        console.log({value});
+
+        //const results = document.querySelector('.results pre');
+        //results.innerText = JSON.stringify(formJSON, null, 2);
+      }
+
+      const form = document.querySelector('form');
+      form.addEventListener('submit', handleFormSubmit);
+    </script>
+
+
   <form action="../../Backend/Controller/pruzateljiUsluge.php" method="post">
     <div class="card" data-step id="usluge">
         <h3>Usluge</h3>

@@ -4,12 +4,12 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
     global $db;
     if(isset($search) && strlen($search) > 0){
         $querySearch = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
-        FROM usluge u
-        INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
-        INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
+        FROM pruzatelji p
+        INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
+        INNER JOIN usluge u ON u.idUsluge = pu.usluga
+        INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+        INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
         INNER JOIN lokacija l ON l.idLokacije = p.lokacija
-        INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-        INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
         WHERE p.naziv_pruzatelja like '%$search%' OR p.email like '%$search%' OR l.naziv_lokacije like '%$search%' OR p.adresa like '%$search%' OR p.kontakt like '%$search%' 
         OR p.URL_stranice like '%$search%' OR p.napomena like '%$search%' OR u.naziv_usluge like '%$search%' OR k.naziv_kategorije like '%$search%'
         GROUP BY p.naziv_pruzatelja";
@@ -27,12 +27,12 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
 
     else if(isset($zupanija) && strlen($zupanija) > 10){
         $queryZupanija = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
-        FROM usluge u
-        INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
-        INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
+        FROM pruzatelji p
+        INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
+        INNER JOIN usluge u ON u.idUsluge = pu.usluga
+        INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+        INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
         INNER JOIN lokacija l ON l.idLokacije = p.lokacija
-        INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-        INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
         WHERE p.naziv_pruzatelja like '%$zupanija%' OR p.email like '%$zupanija%' OR l.naziv_lokacije like '%$zupanija%' OR p.adresa like '%$zupanija%' OR p.kontakt like '%$zupanija%' 
         OR p.URL_stranice like '%$zupanija%' OR p.napomena like '%$zupanija%' OR u.naziv_usluge like '%$zupanija%' OR k.naziv_kategorije like '%$zupanija%'
         GROUP BY p.naziv_pruzatelja";
@@ -50,12 +50,12 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
 
     else if(isset($usluga) && strlen($usluga) > 8){
         $queryUsluga = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
-        FROM usluge u
-        INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
-        INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
+        FROM pruzatelji p
+        INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
+        INNER JOIN usluge u ON u.idUsluge = pu.usluga
+        INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+        INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
         INNER JOIN lokacija l ON l.idLokacije = p.lokacija
-        INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-        INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
         WHERE p.naziv_pruzatelja like '%$usluga%' OR p.email like '%$usluga%' OR l.naziv_lokacije like '%$usluga%' OR p.adresa like '%$usluga%' OR p.kontakt like '%$usluga%' 
         OR p.URL_stranice like '%$usluga%' OR p.napomena like '%$usluga%' OR u.naziv_usluge like '%$usluga%' OR k.naziv_kategorije like '%$usluga%'
         GROUP BY p.naziv_pruzatelja";
@@ -69,12 +69,12 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
     }    
     else if(isset($kategorija)){
         $queryKategorija = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
-        FROM usluge u
-        INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
-        INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
+        FROM pruzatelji p
+        INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
+        INNER JOIN usluge u ON u.idUsluge = pu.usluga
+        INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+        INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
         INNER JOIN lokacija l ON l.idLokacije = p.lokacija
-        INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-        INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
         WHERE p.naziv_pruzatelja like '%$kategorija%' OR p.email like '%$kategorija%' OR l.naziv_lokacije like '%$kategorija%' OR p.adresa like '%$kategorija%' OR p.kontakt like '%$kategorija%' 
         OR p.URL_stranice like '%$kategorija%' OR p.napomena like '%$kategorija%' OR u.naziv_usluge like '%$kategorija%' OR k.naziv_kategorije like '%$kategorija%'
         GROUP BY p.naziv_pruzatelja";
@@ -88,12 +88,12 @@ function searchTest($search,$zupanija,$usluga,$kategorija){
     }
     else{
         $query = "SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
-        FROM usluge u
-        INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
-        INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
+        FROM pruzatelji p
+        INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
+        INNER JOIN usluge u ON u.idUsluge = pu.usluga
+        INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+        INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
         INNER JOIN lokacija l ON l.idLokacije = p.lokacija
-        INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-        INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
         GROUP BY p.naziv_pruzatelja";
 
         $statement = $db->prepare($query);
@@ -234,13 +234,13 @@ function selectLok(){
 
 function selectPruzUslKat(){
     global $db;
-    $query = ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
-    FROM usluge u
-    INNER JOIN pruzatelji_usluge pu ON u.idUsluge = pu.usluga
-    INNER JOIN pruzatelji p ON p.idPruz = pu.pruzatelj
-    INNER JOIN lokacija l ON l.idLokacije = p.lokacija
-    INNER JOIN pruzatelji_usluge_kategorije puk ON pu.idPruzUsl = puk.pruzatelj_usluga
-    INNER JOIN kategorije k ON k.idKategorija = puk.kategorija
+    $query = ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge
+        FROM pruzatelji p
+        INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
+        INNER JOIN usluge u ON u.idUsluge = pu.usluga
+        INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+        INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
+        INNER JOIN lokacija l ON l.idLokacije = p.lokacija
     GROUP BY p.naziv_pruzatelja");
     $statement = $db->prepare($query);
     $statement->execute();

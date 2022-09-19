@@ -69,18 +69,19 @@ require "../Components/header_puk.php";
 <div class="container overflow-hidden">
   <div class="row gx-5" id="div-pruz">
   <?php
-  foreach($searchTest as $key){
-   echo "<div class='col'>";
-   echo "<div class='p-3 border bg-light'>";
-   echo "<p>" . "<b>" . $key["naziv_pruzatelja"] . "</b>" . "</p>";
-   echo "<p>" . "<b>" . $key["usluge"] . "</b>" . "</p>";
-   echo "<p>" . "<b>" . $key["kategorije"] . "</b>" . "</p>"; 
-   echo "<p>" . "<b>" . $key["naziv_lokacije"] . "</b>" . "</p>";?> 
-   <a href='detail.php?id=<?php echo $key["idPruz"] ?>' id='more'>Prikaži više</a>
-   <?php
-   echo "</div>";
-   echo "</div>";
-  }     
+  if(is_array($searchTest) || is_object($searchTest))
+  {
+    foreach($searchTest as $key){
+      echo "<div class='col'>";
+      echo "<div class='p-3 border bg-light'>";
+      echo "<p>" . "<b>" . $key["naziv_pruzatelja"] . "</b>" . "</p>"; 
+      echo "<p>" . "<b>" . $key["naziv_lokacije"] . "</b>" . "</p>";?> 
+      <a href='detail.php?id=<?php echo $key["idPruz"] ?>' id='more'>Prikaži više</a>
+      <?php
+      echo "</div>";
+      echo "</div>";
+      }    
+  }
   ?>
 
   </div>

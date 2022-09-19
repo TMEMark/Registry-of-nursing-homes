@@ -48,7 +48,7 @@ if(isset($_SESSION['logedIn']) == 0)
     echo '<a href="http://localhost/Registry-of-nursing-homes/Frontend/Pages/form_login.php" id="login" style="
     color: white;
     text-decoration: none;
-">Prijava</a>';;
+"></a>';;
 }
 
 ?>
