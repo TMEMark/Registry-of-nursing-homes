@@ -133,8 +133,9 @@ div h3{
     }
     .grid{
         margin-left: 180px;
-        height: 80px;
-        width: inherit;
+        height: 100%;
+        width: 100%;
+        width: 150%;
         display: grid;
         grid-template-areas:
         ".container1 .container2"
@@ -147,54 +148,76 @@ div h3{
         margin-top: 15px;
     }
 }
-@media ((min-width:992px) and (max-width: 1440px)){
-    #search{
-        margin-top: 10px;
-        width: 30%;
+@media ((min-width:991px) and (max-width: 1440px)){
+    #sidebar {
+        position: fixed;
+        top: 0%;
+        left: 250px;
+        width: 250px;
+        height: 90%;
+        margin-left: -250px;
+        margin-top: 90px;
+        overflow-y: auto;
+        background: #EFEFEF;
         text-align: center;
+      }
+      #sidebar .nav a{
+        color: #595959;
+        font-size: 14px;
+        padding: 16px 24px;
+      }
+      #sidebar .nav a:hover{
+        background: none;
+        color: #7d8488;
+      } 
+      #sidebar #admin{
+        margin-top: 3em;
+      }
+      #sidebar p{
+          margin-bottom: 2em;
+      }
+     .nav{
+         border: none;
+     }
+     .nav td{
+        width: 20px;
+        padding: 0.5em;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
     }
-    #pruzatelj{
-        float: left;
-    }
-    #usluga{
-        float: left;
-    }
-    #kategorija{
-        float: left;
-    }
-    #celija_pruzatelji{
-        float: left;
-    }
-    #celija_usluge{
-        float: left;
-    }
-    #celija_kategorije{
-        float: left;
-    }
-    #celija_admini{
-        float: left;
-    }
-    #viewport{
-        margin-top: 120px;
-    }
-    .submit{
-        margin-top: 100px;
-        margin-left: -400px;
-        width: 100px;
-    }
-    h1{
-        margin-top: 40%
-    }
-    #logout{
+     #logout{
         color: white;
         text-decoration: none;
-        display: block;
     }
-    .breadcrumb{
-        margin-top: -150px;
+    .d-block{
+        padding-left:100px;
     }
-    div .container1, .container2{
+    .container{
+        padding-left: 210px;
+    }
+    thead{
+        border: 1px;
+        border-color: #595959;
+    }
+    .ui-menu > li{
+        width: 220px;
+    }
+    .grid{
         margin-left: 180px;
+        height: 100%;
+        width: 150%;
+        display: grid;
+        grid-template-areas:
+        ".container1 .container2 .container3"
+        ".container1 .container2 .container3";
+        justify-content: space-between;
+        justify-items: start;
+        column-gap: 3em;
+    }
+    tbody{
+        margin-top: 15px;
     }
 }
 
@@ -225,7 +248,7 @@ div h3{
         text-decoration: none;
         display: block!important;
     }
-    div .container1, .container2{
+    div .container1, .container2, .container3{
         margin-left: 80px;
     }
 }

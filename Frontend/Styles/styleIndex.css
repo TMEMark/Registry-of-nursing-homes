@@ -70,3 +70,9 @@ select option {
 #add{
     width: 35px !important;
 }
+input[type="submit"]{
+    width: 50%
+}
+.form-select{
+    margin-left: 50px;
+}

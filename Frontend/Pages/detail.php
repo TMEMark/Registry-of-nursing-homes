@@ -1,13 +1,9 @@
 <?php
 require "../Components/header.html";
 require "../../Backend/select.php";
-$query = $db->query ("SELECT DISTINCT p.naziv_pruzatelja, p.email, l.naziv_lokacije, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, GROUP_CONCAT(u.naziv_usluge) as 'usluge', GROUP_CONCAT(k.naziv_kategorije) as 'kategorije', k.idKategorija, p.idPruz, u.idUsluge   
+$query = $db->query ("SELECT p.naziv_pruzatelja, p.email, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, l.naziv_lokacije, p.oib
 FROM pruzatelji p
-INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj 
-INNER JOIN usluge u ON u.idUsluge = pu.usluga
-INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
-INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
-INNER JOIN lokacija l ON l.idLokacije = p.lokacija
+INNER JOIN lokacija l ON p.lokacija=l.idLokacije
 WHERE p.idPruz = " . $_GET["id"]);
 $results = $query -> fetchAll();
 ?>
@@ -32,15 +28,38 @@ $results = $query -> fetchAll();
                     <p><b>KONTAKT:</b> <?php echo $results[0]["kontakt"]; ?> </p><br>
                     <p><b>MAIL:</b> <?php echo $results[0]["email"]; ?> </p><br>
                     <p><b>RADNO VRIJEME:</b> <?php echo $results[0]["radno_vrijeme"]; ?> </p><br>
+                    <p><b>WEB:</b> <?php echo $results[0]["URL_stranice"]; ?> </p><br>
+                    <p><b>NAPOMENA:</b> <?php echo $results[0]["napomena"]; ?> </p><br>                    
 
                 </div>
 
                 <div class="container2">
-                    <p><b>WEB:</b> <?php echo $results[0]["URL_stranice"]; ?> </p><br>
-                    <p><b>NAPOMENA:</b> <?php echo $results[0]["napomena"]; ?> </p><br>
-                    <p><b>USLUGE:</b> <?php echo $results[0]["usluge"]; ?> </p><br>
-                    <p><b>KATEGORIJE:</b> <?php echo $results[0]["kategorije"]; ?> </p>
+
+                    <?php
+                    $query2 = $db->query("SELECT p.naziv_pruzatelja, u.naziv_usluge
+                    FROM pruzatelji p
+                    INNER JOIN pruzatelji_usluge pu ON p.idPruz = pu.pruzatelj
+                    INNER JOIN usluge u ON u.idUsluge = pu.usluga
+                    WHERE p.idPruz = " . $_GET["id"]);
+                    $results2 = $query2 -> fetchAll();
+                    ?>
+                    <p><b>USLUGE:</b><br><?php foreach($results2 as $r2){
+                        echo $r2["naziv_usluge"] . "<br>"; }
+                      ?></p><br>
+                    <?php
+                    $query3 = $db->query("SELECT p.naziv_pruzatelja, k.naziv_kategorije
+                    FROM pruzatelji p
+                    INNER JOIN pruzatelji_kategorije pk ON p.idPruz = pk.pruzatelj
+                    INNER JOIN kategorije k ON k.idKategorija = pk.kategorija
+                    WHERE p.idPruz = " . $_GET["id"]);
+                    $results3 = $query3 -> fetchAll();
+                    ?>
                 </div>
+                <div class="container3">
+                    <p><b>KATEGORIJE:</b><br> <?php
+                    foreach($results3 as $r3){
+                      echo $r3["naziv_kategorije"] . "<br>"; }
+                    ?> </p>
                 </div>
            
             </div>
