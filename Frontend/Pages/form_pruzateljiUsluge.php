@@ -86,7 +86,7 @@ $idPruzUslKat = "";
           $idPruz = $key['idPruz'];
         }
         ?>
-        <h4>5. korak od 6</h4> 
+        <h4>4. korak od 5</h4> 
         <div class="form-group">
         <input type="hidden" name="idPruzUsl" value="<?php echo $idPruzUsl;?>">
           <input type="hidden" name="pruzatelj"  class="form-control" value="<?php echo $idPruz; ?>">

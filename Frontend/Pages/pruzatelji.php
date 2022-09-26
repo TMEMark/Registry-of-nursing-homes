@@ -44,7 +44,6 @@ foreach ($selectPruzLok as $keyPruzLok){
             <p>Kontakt: <?php echo $keyPruzLok["kontakt"] ?></p>
             <p>Web stranica: <?php echo $keyPruzLok["URL_stranice"] ?></p>
             <p>Radno vrijeme: <?php echo $keyPruzLok["radno_vrijeme"] ?></p>
-            <p>Usluge:</p>
           </div>
 
           <div class="col-2">

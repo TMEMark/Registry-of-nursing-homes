@@ -41,6 +41,13 @@
     }
 }
 
+@media(max-width:991px){
+    #zupanija, #usluga, #kategorija, [type=submit]{
+        float: left;
+        margin-left: 100px;
+    }
+}
+
 #div-pruz{
     flex-direction: column;
 }

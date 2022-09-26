@@ -84,7 +84,7 @@ $idPruzUslKat = "";
     <div class="card" data-step>
       <h2>Dodajte pružatelja</h2>
       <h3 class="step-title">Osnovne informacije</h3>
-      <h4>1. korak od 6</h4>
+      <h4>1. korak od 5</h4>
       <div class="form-group">
         <div class="naziv">
           <label for="naziv" id="label-naziv">
@@ -145,7 +145,7 @@ $idPruzUslKat = "";
     </div>
     <div class="card" data-step>
       <h3 class="step-title">Kontakt informacije</h3>
-      <h4>2. korak od 6</h4>
+      <h4>2. korak od 5</h4>
       <div class="form-group">
         <div class="kontakt">
           <label for="kontakt" id="label-kontakt">
@@ -179,36 +179,10 @@ $idPruzUslKat = "";
         </div>
       </div>
     </div>
-    <div class="card" data-step>
-      <h3 class="step-title">Upis na kartu</h3>
-      <h4>3. korak od 6</h4>
-      <div class="form-group">
-      <div class="long">
-          <label for="long" id="label-long">
-          <span class="content-long">
-                  Longitude
-              </span>
-              <input type="text" autocomplete="off" id="long" value="<?php echo $long?>" name="long" />
-          </label>
-          <br />
-        </div>
-        <div class="lat">
-          <label for="lat" id="label-lat">
-          <span class="content-lat">
-                  Latitude
-              </span>
-              <input type="text" autocomplete="off" id="lat" value="<?php echo $lat;?>" name="lat" />
-          </label>
-          <br />
-          <button type="button" data-previous>Prethodno</button>
-          <button type="button" data-next>Sljedeće</button>
-          <button type="button"><a href="pruzatelji.php"><img src="../Components/assets/x.svg" alt="poništavanje" id="quit">Odustani</a></button>
-        </div>
-      </div>
-    </div>
+
     <div class="card" data-step>
       <h3 class="step-title">Napomena</h3>
-      <h4>4. korak od 6</h4>
+      <h4>3. korak od 5</h4>
       <div class="form-group">
       <div class="napomena">
           <label for="napomena" id="label-napomena">
@@ -224,25 +198,6 @@ $idPruzUslKat = "";
       </div>
     </div>
   </form>
-  
-  <div class="results">
-  <h2>Form Data</h2>
-  <pre></pre>
-</div>
-  <script>
-      function handleFormSubmit(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        const formJSON = Object.fromEntries(data.entries());
-        console.log({value});
-
-        //const results = document.querySelector('.results pre');
-        //results.innerText = JSON.stringify(formJSON, null, 2);
-      }
-
-      const form = document.querySelector('form');
-      form.addEventListener('submit', handleFormSubmit);
-    </script>
 
 
   <form action="../../Backend/Controller/pruzateljiUsluge.php" method="post">
@@ -254,7 +209,7 @@ $idPruzUslKat = "";
           $idPruz = $key['idPruz'];
         }
         ?>
-        <h4>5. korak od 6</h4> 
+        <h4>4. korak od 5</h4> 
         <div class="form-group">
         <input type="hidden" name="idPruzUsl" value="<?php echo $idPruzUsl;?>">
           <input type="hidden" name="pruzatelj"  class="form-control" value="<?php echo $idPruz; ?>">
@@ -290,7 +245,7 @@ $idPruzUslKat = "";
           $idPruzUsl = $key['idPruzUsl'];
         }
         ?>
-        <h4>6. korak od 6</h4> 
+        <h4>5. korak od 5</h4> 
         <div class="form-group">
         <input type="hidden" name="idPruzUslKat" value="<?php echo $idPruzUslKat;?>">
           <input type="hidden" name="pruzateljUsluga"  class="form-control" value="<?php echo $idPruzUsl; ?>">

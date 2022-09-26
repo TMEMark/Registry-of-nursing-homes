@@ -90,7 +90,7 @@ $idPruzUslKat = "";
           $idPruzUsl = $key['idPruzUsl'];
         }
         ?>
-        <h4>6. korak od 6</h4> 
+        <h4>5. korak od 5</h4> 
         <div class="form-group">
         <input type="hidden" name="idPruzUslKat" value="<?php echo $idPruzUslKat;?>">
           <input type="hidden" name="pruzateljUsluga"  class="form-control" value="<?php echo $idPruzUsl; ?>">
