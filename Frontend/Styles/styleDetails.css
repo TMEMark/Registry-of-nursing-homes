@@ -1,0 +1,36 @@
+.mainDiv {
+  font-family: 'Poppins', sans-serif;
+  background-color: rgba(207, 34, 20, 0.05);
+  width: 100%;
+}
+.firstSection {
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
+}
+.secondSection {
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
+}
+h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 45px;
+  color: #CF2214;
+  margin-left: 30px;
+}
+.txtDetail {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #535353;
+}
+.txtDetailServices {
+  margin-left: 150px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #535353;
+}

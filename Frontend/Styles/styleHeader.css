@@ -1,0 +1,77 @@
+
+.logoRMU{
+  grid-area: a
+}
+.logoIzvor {
+  grid-area: b
+}
+.searchBar {
+  grid-area: c
+}
+.login{
+  grid-area: d
+}
+nav {
+  display: grid;
+  grid-template-areas:
+  "a b c c d";
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+#logoRMU {
+  width: 250px;
+  height: 80px;
+}
+#logoIzvor {
+  height: 80px;
+}
+.searchBar{
+  border: 2px solid #D9D9D9;
+  border-radius: 10px;
+  width: 542px;
+  height: 40px;
+  font-family: 'Poppins', sans-serif;
+}
+.searchBar {
+  position:relative;
+}
+.inputField {
+  height:20px;
+  margin:0;
+  padding-left: 30px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  width: 80%;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+#imgSearchBar {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+}
+#button {
+  width: 90px;
+  height: 30px;
+  /* left: 1114px; */
+  top: 5px;
+  border-radius: 10px;
+  border: none;
+  background: #CF2214;
+  color: #fff;
+  position: absolute;
+  font-family: 'Poppins', sans-serif;
+}
+#loginTxt{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #CF2214;
+  text-align: center;
+}
+a {
+  text-decoration: none;
+}
