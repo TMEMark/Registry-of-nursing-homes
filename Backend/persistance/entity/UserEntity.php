@@ -1,5 +1,5 @@
 <?php
-class UserEntity{
+class UserEntity extends AbstractEntity{
 
     private String $firstname;
 

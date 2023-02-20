@@ -1,5 +1,5 @@
 <?php
-class ServiceEntity{
+class ServiceEntity extends AbstractEntity{
     private String $name;
 
 	/**

@@ -1,5 +1,5 @@
 <?php
-class CategoryEntity{
+class CategoryEntity extends AbstractEntity{
     private String $name;
 
 	/**

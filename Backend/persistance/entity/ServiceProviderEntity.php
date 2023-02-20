@@ -1,5 +1,5 @@
 <?php
-class ServiceProviderEntity{
+class ServiceProviderEntity extends AbstractEntity{
     private String $name;
 
     private String $email;

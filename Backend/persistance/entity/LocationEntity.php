@@ -1,5 +1,5 @@
 <?php
-class LocationEntity{
+class LocationEntity extends AbstractEntity{
     private String $name;
 
 	/**
