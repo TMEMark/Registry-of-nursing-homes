@@ -6,14 +6,75 @@
 .filters {
   grid-area: a;
 }
+.filtersCollapsible {
+  grid-area: a1;
+}
 .gridNursingHomes {
   grid-area: b
 }
+/* Laptops and Desktops */
+@media (min-width: 1025px) {
 .gridMain {
   display: grid;
   grid-template-areas:
   "a b";
   grid-template-columns: 30% 70%;
+}
+.filtersCollapsible {
+  display: none;
+}
+}
+
+/*Tablets*/
+ @media (min-width: 481px) and (max-width: 1024px) {
+   .gridMain {
+     display: grid;
+     grid-template-areas:
+     "a b";
+     grid-template-columns: 30% 70%;
+   }
+   .filtersCollapsible {
+     display: none;
+   }
+   body {
+     background-color: rgba(207, 34, 20, 0.05);
+   }
+ }
+
+/*Mobiles*/
+@media (max-width: 480px) {
+.gridMain {
+  display: grid;
+  grid-template-areas:
+  "a1"
+  "b";
+}
+.filters {
+  display: none;
+}
+.image{
+  display: none;
+}
+.collapsible {
+  background-color: rgba(207, 34, 20, 0.05);
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.active, .collapsible:hover {
+  background-color: rgba(207, 34, 20, 0.05);
+}
+.content {
+  padding: 0 18px;
+  display: none;
+  /*overflow: hidden;*/
+  background-color: #F9F9F9;
+}
 }
 
 .txtFilters {
@@ -21,6 +82,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  font-size: 0px;
 }
 .filtersLSC{
   margin-left: 70px;
@@ -47,18 +109,67 @@
   "a a a a a"
   "b c c c c"
 }
+.gridDescNursingHomesMobile {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .intro {
+    grid-area: a;
+  }
+  .mainInfo {
+    grid-area: b;
+  }
+  .imgNursingHomes {
+    grid-area: c;
+  }
+
+.gridDescNursingHomesMobile {
+  display: grid;
+  grid-template-areas:
+  "a a"
+  "b b"
+  "c c";
+}
+.gridNursingHomes {
+  display: none;
+}
+#nameNursingHome {
+  color: #F1F1F1 !important;
+  font-size: 16px;
+}
+#nameLocation {
+  color: #fff;
+  font-size: 12px;
+}
+.mainInfo {
+  background: #CF2214;
+  padding-top: 10px;
+  width: 100%;
+}
+.img {
+  width: 100%;
+  position:absolute;
+  margin-top:-15px;
+  position: relative;
+  margin-top: -10px;
+  z-index: -1;
+}
+}
 
 #filterTxtOne {
   color: #858585;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  display: inline-block;
 }
 #filterTxtTwo {
   color: #CF2214;
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
+  display: inline-block;
 }
 .filterHr{
   width: 297.5px;
@@ -68,7 +179,7 @@ input[type="checkbox"]{
   border-radius: 5px;
 }
 input[type="checkbox"]:checked{
-  background: #CF2214;
+  accent-color: #CF2214;
   border: 1px solid #CF2214;
   border-radius: 5px;
 }
@@ -144,7 +255,4 @@ hr {
   width: 600px;
   height: 0px;
   color: #D9D9D9;
-}
-.btnDetails {
-
 }

@@ -62,9 +62,55 @@ $resultsKat = $queryKat->fetchAll();
         ?>
         </div>
       </div>
-
-
     </div>
+
+    <div class="filtersCollapsible">
+        <button type="button" class="collapsible">Filtriraj</button>
+
+      <div class="content">
+        <div class="filterLocation">
+          <p class="filterTitle">ŽUPANIJE</p>
+          <?php
+          foreach ($resultsLok as $lokacija) { ?>
+            <label class="location">
+              <input type="checkbox" id="checkbox">
+              <img src="../Assets/location.svg" alt="">
+              <span class="checkmark"><?php echo $lokacija["naziv_lokacije"] ?></span>
+            </label><br>
+            <?php
+          }
+          ?>
+        </div>
+        <div class="filterServices">
+          <p class="filterTitle">USLUGE</p>
+          <?php
+          foreach ($resultsUsl as $usluga) { ?>
+          <label class="location">
+            <input type="checkbox" id="checkbox">
+            <img src="../Assets/services.svg" alt="">
+            <span class="checkmark"><?php echo $usluga["naziv_usluge"] ?></span>
+          </label><br>
+          <?php
+        }
+        ?>
+        </div>
+        <div class="filterCategories">
+          <p class="filterTitle">KATEGORIJE</p>
+          <p class="filterTitle" style="margin-left: 10px"> Skrb i usluge za:</p>
+          <?php
+          foreach ($resultsKat as $kategorija) { ?>
+          <label class="location">
+            <input type="checkbox" id="checkbox">
+            <img src="../Assets/categories.svg" alt="">
+            <span class="checkmark"><?php echo $kategorija["naziv_kategorije"] ?></span>
+          </label><br>
+          <?php
+        }
+        ?>
+        </div>
+      </div>
+    </div>
+
     <div class="gridNursingHomes">
       <div class="intro">
         <div class="txtIcon">
@@ -95,8 +141,26 @@ $resultsKat = $queryKat->fetchAll();
               </a>
           </div>
         </div>
-
       </div>
     </div>
+    <div class="gridDescNursingHomesMobile">
+          <div class="intro">
+            <div class="txtIcon">
+              <img src="../Assets/home.svg" alt="Pružatelji">
+              <p class="txtPruzatelji">PRUŽATELJI</p>
+            </div>
+            <p class="noResults">x rezultata</p>
+          </div>
+          <div class="mainInfo">
+            <p id="nameNursingHome">Naziv pružatelja</p>
+            <p id="nameLocation">Županija</p>
+          </div>
+          <div class="imgNursingHomes">
+            <img src="../Assets/img_NursingHome.png" alt="Nursing home" class="img">
+          </div>
+        </div>    
   </div>
 </div>
+<?php
+require "Components/footer.html";
+ ?>
