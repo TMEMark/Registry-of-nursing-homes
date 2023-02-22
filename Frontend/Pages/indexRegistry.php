@@ -12,45 +12,44 @@ require  "../../Backend/search.php";
       </div>
       <hr class="filterHr">
       <div class="filtersLSC">
-        <div class="filterLocation">
+      <div class="filterLocation">
           <p class="filterTitle">ŽUPANIJE</p>
-          <?php
-          foreach ($resultsLok as $lokacija) { ?>
-            <label class="location">
-              <input type="checkbox" id="checkbox">
-              <img src="../Assets/location.svg" alt="">
-              <span class="checkmark"><?php echo $lokacija["naziv_lokacije"] ?></span>
-            </label><br>
-            <?php
-          }
-          ?>
+          <?php 
+                foreach ($selectLok as $keyLok){
+                  $checked="";
+                  if($_GET['zupanija'] == $keyLok['naziv_lokacije']){
+                    $checked=" checked=\"checked\" ";
+                  }
+                  echo "<input type='checkbox' id='checkbox'" . $checked . "><img src='../Assets/location.svg' alt=''>" . ($keyLok['naziv_lokacije']);
+                };
+                ?>
+            
         </div>
         <div class="filterServices">
           <p class="filterTitle">USLUGE</p>
-          <?php
-          foreach ($resultsUsl as $usluga) { ?>
-          <label class="location">
-            <input type="checkbox" id="checkbox">
-            <img src="../Assets/services.svg" alt="">
-            <span class="checkmark"><?php echo $usluga["naziv_usluge"] ?></span>
-          </label><br>
-          <?php
-        }
-        ?>
+          <?php 
+                foreach ($selectUsl as $keyUsl){
+                  $checked="";
+                  if($_GET['usluga'] == $keyUsl['naziv_usluge']){
+                    $checked=" checked=\"checked\" ";
+                  }
+                  echo "<input type='checkbox' id='checkbox'" . $checked . "><img src='../Assets/services.svg' alt=''>" . ($keyUsl['naziv_usluge']);
+                };
+                ?>
+
         </div>
         <div class="filterCategories">
           <p class="filterTitle">KATEGORIJE</p>
           <p class="filterTitle" style="margin-left: 10px"> Skrb i usluge za:</p>
-          <?php
-          foreach ($resultsKat as $kategorija) { ?>
-          <label class="location">
-            <input type="checkbox" id="checkbox">
-            <img src="../Assets/categories.svg" alt="">
-            <span class="checkmark"><?php echo $kategorija["naziv_kategorije"] ?></span>
-          </label><br>
-          <?php
-        }
-        ?>
+          <?php 
+                foreach ($selectKat as $keyKat){
+                  $checked="";
+                  if($_GET['kategorija'] == $keyUsl['naziv_kategorije']){
+                    $checked=" checked=\"checked\" ";
+                  }
+                  echo "<input type='checkbox' id='checkbox'" . $checked . "><img src='../Assets/categories.svg' alt=''>" . ($keyKat['naziv_kategorije']);
+                };
+                ?>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <?php
 require "Components/header.html";
-//require "../../Backend/select.php";
+require "../../Backend/select.php";
 ?>
 
 </div>
