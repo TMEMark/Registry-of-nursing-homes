@@ -7,9 +7,10 @@
     </div>
 </div>
 
-<div class="container d-none d-sm-none d-md-none d-lg-block">
-    <div id="viewport">
-      <div id="sidebar" class="">
+  <div class="filtersCollapsibleAdmin">
+        <button type="button" class="collapsible">Odaberi</button>
+
+      <div class="content">
         <?php 
         echo "<p><img src='../Assets/user.svg' alt='admin' id='admin' style= 'width:40px;'>
         Prijavljeni ste kao: " . $_SESSION["user"] . "</p>";
@@ -54,6 +55,6 @@
           </tr>
         </table>
         
-      </div>
+      
     </div>
   </div>

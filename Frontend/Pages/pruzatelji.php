@@ -93,8 +93,8 @@ foreach ($selectPruzLok as $keyPruzLok){
                 }?></td>
                
                 <td>
-                <a href="form_pruzatelji.php?idPruz=<?php echo $keyPruzLok["idPruz"];?>"><img src="../Components/assets/update.svg" alt="Update"></a>
-                <a href="../../Backend/Controller/pruzatelji.php?delete=<?php echo $keyPruzLok["idPruz"];?>"><img src='../Components/assets/delete.svg' alt='Delete'></a>
+                <a href="form_pruzatelji.php?idPruz=<?php echo $keyPruzLok["idPruz"];?>"><img src="../Assets/update.svg" alt="Update"></a>
+                <a href="../../Backend/Controller/pruzatelji.php?delete=<?php echo $keyPruzLok["idPruz"];?>"><img src='../Assets/delete.svg' alt='Delete'></a>
                 </td>
             </tr>
 <?php

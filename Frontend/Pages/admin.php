@@ -3,13 +3,11 @@ require "../../Backend/Controller/LoginSystem/session.php";
 require "../../Backend/Controller/LoginSystem/adminRole.php";
 require "Components/header.html";
 require "../../Backend/select.php";
-//require "../Components/header_admin.php";
-//require "../Components/header_puk.php";
-
+require "Components/header_admin.php";
 ?>
 
 <div class="container"><a href="form_admin.php">
-  <img src="../Components/assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
+  <img src="../Assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
 </div>
 <style>
     @media (max-width:991px){
@@ -33,9 +31,9 @@ foreach ($selectAdminUloge as $admin){
           </div>
 
           <div class="col-2">
-              <a href="form_admin.php?idAdmin=<?php echo $admin["idAdmin"];?>"><img src="../Components/assets/update.svg" alt="Update"></a>
+              <a href="form_admin.php?idAdmin=<?php echo $admin["idAdmin"];?>"><img src="../Assets/update.svg" alt="Update"></a>
 
-              <a href ="../../Backend/Controller/admin.php?delete=<?php echo $admin["idAdmin"]; ?>"><img src="../Components/assets/delete.svg" alt="Delete"></a>
+              <a href ="../../Backend/Controller/admin.php?delete=<?php echo $admin["idAdmin"]; ?>"><img src="../Assets/delete.svg" alt="Delete"></a>
           </div>
         </div>
       </div>
@@ -64,9 +62,9 @@ foreach ($selectAdminUloge as $admin){
               <td><?php echo $admin["nazivUloge"]; ?></td>
               <td><?php echo $admin["lozinka"]; ?></td>
               <td>
-              <a href="form_admin.php?idAdmin=<?php echo $admin["idAdmin"];?>"><img src="../Components/assets/update.svg" alt="Update"></a>
+              <a href="form_admin.php?idAdmin=<?php echo $admin["idAdmin"];?>"><img src="../Assets/update.svg" alt="Update"></a>
 
-              <a href ="../../Backend/Controller/administratori.php?delete=<?php echo $admin["idAdmin"]; ?>"><img src="../Components/assets/delete.svg" alt="Delete"></a>
+              <a href ="../../Backend/Controller/administratori.php?delete=<?php echo $admin["idAdmin"]; ?>"><img src="../Assets/delete.svg" alt="Delete"></a>
               </td>
 <?php
 }
@@ -78,5 +76,5 @@ foreach ($selectAdminUloge as $admin){
 <script type="text/javascript" src="../JavaScript/admin.js"></script>
 
 <?php
-require "../Components/footer.html" ;
+require "Components/footer.html" ;
 ?>
