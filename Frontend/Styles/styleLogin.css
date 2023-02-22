@@ -1,0 +1,30 @@
+.content {
+    font-family: 'Poppins', sans-serif;
+}
+h3 {
+    margin-top: 120px;
+    color: #CF2214;
+}
+label {
+    color: #CF2214;
+}
+.button {
+    background-color: #CF2214;
+    border: 0;
+    border-radius: 10px;
+    height: 40px;
+    width: 80px;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 15px;
+}
+#quit {
+    border-radius: 10px;
+    border-color: #CF2214;
+    height: 40px;
+    width: 140px;
+    font-weight: bold;
+}
+button a {
+    color: #CF2214;
+}
