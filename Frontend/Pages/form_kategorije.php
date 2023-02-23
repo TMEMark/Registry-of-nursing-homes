@@ -1,9 +1,7 @@
 <link rel="stylesheet" href="../Styles/styleKategorije.css">
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
-require "../Components/header.html";
-//require "../Components/dropdown_menu.html";
-//require "../Components/header.html";
+require "Components/header.html";
 require "../../Backend/select.php";
 
 if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
@@ -23,10 +21,9 @@ if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
 </nav>
 
 <div class="ilustracija">
-  <img src="../Components/assets/ilustracija1.png" alt="Ilustracija" class="illustr">
+  <!--<img src="../Components/assets/ilustracija1.png" alt="Ilustracija" class="illustr">-->
 </div>
 
-<div class="content">
   <!--Marko je bio tu.-->
     <div class="container">
       <div class="row">
@@ -46,7 +43,7 @@ if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
 
               <input type="submit" name="submit" value="Unos" class="submit">
 
-              <a href="kategorije.php"><button type="button" class="btn btn-outline-secondary"><img src="../Components/assets/x.svg" alt="poništavanje">Odustani</button></a>
+              <a href="kategorije.php"><button type="button" class="btn btn-outline-secondary"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
 
             </form>
             <?php
@@ -63,4 +60,4 @@ if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
         
       </div>
     </div>
-  </div>
+

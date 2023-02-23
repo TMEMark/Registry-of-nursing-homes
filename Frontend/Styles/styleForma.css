@@ -1,0 +1,28 @@
+.container {
+    font-family: 'Poppins', sans-serif;
+}
+#role {
+    border-radius: 10px;
+    height: 40px;
+    width: 150px;
+}
+
+.submit {
+    background-color: #CF2214;
+    border: 0;
+    border-radius: 10px;
+    height: 40px;
+    width: 80px;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+#quitForm {
+    border-radius: 10px;
+    border-color: #CF2214;
+    height: 40px;
+    width: 140px;
+    font-weight: bold;
+    background-color: #fff;
+}
