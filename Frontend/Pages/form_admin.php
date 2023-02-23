@@ -80,7 +80,7 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
               
             <input type="submit" name="submit" value="Unos" class="submit">
 
-            <a href="admin.php"><button type="button" id="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
+            <a href="admin.php"><button type="button" class="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
 
             </form>
             <?php

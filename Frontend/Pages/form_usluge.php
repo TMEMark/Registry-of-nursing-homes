@@ -44,7 +44,7 @@ if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
 
               <input type="submit" name="submit" value="Unos" class="submit">
 
-              <a href="usluge.php"><button type="button" class="btn btn-outline-secondary"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
+              <a href="usluge.php"><button type="button" class="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
 
             </form>
             <?php

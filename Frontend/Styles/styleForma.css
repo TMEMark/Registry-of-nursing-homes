@@ -17,12 +17,125 @@
     font-weight: bold;
     margin-right: 15px;
 }
+.before {
+    background-color: #CF2214;
+    border: 0;
+    border-radius: 10px;
+    height: 40px;
+    width: 120px;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 15px;
+}
 
-#quitForm {
+.quitForm {
     border-radius: 10px;
     border-color: #CF2214;
     height: 40px;
     width: 140px;
     font-weight: bold;
     background-color: #fff;
+    margin-top: 2px;
 }
+
+/*Za pruzatelje - korak po korak forma*/
+h1{
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+#naziv, #oib, #adresa, #radn_vrijeme, #kontakt, #email, #url{
+    width: 300px;
+    height: 30px;
+    border-width: thin;
+    border-radius: 10px;
+}
+.formRegistry {
+    font-family: 'Poppins', sans-serif;
+}
+  
+  #lokacija{
+    border-radius: 10px;
+    height: 40px;
+    width: 300px;
+  }
+  
+  textarea{
+    width: 500px;
+    background: transparent;
+    border-color: #CF2214;
+  }
+  
+  select option:hover{
+    background-color: #595959;
+    color: whitesmoke;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .card {
+    padding: .5rem;
+    max-width: 80%;
+    margin: 0 auto;
+    animation: fade 250ms ease-in-out forwards;
+  }
+
+  h4{
+    margin-bottom: 1em;
+  }
+  
+  .card.active {
+    animation: slide 250ms 125ms ease-in-out both;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .multi-step-form {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(200%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  h2{
+    text-align: center;
+  }
+  
+  #unos{
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .select2-container--default .select2-selection--multiple{
+    width: 40%;
+    margin-left:250px;
+  }
