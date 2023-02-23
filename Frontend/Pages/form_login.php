@@ -3,10 +3,7 @@ require "Components/header.html";
 require "../../Backend/select.php";
 ?>
 
-</div>
-</nav>
-
-<div class="content">
+<div class="login">
     <div class="container">
       <div class="row">
         <div class="col-md-6 contents">

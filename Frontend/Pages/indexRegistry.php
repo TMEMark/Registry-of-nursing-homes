@@ -44,7 +44,7 @@ require  "../../Backend/search.php";
           <?php 
                 foreach ($selectKat as $keyKat){
                   $checked="";
-                  if($_GET['kategorija'] == $keyUsl['naziv_kategorije']){
+                  if($_GET['kategorija'] == $keyKat['naziv_kategorije']){
                     $checked=" checked=\"checked\" ";
                   }
                   echo "<input type='checkbox' id='checkbox'" . $checked . "><img src='../Assets/categories.svg' alt=''>" . ($keyKat['naziv_kategorije']);
