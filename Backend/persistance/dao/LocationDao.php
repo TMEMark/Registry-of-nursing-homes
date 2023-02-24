@@ -3,7 +3,7 @@ include('../mapper/LocationMapper.php');
 include("../entity/LocationEntity.php");
 class LocationDao{
 
-    private final LocationMapper $locationMapper;
+    private LocationMapper $locationMapper;
 
     public function __construct(LocationMapper $locationMapper) {
         $this->locationMapper = $locationMapper;

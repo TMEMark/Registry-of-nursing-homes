@@ -1,6 +1,6 @@
 <?php
 class ServiceProviderDao{
-    private final ServiceProviderMapper $serviceProviderMapper;
+    private ServiceProviderMapper $serviceProviderMapper;
 
     public function __construct(ServiceProviderMapper $serviceProviderMapper) {
         $this->serviceProviderMapper = $serviceProviderMapper;

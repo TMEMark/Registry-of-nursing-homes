@@ -3,7 +3,7 @@ include('../mapper/CategoryMapper.php');
 include("../entity/CategoryEntity.php");
 class CategoryDao{
 
-    private final CategoryMapper $categoryMapper;
+    private CategoryMapper $categoryMapper;
 
     public function __construct(CategoryMapper $categoryMapper) {
         $this->categoryMapper = $categoryMapper;
