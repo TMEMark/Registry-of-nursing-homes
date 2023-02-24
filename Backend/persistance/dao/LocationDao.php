@@ -1,5 +1,6 @@
 <?php
-include('LocationMapper.php');
+include('../mapper/LocationMapper.php');
+include("../entity/LocationEntity.php");
 class LocationDao{
 
     private final LocationMapper $locationMapper;

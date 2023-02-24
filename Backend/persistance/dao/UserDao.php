@@ -1,9 +1,9 @@
 <?php
-include("UserMapper.php");
-include("UserEntity.php");
+include("../mapper/UserMapper.php");
+include("../entity/UserEntity.php");
 class UserDao{
 
-    private final UserMapper $userMapper;
+    private UserMapper $userMapper;
 
     public function __construct(UserMapper $userMapper) {
         $this->userMapper = $userMapper;

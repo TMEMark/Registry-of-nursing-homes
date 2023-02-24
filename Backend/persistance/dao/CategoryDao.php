@@ -1,5 +1,6 @@
 <?php
-include('CategoryMapper.php');
+include('../mapper/CategoryMapper.php');
+include("../entity/CategoryEntity.php");
 class CategoryDao{
 
     private final CategoryMapper $categoryMapper;
