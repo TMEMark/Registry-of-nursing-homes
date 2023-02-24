@@ -1,5 +1,6 @@
 <?php
 include("UserMapper.php");
+include("UserEntity.php");
 class UserDao{
 
     private final UserMapper $userMapper;
@@ -127,7 +128,7 @@ class UserDao{
         try{
             $db->beginTransaction();
             $db -> query = 
-            'DELETE FROM administratori 
+            'DELETE FROM user 
             WHERE id = :id ';
             $statement = $db->prepare($db);
             $statement->bindValue(':id', $id);
