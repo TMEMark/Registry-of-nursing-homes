@@ -1,4 +1,5 @@
 <?php
+include('AbstractEntity.php');
 class ServiceEntity extends AbstractEntity{
     private String $name;
 

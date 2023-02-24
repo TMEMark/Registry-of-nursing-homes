@@ -1,4 +1,5 @@
 <?php
+include('AbstractEntity.php');
 class CategoryEntity extends AbstractEntity{
     private String $name;
 

@@ -1,4 +1,5 @@
 <?php
+include('AbstractEntity.php');
 class UserEntity extends AbstractEntity{
 
     private String $firstname;
