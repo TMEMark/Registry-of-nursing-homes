@@ -1,4 +1,6 @@
 <?php
+include('../mapper/ServiceMapper.php');
+include("../entity/ServiceEntity.php");
 class ServiceDao{
     private ServiceMapper $serviceMapper;
 
