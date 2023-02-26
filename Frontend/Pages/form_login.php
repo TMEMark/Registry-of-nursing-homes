@@ -1,12 +1,9 @@
 <?php
-require "../Components/header.html";
+require "Components/header.html";
 require "../../Backend/select.php";
 ?>
 
-</div>
-</nav>
-
-<div class="content">
+<div class="login">
     <div class="container">
       <div class="row">
         <div class="col-md-6 contents">
@@ -28,7 +25,7 @@ require "../../Backend/select.php";
               </div>
               
               <input type="submit" name="submit" value="Login" class="button">
-              <button type="button" class="btn btn-outline-secondary" id="quit"><a href="index.php"><img src="../Components/assets/x.svg" alt="poništavanje">Odustani</a></button>
+              <button type="button" class="btn btn-outline-secondary" id="quit"><a href="index.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
 
             </form>
             <?php

@@ -1,9 +1,7 @@
 <link rel="stylesheet" href="../Styles/styleAdmin.css">
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
-require "../Components/header.html";
-//require "../Components/dropdown_menu.html";
-//require "../Components/header.html";
+require "Components/header.html";
 require "../../Backend/select.php";
 
 if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
@@ -82,7 +80,7 @@ if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
               
             <input type="submit" name="submit" value="Unos" class="submit">
 
-            <a href="admin.php"><button type="button" class="btn btn-outline-secondary"><img src="../Components/assets/x.svg" alt="poništavanje">Odustani</button></a>
+            <a href="admin.php"><button type="button" class="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
 
             </form>
             <?php

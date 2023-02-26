@@ -1,9 +1,6 @@
-<link rel="stylesheet" href="../Styles/styleUsluge.css">
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
-require "../Components/header.html";
-//require "../Components/dropdown_menu.html";
-//require "../Components/header.html";
+require "Components/header.html";
 require "../../Backend/select.php";
 
 
@@ -24,10 +21,10 @@ if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
 </nav>
 
 <div class="ilustracija">
-  <img src="../Components/assets/ilustracija2.png" alt="Ilustracija" class="illustr">
+  <!--<img src="../Assets/ilustracija2.png" alt="Ilustracija" class="illustr">-->
 </div>
 
-<div class="content">
+
     <div class="container">
       <div class="row">
         <div class="col-md-6 contents">
@@ -47,7 +44,7 @@ if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
 
               <input type="submit" name="submit" value="Unos" class="submit">
 
-              <a href="usluge.php"><button type="button" class="btn btn-outline-secondary"><img src="../Components/assets/x.svg" alt="poništavanje">Odustani</button></a>
+              <a href="usluge.php"><button type="button" class="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
 
             </form>
             <?php
@@ -64,4 +61,4 @@ if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
         
       </div>
     </div>
-  </div>
+  

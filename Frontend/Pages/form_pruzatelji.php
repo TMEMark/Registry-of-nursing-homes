@@ -1,9 +1,6 @@
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
-//require "../Components/header.html";
-//require "../Components/dropdown_menu.html";
-//require "../Components/header.html";
-//require "../Components/header_admin.html";
+require "Components/header.html";
 require "../../Backend/select.php";
 
 if(isset($_GET["idPruz"]) && $_GET["idPruz"] > 0){
@@ -43,41 +40,12 @@ if(isset($_GET["idPruz"]) && $_GET["idPruz"] > 0){
 $idPruzUsl = "";
 $idPruzUslKat = "";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../Styles/style_formPruzatelji.css">
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-  <script src="../JavaScript/script.js" defer></script>
-  <title>Unos pružatelja</title>
-</head>
-<body>
 
-<div class="grid">
   
-<!--navbar-->
-<nav class="navbar fixed-top py-4 navbar-dark bg-dark"> 
-        <div class="container-fluid">
-         <div class="d-none d-lg-block d-xl-block">
-          <a href="index.php"><img src="../Components/assets/LogoRazvoj.svg" alt="Logo" id="logoRMU"></a>
-         </div>
-         <div class="d-none d-lg-block d-xl-block">
-          <a href="pruzatelji.php"><img src="../Components/assets/IzvorLogo.svg" alt="Logo" id="logoIZVOR"></a>
-        </div>
-</nav>
+  <h1>Unos pružatelja</h1>
 
-
-<!--sidebar-->
-<div class="ilustracija">
-  <img src="../Components/assets/ilustracija1.png" alt="Ilustracija" class="illustr">
-</div>
-
-
+<div class="formRegistry">
+  
 <!--form-->
   <form data-multi-step class="multi-step-form" action="../../Backend/Controller/pruzatelji.php" method="post">
   <input type="hidden" name="idPruz" value="<?php echo $idPruz;?>">
@@ -88,7 +56,7 @@ $idPruzUslKat = "";
       <div class="form-group">
         <div class="naziv">
           <label for="naziv" id="label-naziv">
-          <span class="content-naziv">
+          <span class="content-naziv" >
                   Naziv pružatelja
               </span><br>
               <input type="text" autocomplete="off" id="naziv" value="<?php echo $naziv_pruzatelja;?>" name="naziv" />
@@ -138,8 +106,8 @@ $idPruzUslKat = "";
               <input type="text" autocomplete="off" id="radn_vrijeme" value="<?php echo $radno_vrijeme;?>" name="radn_vrijeme" />
           </label>
           <br />
-          <button type="button" data-next>Sljedeće</button>
-          <button type="button"><a href="pruzatelji.php"><img src="../Components/assets/x.svg" alt="poništavanje" id="quit">Odustani</a></button>
+          <button type="button" data-next class="submit">Sljedeće</button>
+          <button type="button" class="quitForm"><a href="pruzatelji.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -173,9 +141,9 @@ $idPruzUslKat = "";
               <input type="text" autocomplete="off" id="url" value="<?php echo $URL_stranice;?>" name="url" />
           </label>
           <br />
-          <button type="button" data-previous>Prethodno</button>
-          <button type="button" data-next>Sljedeće</button>
-          <button type="button" data-next><a href="pruzatelji.php"><img src="../Components/assets/x.svg" alt="poništavanje" id="quit">Odustani</a></button>
+          <button type="button" data-previous class="before">Prethodno</button>
+          <button type="button" data-next class="submit">Sljedeće</button>
+          <button type="button" data-next class="quitForm"><a href="pruzatelji.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -191,7 +159,7 @@ $idPruzUslKat = "";
               </span><br>
               <textarea name="napomena" id="napomena" value="<?php echo $napomena;?>" cols="30" rows="10"></textarea>
           </label><br>
-          <button type="button" data-previous>Prethodno</button>
+          <button type="button" data-previous class="before">Prethodno</button>
           <input type="submit" name="submit" value="Unos" class="submit" id="unos">
           <br />
         </div>
@@ -269,6 +237,7 @@ $idPruzUslKat = "";
     </div>
   </form>
 </div>
+<script src="../JavaScript/script.js" defer></script>
   <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -280,5 +249,3 @@ $idPruzUslKat = "";
         $('.js-example-basic-multiple').select2();
     });
   </script>
-</body>
-</html>
