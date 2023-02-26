@@ -125,7 +125,7 @@ require  "../../Backend/search.php";
           </div>
           <hr>
           <div class="btnDetails">
-              <a href="details.php">
+              <a href="details.php?id=<?php echo $key["idPruz"] ?>">
               <button type="button" name="button" id= "buttonNursingHome">Prikaži detalje</button>
               </a>
           </div>
