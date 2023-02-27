@@ -1,9 +1,8 @@
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
-require "../Components/header.html";
-require "../Components/dropdown_menu.php";
-require "../Components/header_admin.php";
-require "../Components/header_puk.php";
+require "Components/header.html";
+require "Components/header_admin.php";
+//require "../Components/header_puk.php";
 require "../../Backend/select.php";
 ?>
 
@@ -26,7 +25,7 @@ require "../../Backend/select.php";
 </head>
 <body>
 <div class="container"><a href="form_pruzatelji.php">
-  <img src="../Components/assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
+  <img src="../Assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
 </div>
 
 <?php
@@ -47,9 +46,9 @@ foreach ($selectPruzLok as $keyPruzLok){
           </div>
 
           <div class="col-2">
-              <a href="form_pruzatelji.php?idPruz=<?php echo $keyPruzLok["idPruz"] ?>"> <img src="../Components/assets/update.svg" alt="Update"></a>
+              <a href="form_pruzatelji.php?idPruz=<?php echo $keyPruzLok["idPruz"] ?>"> <img src="../Assets/update.svg" alt="Update"></a>
 
-              <a href ="../../Backend/Controller/pruzatelji.php?delete=<?php echo $keyK["idPruz"]; ?>"><img src="../Components/assets/delete.svg" alt="Delete"></a>
+              <a href ="../../Backend/Controller/pruzatelji.php?delete=<?php echo $keyK["idPruz"]; ?>"><img src="../Assets/delete.svg" alt="Delete"></a>
           </div>
         </div>
       </div>
@@ -94,8 +93,8 @@ foreach ($selectPruzLok as $keyPruzLok){
                 }?></td>
                
                 <td>
-                <a href="form_pruzatelji.php?idPruz=<?php echo $keyPruzLok["idPruz"];?>"><img src="../Components/assets/update.svg" alt="Update"></a>
-                <a href="../../Backend/Controller/pruzatelji.php?delete=<?php echo $keyPruzLok["idPruz"];?>"><img src='../Components/assets/delete.svg' alt='Delete'></a>
+                <a href="form_pruzatelji.php?idPruz=<?php echo $keyPruzLok["idPruz"];?>"><img src="../Assets/update.svg" alt="Update"></a>
+                <a href="../../Backend/Controller/pruzatelji.php?delete=<?php echo $keyPruzLok["idPruz"];?>"><img src='../Assets/delete.svg' alt='Delete'></a>
                 </td>
             </tr>
 <?php
@@ -107,7 +106,7 @@ foreach ($selectPruzLok as $keyPruzLok){
 <script type="text/javascript" src="../JavaScript/pruzatelji.js"></script>
 
 <?php
-require "../Components/footer.html";
+require "Components/footer.html";
 ?>
 
 

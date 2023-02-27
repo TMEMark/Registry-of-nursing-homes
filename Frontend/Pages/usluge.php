@@ -1,10 +1,8 @@
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
-require "../Components/header.html";
+require "Components/header.html";
 require "../../Backend/select.php";
-require "../Components/dropdown_menu.php";
-require "../Components/header_admin.php";
-require "../Components/header_puk.php";
+require "Components/header_admin.php";
 ?>
    <style>
     @media (max-width:991px){
@@ -14,7 +12,7 @@ require "../Components/header_puk.php";
 }
   </style>   
 <div class="container"><a href="form_usluge.php">
-  <img src="../Components/assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
+  <img src="../Assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
 </div>
 
 <?php 
@@ -28,9 +26,9 @@ foreach ($selectUsl as $keyU){
           </div>
 
           <div class="col-2">
-              <a href="form_usluge.php?idUsluge=<?php echo $keyU["idUsluge"];?>"><img src="../Components/assets/update.svg" alt="Update"></a>
+              <a href="form_usluge.php?idUsluge=<?php echo $keyU["idUsluge"];?>"><img src="../Assets/update.svg" alt="Update"></a>
 
-              <a href ="../../Backend/Controller/kategorije.php?delete=<?php echo $keyU["idUsluge"]; ?>"><img src="../Components/assets/delete.svg" alt="Delete"></a>
+              <a href ="../../Backend/Controller/kategorije.php?delete=<?php echo $keyU["idUsluge"]; ?>"><img src="../Assets/delete.svg" alt="Delete"></a>
           </div>
         </div>
       </div>
@@ -54,8 +52,8 @@ foreach ($selectUsl as $keyUsl){
               <td><?php echo $keyUsl["naziv_usluge"]; ?></td>
 
               <td>
-              <a href="form_usluge.php?idUsluge=<?php echo $keyUsl["idUsluge"];?>"><img src="../Components/assets/update.svg" alt="Update"></a>
-              <a href="../../Backend/Controller/usluge.php?delete=<?php echo $keyUsl["idUsluge"];?>"><img src="../Components/assets/delete.svg" alt="Delete"></a> 
+              <a href="form_usluge.php?idUsluge=<?php echo $keyUsl["idUsluge"];?>"><img src="../Assets/update.svg" alt="Update"></a>
+              <a href="../../Backend/Controller/usluge.php?delete=<?php echo $keyUsl["idUsluge"];?>"><img src="../Assets/delete.svg" alt="Delete"></a> 
               </td>
             </tr>
 <?php
@@ -68,5 +66,5 @@ foreach ($selectUsl as $keyUsl){
 <script type="text/javascript" src="../JavaScript/usluge.js"></script>
 
 <?php
-require "../Components/footer.html";
+require "Components/footer.html";
 ?>

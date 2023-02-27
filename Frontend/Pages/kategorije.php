@@ -1,15 +1,13 @@
 <?php
 include "../../Backend/Controller/LoginSystem/session.php";
-require "../Components/header.html";
+require "Components/header.html";
 require "../../Backend/select.php";
-require "../Components/dropdown_menu.php";
-require "../Components/header_admin.php";
-require "../Components/header_puk.php";
+require "Components/header_admin.php";
 ?>
 
 
 <div class="container"><a href="form_kategorije.php">
-  <img src="../Components/assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
+  <img src="../Assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
 </div>
 <style>
     @media (max-width:991px){
@@ -29,9 +27,9 @@ foreach ($selectKat as $keyK){
           </div>
 
           <div class="col-2">
-          <a href="form_kategorije.php?idKategorija=<?php echo $keyK["idKategorija"]; ?>"><img src="../Components/assets/update.svg" alt="Update"></a>
+          <a href="form_kategorije.php?idKategorija=<?php echo $keyK["idKategorija"]; ?>"><img src="../Assets/update.svg" alt="Update"></a>
 
-          <a href ="../../Backend/Controller/kategorije.php?delete=<?php echo $keyK["idKategorija"]; ?>"><img src="../Components/assets/delete.svg" alt="Delete"></a>
+          <a href ="../../Backend/Controller/kategorije.php?delete=<?php echo $keyK["idKategorija"]; ?>"><img src="../Assets/delete.svg" alt="Delete"></a>
           </div>
         </div>
       </div>
@@ -54,9 +52,9 @@ foreach ($selectKat as $keyKat){
             <tr>
               <td><?php echo $keyKat["naziv_kategorije"]; ?></td>
               <td>
-              <a href="form_kategorije.php?idKategorija=<?php echo $keyKat["idKategorija"]; ?>"><img src="../Components/assets/update.svg" alt="Update"></a>
+              <a href="form_kategorije.php?idKategorija=<?php echo $keyKat["idKategorija"]; ?>"><img src="../Assets/update.svg" alt="Update"></a>
 
-              <a href="../../Backend/Controller/kategorije.php?delete=<?php echo $keyKat["idKategorija"];?>"><img src="../Components/assets/delete.svg" alt="Delete"></a>
+              <a href="../../Backend/Controller/kategorije.php?delete=<?php echo $keyKat["idKategorija"];?>"><img src="../Assets/delete.svg" alt="Delete"></a>
               </td>
 <?php 
 } 
@@ -70,5 +68,5 @@ foreach ($selectKat as $keyKat){
 <script type="text/javascript" src="../JavaScript/kategorije.js"></script>
 
 <?php
-require "../Components/footer.html";
+require "Components/footer.html";
 ?>

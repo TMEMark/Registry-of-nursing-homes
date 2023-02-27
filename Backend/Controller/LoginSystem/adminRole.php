@@ -1,5 +1,5 @@
 <?php
-include "../../Database/pdo.php";
+/*include "../../Database/pdo.php";
 include "../../Repo/Read/index.php";
 
 $user = $_SESSION['user'];
@@ -9,4 +9,4 @@ if($getUserRole == 'admin'){
     header("Location:../../../Frontend/Pages/admin.php");
 }else{
     header("Location:../../../Frontend/Pages/pruzatelji.php");
-}
+}*/

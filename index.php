@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="shortcut icon" href="Frontend/Components/assets/search-home.svg">
+    <link rel="shortcut icon" href="Frontend/Assets/search-home.svg">
     <script src="https://kit.fontawesome.com/464e80c499.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -109,9 +109,15 @@
         <div class="desc2">
             <div class="conInfo">
                 <p><i class="fa-solid fa-phone-volume"></i> SOS telefon /0800 200 151</p>
-                <p><i class="fa-solid fa-envelope"><a href="mailto:zenska.udruga.izvor@gmail.com"></i> zenska.udruga.izvor@gmail.com</a></p>
+                <p><i class="fa-solid fa-envelope"><a href="mailto:zenska.udruga.izvor@gmail.com" style="
+    text-decoration: none;
+    color: rgb(43, 60, 118);;
+"></i> zenska.udruga.izvor@gmail.com</a></p>
                 <p><i class="fa-brands fa-skype"></i>zenskaudrugaIZVOR</p>
-                <p><a href="https://web.facebook.com/zenskaudruga.izvor/"><i class="fa-brands fa-facebook"></i> zenskaudruga.izvor</a></p>
+                <p><a href="https://web.facebook.com/zenskaudruga.izvor/" style="
+    text-decoration: none;
+    color: rgb(43, 60, 118);;
+"><i class="fa-brands fa-facebook"></i> zenskaudruga.izvor</a></p>
             </div>
         </div>
     </div>
