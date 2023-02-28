@@ -1,5 +1,5 @@
 <?php
-include('AbstractEntity.php');
+include_once('AbstractEntity.php');
 class LocationEntity extends AbstractEntity{
     private String $name;
 
