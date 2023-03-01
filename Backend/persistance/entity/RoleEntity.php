@@ -1,6 +1,6 @@
 <?php
 include_once('AbstractEntity.php');
-class ServiceEntity extends AbstractEntity{
+class RoleEntity extends AbstractEntity{
     private String $name;
 
 	/**
