@@ -30,26 +30,8 @@
   }
 }
 
-/*Tablets*/
-@media (min-width: 481px) and (max-width: 1024px) {
-  .gridMain {
-    display: grid;
-    grid-template-areas:
-      "a b";
-    grid-template-columns: 30% 70%;
-  }
-
-  .filtersCollapsible {
-    display: none;
-  }
-
-  body {
-    background-color: rgba(207, 34, 20, 0.05);
-  }
-}
-
 /*Mobiles*/
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
   .gridMain {
     display: grid;
     grid-template-areas:
@@ -143,7 +125,7 @@ grid-area: d;
   flex-direction: column;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
   .intro {
     grid-area: a;
   }
@@ -162,7 +144,8 @@ grid-area: d;
       "a a"
       "b b"
       "c c";
-    grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr;
+    /*grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr;*/
+    margin-left: 15px;
   }
 
   .gridNursingHomes {
@@ -171,12 +154,10 @@ grid-area: d;
 
   #nameNursingHome {
     color: #F1F1F1 !important;
-    font-size: 16px;
   }
 
   #nameLocation {
-    color: #fff;
-    font-size: 12px;
+    color: #fff !important;
   }
 
   .mainInfo {
@@ -276,11 +257,13 @@ input[type="checkbox"]:checked {
   font-size: 24px;
   line-height: 36px;
   color: #858585;
-  margin-left: 10px;
+  margin-left: 5px;
+  font-family: 'Poppins', sans-serif;
 }
 
 #nameLocation {
   margin-left: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 #nameServicesCategories {
@@ -314,4 +297,18 @@ hr {
 .nursingHome {
   display: flex;
   align-items: center;
+}
+
+#categoryData, #serviceData {
+  background:  rgba(207, 34, 20, 0.05);;
+  border-radius: 15px;
+  font-size: 12px;
+  color: #858585;
+  display:inline-block;
+  margin-left: 15px;
+}
+
+.filtersCollapsible {
+  margin-left: 15px;
+  text-align: -webkit-center;
 }

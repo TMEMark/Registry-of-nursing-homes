@@ -25,7 +25,7 @@ require "../../Backend/select.php";
               </div>
               
               <input type="submit" name="submit" value="Login" class="button">
-              <button type="button" class="btn btn-outline-secondary" id="quit"><a href="index.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
+              <button type="button" class="btn btn-outline-secondary" id="quit"><a href="indexRegistry.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
 
             </form>
             <?php

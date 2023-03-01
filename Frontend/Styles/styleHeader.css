@@ -1,70 +1,80 @@
-
-.logoRMU{
+.logoRMU {
   grid-area: a
 }
+
 .logoIzvor {
   grid-area: b
 }
+
 .searchBar {
   grid-area: c
 }
-.login{
+
+.login {
   grid-area: d
 }
+
 @media (min-width: 1025px) {
-nav {
-  display: grid;
-  grid-template-areas:
-  "a b c c d";
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
-}
-@media (min-width: 481px) and (max-width: 1024px) {
   nav {
     display: grid;
     grid-template-areas:
-    "a b c c d";
+      "a b c c d";
     justify-content: space-between;
     align-items: center;
     font-family: 'Poppins', sans-serif;
   }
 }
 
-@media (max-width: 480px) {
-nav {
-  display: grid;
-  grid-template-areas:
-  "a b d"
-  "c c c";
+@media (max-width: 1024px) {
+  nav {
+    display: grid;
+    grid-template-areas:
+      "a b d"
+      "c c c";
+    
+      justify-content: start;
+      font-family: 'Poppins', sans-serif;
+      justify-items: center;
+      align-items: center;
+  }
+.searchBar {
+  width: fit-content;
+}
+#logoRMU {
+  width: 40% !important;
+  height: 40% !important;
+}
 
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  justify-items: end;
+#logoIzvor {
+  width: 30% !important;
+  height: 30% !important;;
 }
 }
+
 #logoRMU {
   width: 250px;
   height: 80px;
 }
+
 #logoIzvor {
   height: 80px;
 }
-.searchBar{
+
+.searchBar {
   border: 2px solid #D9D9D9;
   border-radius: 10px;
   width: 542px;
   height: 40px;
   font-family: 'Poppins', sans-serif;
 }
+
 .searchBar {
-  position:relative;
+  position: relative;
 }
+
 .inputField {
-  height:20px;
-  margin:0;
+  height: 20px;
+  margin: 0;
   padding-left: 30px;
   border: none;
   font-family: 'Poppins', sans-serif;
@@ -72,6 +82,7 @@ nav {
   margin-top: 10px;
   margin-left: 15px;
 }
+
 #imgSearchBar {
   position: absolute;
   bottom: 10px;
@@ -79,11 +90,12 @@ nav {
   width: 20px;
   height: 20px;
 }
+
 #button {
   width: 90px;
   height: 30px;
   /* left: 1114px; */
-  top: 5px;
+  top: 4px;
   border-radius: 10px;
   border: none;
   background: #CF2214;
@@ -91,13 +103,15 @@ nav {
   position: absolute;
   font-family: 'Poppins', sans-serif;
 }
-#loginTxt{
+
+#loginTxt {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #CF2214;
   text-align: center;
 }
+
 a {
   text-decoration: none;
 }
