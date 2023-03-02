@@ -146,6 +146,7 @@ grid-area: d;
       "c c";
     /*grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr;*/
     margin-left: 15px;
+    margin-right: 15px;
   }
 
   .gridNursingHomes {

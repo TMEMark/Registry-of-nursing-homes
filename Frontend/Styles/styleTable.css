@@ -1,0 +1,14 @@
+
+table.table td {
+    word-wrap: break-word;
+    max-width: 100px;
+}
+
+td a {
+    background: none;
+    color: #7d8488;
+}
+
+td a:hover {
+    color: rgb(207, 34, 20);
+}

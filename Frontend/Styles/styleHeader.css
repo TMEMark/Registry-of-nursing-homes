@@ -38,7 +38,7 @@
       align-items: center;
   }
 .searchBar {
-  width: fit-content;
+  width: 250px !important;
 }
 #logoRMU {
   width: 40% !important;
@@ -48,6 +48,10 @@
 #logoIzvor {
   width: 30% !important;
   height: 30% !important;;
+}
+
+#button {
+  display: none;
 }
 }
 

@@ -205,6 +205,7 @@ require "../../Backend/search.php";
         }
         ?>
       </div>
+      
 
     </div>
 
@@ -241,7 +242,14 @@ require "../../Backend/search.php";
       ?>
         </div>
         </div>
-        
+        <footer>
+            <img src="../Assets/Logo_ESF.png" alt="Logo_ESF" id="logo_ESF" style="width:350px;
+    height:100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;">
+          </footer>
       </div>
       
 </div>
