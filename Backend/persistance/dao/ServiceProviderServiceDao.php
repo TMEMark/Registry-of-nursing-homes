@@ -1,6 +1,6 @@
 <?php
-include('../mapper/ServiceProviderServiceMapper.php');
-include("../entity/ServiceProviderServiceEntity.php");
+include_once(__DIR__.'../../mapper/ServiceProviderServiceMapper.php');
+include_once(__DIR__."../../entity/ServiceProviderServiceEntity.php");
 class ServiceProviderServiceDao{
 
     private ServiceProviderServiceMapper $serviceProviderServiceMapper;
@@ -46,26 +46,23 @@ class ServiceProviderServiceDao{
         }
     }
 
-    public function insertServiceProviderService(ServiceProviderServiceEntity $serviceProviderService){
+    public function insertServiceProviderService($id, ServiceProviderServiceEntity $serviceProviderService){
         global $db;
-        $id =  abs( crc32( uniqid() ) );;
         try{
-
-            $db->beginTransaction();
+            $idService =  abs( crc32( uniqid() ) );
             $db -> query = 
             'INSERT INTO "service_provider_service" (id,service_provider_id,"service_id") 
             VALUES (:id,:"service_provider",:"service")';
             $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':"service_provider"', $serviceProviderService->getServiceProvider());
+            $statement->bindValue(':id', $idService);
+            $statement->bindValue(':"service_provider"', $id);
             $statement->bindValue(':"service"', $serviceProviderService->getService());
+            $statement->execute();
             $statement->closeCursor();
 
-            $db->commit();
             return $serviceProviderService;
         }catch(Exception $e){
             error_log('could not create serviceProviderService {}', $serviceProviderService->getId(), $e);
-            $db->rollback();
 			return null;
         }
     }

@@ -1,6 +1,6 @@
 <?php
-include("../mapper/UserMapper.php");
-include("../entity/UserEntity.php");
+include_once(__DIR__."../../mapper/UserMapper.php");
+include_once(__DIR__."../../entity/UserEntity.php");
 class UserDao{
 
     private UserMapper $userMapper;

@@ -1,6 +1,6 @@
 <?php
-include('../mapper/RoleMapper.php');
-include("../entity/RoleEntity.php");
+include_once(__DIR__.'../../mapper/RoleMapper.php');
+include_once("../../entity/RoleEntity.php");
 class RoleDao{
 
     private RoleMapper $roleMapper;

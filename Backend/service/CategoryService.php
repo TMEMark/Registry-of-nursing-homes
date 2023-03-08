@@ -1,6 +1,7 @@
 <?php
-include('../persistance/dao/CategoryDao.php');
-include('../persistance/entity/CategoryEntity.php');
+echo __DIR__ ;
+include_once(__DIR__ .'../../persistance/dao/CategoryDao.php');
+include_once(__DIR__ .'../../persistance/entity/CategoryEntity.php');
 class CategoryService{
     private CategoryDao $categoryDao;
 
@@ -40,7 +41,9 @@ class CategoryService{
         throw new Exception('could not list categories');
        }else{
         syslog(LOG_INFO, 'categories found');
-        return $categoryDaoList;
+        foreach ($categoryDaoList as $hehe){
+            echo $hehe['name'];
+        }
        }
     }
 

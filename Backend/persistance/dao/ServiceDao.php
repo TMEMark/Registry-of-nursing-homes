@@ -1,6 +1,6 @@
 <?php
-include('../mapper/ServiceMapper.php');
-include("../entity/ServiceEntity.php");
+include_once(__DIR__.'../../mapper/ServiceMapper.php');
+include(__DIR__."../../entity/ServiceEntity.php");
 class ServiceDao{
     private ServiceMapper $serviceMapper;
 

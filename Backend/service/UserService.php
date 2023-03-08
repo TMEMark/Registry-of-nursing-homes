@@ -1,6 +1,6 @@
 <?php
-include('../persistance/dao/UserDao.php');
-include('../persistance/entity/UserEntity.php');
+include_once(__DIR__.'../../persistance/dao/UserDao.php');
+include_once(__DIR__.'../../persistance/entity/UserEntity.php');
 class UserService{
     private UserDao $userDao;
 

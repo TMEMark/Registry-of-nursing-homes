@@ -1,6 +1,6 @@
 <?php
-include('../mapper/LocationMapper.php');
-include("../entity/LocationEntity.php");
+include_once(__DIR__.'../../mapper/LocationMapper.php');
+include_once(__DIR__."../../entity/LocationEntity.php");
 class LocationDao{
 
     private LocationMapper $locationMapper;

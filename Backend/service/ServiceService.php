@@ -1,6 +1,6 @@
 <?php
-include('../persistance/dao/ServiceDao.php');
-include('../persistance/entity/ServiceEntity.php');
+include_once(__DIR__.'../../persistance/dao/ServiceDao.php');
+include_once(__DIR__.'../../persistance/entity/ServiceEntity.php');
 class ServiceService{
     private ServiceDao $serviceDao;
 

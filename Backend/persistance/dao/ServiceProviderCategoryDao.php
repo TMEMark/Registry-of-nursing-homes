@@ -1,6 +1,6 @@
 <?php
-include('../mapper/ServiceProviderCategoryMapper.php');
-include("../entity/ServiceProviderCategoryEntity.php");
+include_once(__DIR__.'../../mapper/ServiceProviderCategoryMapper.php');
+include_once(__DIR__."../../entity/ServiceProviderCategoryEntity.php");
 class ServiceProviderCategoryDao{
 
     private ServiceProviderCategoryMapper $serviceProviderCategoryMapper;
@@ -28,7 +28,7 @@ class ServiceProviderCategoryDao{
         }
     }
 
-    public function listServiceProviderCategorys(){
+    public function listServiceProviderCategories(){
         global $db;
         $sql = 'SELECT * FROM "service_provider_category"';
         try{
@@ -46,69 +46,67 @@ class ServiceProviderCategoryDao{
         }
     }
 
-    public function insertServiceProviderCategory(ServiceProviderCategoryEntity $serviceProviderCategory){
+    public function insertServiceProviderCategory($id, ServiceProviderCategoryEntity $serviceProviderCategory): ?ServiceProviderCategoryEntity
+    {
         global $db;
-        $id =  abs( crc32( uniqid() ) );;
         try{
-
-            $db->beginTransaction();
+            $idServiceCat =  abs( crc32( uniqid() ) );
             $db -> query = 
             'INSERT INTO "service_provider_category" (id,service_provider_id,"category_id") 
             VALUES (:id,:"service_provider",:"category")';
             $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':"service_provider"', $serviceProviderCategory->getServiceProvider());
+            $statement->bindValue(':id', $idServiceCat);
+            $statement->bindValue(':"service_provider"', $id);
             $statement->bindValue(':"category"', $serviceProviderCategory->getCategory());
+            $statement->execute();
             $statement->closeCursor();
 
-            $db->commit();
             return $serviceProviderCategory;
         }catch(Exception $e){
             error_log('could not create serviceProviderCategory {}', $serviceProviderCategory->getId(), $e);
-            $db->rollback();
 			return null;
         }
     }
 
-    public function updateServiceProviderCategory(ServiceProviderCategoryEntity $serviceProviderCategory){
+    public function updateServiceProviderCategory(int $serviceProviderId, ServiceProviderCategoryEntity $serviceProviderCategory): ?ServiceProviderCategoryEntity
+    {
         global $db;
         try{
-            $db->beginTransaction();
             $db -> query =
             'UPDATE "service_provider_category" SET
-            "service_provider_id" = :"service_provider",
+            "service_provider_id" = :"service_provider_id",
             "category_id" = :"category",
-            WHERE id = :id';
+            WHERE service_provider_id = :service_provider_id';
             $statement = $db->prepare($db);
-            $statement->bindValue(':id', $serviceProviderCategory->getId());
+            $statement->bindValue(':service_provider_id', $serviceProviderId);
             $statement->bindValue(':"service_provider"', $serviceProviderCategory->getServiceProvider());
             $statement->bindValue(':"category"', $serviceProviderCategory->getCategory());
+            $statement->execute();
             $statement->closeCursor();
 
-            $db->commit();
             return $serviceProviderCategory;
         }catch(Exception $e){
             error_log('could not update serviceProviderCategory {}', $serviceProviderCategory->getId(), $e);
-            $db->rollback();
 			return null;
         }
     }
 
-    public function deleteServiceProviderCategory(int $id){
+    public function deleteServiceProviderCategory(int $serviceProviderId): bool
+    {
         global $db;
         try{
             $db->beginTransaction();
             $db -> query = 
             'DELETE FROM "service_provider_category"
-            WHERE id = :id ';
+            WHERE service_provider_id = :service_provider_id ';
             $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
+            $statement->bindValue(':service_provider_id', $serviceProviderId);
             $statement->closeCursor();
 
             $db->commit();
             return true;
         }catch(Exception $e){
-            error_log('could not delete serviceProviderCategory {}', $id, $e);
+            error_log('could not delete serviceProviderCategory {}', $serviceProviderId, $e);
             $db->rollback();
 			return false;
         }

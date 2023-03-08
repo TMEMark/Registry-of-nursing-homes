@@ -1,6 +1,6 @@
 <?php
-include('../mapper/ServiceProviderMapper.php');
-include("../entity/ServiceProviderEntity.php");
+include_once(__DIR__.'../../mapper/ServiceProviderMapper.php');
+include_once(__DIR__."../../entity/ServiceProviderEntity.php");
 class ServiceProviderDao{
     private ServiceProviderMapper $serviceProviderMapper;
 
@@ -64,12 +64,10 @@ class ServiceProviderDao{
         }
     }
 
-    public function insertServiceProvider(serviceProviderEntity $service){
+    public function insertServiceProvider($id, serviceProviderEntity $service): ?serviceProviderEntity
+    {
         global $db;
-        $id =  abs( crc32( uniqid() ) );;
         try{
-
-            $db->beginTransaction();
             $db -> query = 
             'INSERT INTO "service_provider" (id,"name","email",contact_number,adress,adress_number,work_time,website_url,remark,longitude,latitude,"location",oib) 
             VALUES (:id,:"name",:"email",:contact_number,:adress,:adress_number,:work_time,:website_url,:remark,:longitude,:latitude,:"location",:oib)';
@@ -87,22 +85,20 @@ class ServiceProviderDao{
             $statement->bindValue(':latitude', $service->getLatitude());
             $statement->bindValue(':location', $service->getLocation());
             $statement->bindValue(':oib', $service->getOib());
-
+            $statement->execute();
             $statement->closeCursor();
 
-            $db->commit();
             return $service;
         }catch(Exception $e){
             error_log('could not create service provider {}', $service->getId(), $e);
-            $db->rollback();
 			return null;
         }
     }
 
-    public function updateService(serviceProviderEntity $service){
+    public function updateServiceProvider(serviceProviderEntity $service): ?serviceProviderEntity
+    {
         global $db;
         try{
-            $db->beginTransaction();
             $db -> query =
             'UPDATE "service_provider" SET
             "name" = :"name",
@@ -132,18 +128,18 @@ class ServiceProviderDao{
             $statement->bindValue(':latitude', $service->getLatitude());
             $statement->bindValue(':location', $service->getLocation());
             $statement->bindValue(':oib', $service->getOib());
+            $statement->execute();
             $statement->closeCursor();
 
-            $db->commit();
             return $service;
         }catch(Exception $e){
             error_log('could not update service provider {}', $service->getId(), $e);
-            $db->rollback();
 			return null;
         }
     }
 
-    public function deleteService(int $id){
+    public function deleteServiceProvider(int $id): bool
+    {
         global $db;
         try{
             $db->beginTransaction();

@@ -1,6 +1,6 @@
 <?php
-include('../mapper/CategoryMapper.php');
-include("../entity/CategoryEntity.php");
+include(__DIR__.'../../mapper/CategoryMapper.php');
+include(__DIR__."../../entity/CategoryEntity.php");
 class CategoryDao{
 
     private CategoryMapper $categoryMapper;
@@ -57,6 +57,7 @@ class CategoryDao{
             $statement->closeCursor();
             foreach ($array as $row){
                 $array[] = $this->categoryMapper->toEntity($row);
+                echo $array['name'];
             }
             return $array;
         }catch(Exception $e){
@@ -65,7 +66,8 @@ class CategoryDao{
         }
     }
 
-    public function insertCategory(CategoryEntity $category){
+    public function insertCategory(CategoryEntity $category): ?CategoryEntity
+    {
         global $db;
         $id =  abs( crc32( uniqid() ) );;
         try{
@@ -88,7 +90,8 @@ class CategoryDao{
         }
     }
 
-    public function updateCategory(CategoryEntity $category){
+    public function updateCategory(CategoryEntity $category): ?CategoryEntity
+    {
         global $db;
         try{
             $db->beginTransaction();
@@ -110,7 +113,8 @@ class CategoryDao{
         }
     }
 
-    public function deleteCategory(int $id){
+    public function deleteCategory(int $id): bool
+    {
         global $db;
         try{
             $db->beginTransaction();

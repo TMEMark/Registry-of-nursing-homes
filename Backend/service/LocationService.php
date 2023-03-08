@@ -1,6 +1,6 @@
 <?php
-include('../persistance/dao/LocationDao.php');
-include('../persistance/entity/LocationEntity.php');
+include_once(__DIR__.'../../persistance/dao/LocationDao.php');
+include_once(__DIR__.'../../persistance/entity/LocationEntity.php');
 class LocationService{
     private LocationDao $locationDao;
 
@@ -8,6 +8,9 @@ class LocationService{
         $this->locationDao = $locationDao;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getLocationById(int $id) {
         syslog(LOG_INFO, 'getting location');
         $locationDao = $this->locationDao->getLocationById($id);
