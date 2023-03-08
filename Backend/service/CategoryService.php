@@ -1,5 +1,4 @@
 <?php
-echo __DIR__ ;
 include_once(__DIR__ .'../../persistance/dao/CategoryDao.php');
 include_once(__DIR__ .'../../persistance/entity/CategoryEntity.php');
 class CategoryService{
@@ -9,7 +8,8 @@ class CategoryService{
         $this->categoryDao = $categoryDao;
     }
 
-    public function getCategoryById(int $id) {
+    public function getCategoryById(int $id): array
+    {
         syslog(LOG_INFO, 'getting category');
         $categoryDao = $this->categoryDao->getCategoryById($id);
         if(empty($categoryDao)){
@@ -21,7 +21,8 @@ class CategoryService{
         }
     }
 
-    public function getCategoryByName(String $name){
+    public function getCategoryByName(String $name): array
+    {
         syslog(LOG_INFO, 'getting category');
         $categoryDao = $this->categoryDao->getCategoryByName($name);
         if(empty($categoryDao)){
@@ -33,21 +34,21 @@ class CategoryService{
         }
     }
 
-    public function listCategorys(){
+    public function listCategories(): array
+    {
         syslog(LOG_INFO, 'getting categories');
-       $categoryDaoList = $this->categoryDao->listCategorys();
+       $categoryDaoList = $this->categoryDao->listCategories();
        if(empty($categoryDaoList)){
         syslog(LOG_INFO, 'could not list categories');
         throw new Exception('could not list categories');
        }else{
         syslog(LOG_INFO, 'categories found');
-        foreach ($categoryDaoList as $hehe){
-            echo $hehe['name'];
-        }
+        return $categoryDaoList;
        }
     }
 
-    public function insertCategory(CategoryEntity $category){
+    public function insertCategory(CategoryEntity $category): CategoryEntity
+    {
         syslog(LOG_INFO, 'creating category');
         $categoryDaoInsert = $this->categoryDao->insertCategory($category);
         if($categoryDaoInsert == null){
