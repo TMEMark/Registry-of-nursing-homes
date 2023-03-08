@@ -9,57 +9,62 @@ class CategoryDao{
         $this->categoryMapper = $categoryMapper;
     }
 
-    public function getCategoryById(int $id){
+    public function getCategoryById(int $id): ?array
+    {
         global $db;
         try{
             $sql = 'SELECT * FROM category WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->categoryMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->categoryMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
             error_log('could not find category {}', $id, $e);
 			return null;
         }
     }
 
-    public function getCategoryByName(String $name){
+    public function getCategoryByName(String $name): ?array
+    {
         global $db;
         $sql = 'SELECT * FROM category WHERE name = :"name"';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->categoryMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->categoryMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
             error_log('could not find category {}', $name, $e);
 			return null;
         }
     }
 
-    public function listCategorys(){
+    public function listCategories(): ?array
+    {
         global $db;
         $sql = 'SELECT * FROM category';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->categoryMapper->toEntity($row);
-                echo $array['name'];
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->categoryMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
             error_log('could not find category', $e);
 			return null;
