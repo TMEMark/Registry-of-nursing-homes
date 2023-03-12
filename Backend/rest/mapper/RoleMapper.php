@@ -1,6 +1,13 @@
 <?php
-class RoleMapper {
-    public function toEntity($row){
+
+namespace mapper;
+
+use entity\RoleEntity;
+
+class RoleMapper
+{
+    public function toEntity($row)
+    {
         $role = new RoleEntity();
         $role->setId($row['id']);
         $role->setCreated($row['created']);
@@ -10,4 +17,5 @@ class RoleMapper {
         return $role;
     }
 }
+
 ?>

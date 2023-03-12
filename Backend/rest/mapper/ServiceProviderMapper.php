@@ -1,6 +1,14 @@
 <?php
-class ServiceProviderMapper {
-    public function toEntity($row){
+
+namespace mapper;
+
+
+use entity\ServiceProviderEntity;
+
+class ServiceProviderMapper
+{
+    public function toEntity($row)
+    {
         $serviceProvider = new ServiceProviderEntity();
         $serviceProvider->setId($row['id']);
         $serviceProvider->setCreated($row['created']);
@@ -21,4 +29,5 @@ class ServiceProviderMapper {
         return $serviceProvider;
     }
 }
+
 ?>

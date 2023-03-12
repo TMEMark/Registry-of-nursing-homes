@@ -1,6 +1,13 @@
 <?php
-class UserMapper {
-    public function toEntity($row){
+
+namespace mapper;
+
+use entity\UserEntity;
+
+class UserMapper
+{
+    public function toEntity($row)
+    {
         $user = new UserEntity();
         $user->setId($row['id']);
         $user->setCreated($row['created']);
@@ -14,4 +21,5 @@ class UserMapper {
         return $user;
     }
 }
+
 ?>

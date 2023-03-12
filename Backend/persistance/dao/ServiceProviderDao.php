@@ -1,4 +1,10 @@
 <?php
+
+namespace dao;
+
+use entity\ServiceProviderEntity;
+use mapper\ServiceProviderMapper;
+
 include_once(__DIR__.'../../mapper/ServiceProviderMapper.php');
 include_once(__DIR__."../../entity/ServiceProviderEntity.php");
 class ServiceProviderDao{

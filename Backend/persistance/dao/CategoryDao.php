@@ -1,6 +1,11 @@
 <?php
-include(__DIR__.'../../mapper/CategoryMapper.php');
-include(__DIR__."../../entity/CategoryEntity.php");
+
+namespace dao;
+
+use entity\CategoryEntity;
+use Exception;
+use mapper\CategoryMapper;
+
 class CategoryDao{
 
     private CategoryMapper $categoryMapper;

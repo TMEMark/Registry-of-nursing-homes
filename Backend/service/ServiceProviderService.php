@@ -1,4 +1,7 @@
 <?php
+
+namespace service;
+
 include_once(__DIR__.'../../persistance/dao/ServiceProviderDao.php');
 include_once(__DIR__.'../../persistance/dao/ServiceProviderCategoryDao.php');
 include_once(__DIR__.'../../persistance/dao/ServiceProviderServiceDao.php');

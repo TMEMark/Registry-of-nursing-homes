@@ -1,4 +1,7 @@
 <?php
+
+namespace service;
+
 include_once(__DIR__.'../../persistance/dao/UserDao.php');
 include_once(__DIR__.'../../persistance/entity/UserEntity.php');
 class UserService{

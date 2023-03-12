@@ -1,4 +1,7 @@
 <?php
+
+namespace entity;
+
 abstract class AbstractEntity{
     private int $id;
 

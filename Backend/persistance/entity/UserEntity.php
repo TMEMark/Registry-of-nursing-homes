@@ -1,6 +1,7 @@
 <?php
-include_once('RoleEntity.php');
-include_once('AbstractEntity.php');
+
+namespace entity;
+
 class UserEntity extends AbstractEntity{
 
     private String $firstname;
@@ -11,7 +12,7 @@ class UserEntity extends AbstractEntity{
 
     private String $password;
 
-    private Array $role = array(RoleEntity::class);
+    private array $role = array(RoleEntity::class);
 
 	/**
 	 * @return string

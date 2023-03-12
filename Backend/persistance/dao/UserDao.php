@@ -1,4 +1,10 @@
 <?php
+
+namespace dao;
+
+use entity\UserEntity;
+use mapper\UserMapper;
+
 include_once(__DIR__."../../mapper/UserMapper.php");
 include_once(__DIR__."../../entity/UserEntity.php");
 class UserDao{

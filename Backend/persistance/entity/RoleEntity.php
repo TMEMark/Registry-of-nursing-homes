@@ -1,5 +1,7 @@
 <?php
-include_once('AbstractEntity.php');
+
+namespace entity;
+
 class RoleEntity extends AbstractEntity{
     private String $name;
 

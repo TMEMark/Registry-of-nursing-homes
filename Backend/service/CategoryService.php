@@ -1,17 +1,28 @@
 <?php
-include_once(__DIR__ .'../../persistance/dao/CategoryDao.php');
-include_once(__DIR__ .'../../persistance/entity/CategoryEntity.php');
+
+namespace service;
+
+use dao\CategoryDao;
+use entity\CategoryEntity;
+use Exception;
+use mapper\CategoryMapper;
+
+
 class CategoryService{
     private CategoryDao $categoryDao;
+    private CategoryMapper $categoryMapper;
 
-    public function __construct(CategoryDao $categoryDao) {
+    public function __construct(CategoryDao $categoryDao, CategoryMapper $categoryMapper) {
         $this->categoryDao = $categoryDao;
+        $this->categoryMapper = $categoryMapper;
     }
 
-    public function getCategoryById(int $id): array
+    public function getCategoryById(int $id): \dto\CategoryDto
     {
         syslog(LOG_INFO, 'getting category');
-        $categoryDao = $this->categoryDao->getCategoryById($id);
+        $categoryDao = $this->categoryMapper->toDto($this->categoryDao->getCategoryById($id));
+
+
         if(empty($categoryDao)){
             syslog(LOG_INFO, 'no category found');
             throw new Exception('no category found with id {}', $id);
@@ -21,10 +32,10 @@ class CategoryService{
         }
     }
 
-    public function getCategoryByName(String $name): array
+    public function getCategoryByName(String $name): \dto\CategoryDto
     {
         syslog(LOG_INFO, 'getting category');
-        $categoryDao = $this->categoryDao->getCategoryByName($name);
+        $categoryDao = $this->categoryMapper->toDto($this->categoryDao->getCategoryByName($name));
         if(empty($categoryDao)){
             syslog(LOG_INFO, 'no category found');
             throw new Exception('no category found with name {}', $name);

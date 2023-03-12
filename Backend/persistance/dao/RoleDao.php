@@ -1,4 +1,10 @@
 <?php
+
+namespace dao;
+
+use entity\RoleEntity;
+use mapper\RoleMapper;
+
 include_once(__DIR__.'../../mapper/RoleMapper.php');
 include_once("../../entity/RoleEntity.php");
 class RoleDao{

@@ -1,4 +1,10 @@
 <?php
+
+namespace dao;
+
+use entity\LocationEntity;
+use mapper\LocationMapper;
+
 include_once(__DIR__.'../../mapper/LocationMapper.php');
 include_once(__DIR__."../../entity/LocationEntity.php");
 class LocationDao{
@@ -9,7 +15,8 @@ class LocationDao{
         $this->locationMapper = $locationMapper;
     }
     
-    public function getLocationById(int $id){
+    public function getLocationById(int $id): ?array
+    {
         global $db;
         try{
             $sql = 'SELECT * FROM "location" WHERE id = :id';
@@ -28,7 +35,8 @@ class LocationDao{
         }
     }
 
-    public function getLocationByName(String $name){
+    public function getLocationByName(String $name): ?array
+    {
         global $db;
         $sql = 'SELECT * FROM "location" WHERE name = :"name"';
         try{
@@ -37,9 +45,6 @@ class LocationDao{
             $statement->execute();
             $array = $statement->fetchAll();
             $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->locationMapper->toEntity($row);
-            }
             return $array;
         }catch(Exception $e){
             error_log('could not find location {}', $name, $e);
@@ -47,20 +52,22 @@ class LocationDao{
         }
     }
 
-    public function listLocations(){
+    public function listLocations(): ?array
+    {
         global $db;
-        $sql = 'SELECT * FROM "location"';
+        $sql = 'SELECT * FROM location';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->locationMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->locationMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
-            error_log('could not find location', $e);
+            error_log('could not find location');
 			return null;
         }
     }

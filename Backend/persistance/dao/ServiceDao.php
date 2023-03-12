@@ -1,4 +1,10 @@
 <?php
+
+namespace dao;
+
+use entity\ServiceEntity;
+use mapper\ServiceMapper;
+
 include_once(__DIR__.'../../mapper/ServiceMapper.php');
 include(__DIR__."../../entity/ServiceEntity.php");
 class ServiceDao{
@@ -11,35 +17,30 @@ class ServiceDao{
     public function getServiceById(int $id){
         global $db;
         try{
-            $sql = 'SELECT * FROM "service" WHERE id = :id';
+            $sql = 'SELECT * FROM service WHERE id = :id';
             $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->serviceMapper->toEntity($row);
+            if ($statement->execute()) {
+                while ($row = $statement->fetch()) {
+                    return $this->serviceMapper->toEntity($row);
+                }
             }
-            return $array;
         }catch(Exception $e){
-            error_log('could not find service {}', $id, $e);
 			return null;
         }
     }
 
     public function getServiceByName(String $name){
         global $db;
-        $sql = 'SELECT * FROM "service" WHERE name = :"name"';
+        $sql = 'SELECT * FROM service WHERE name = :"name"';
         try{
             $statement = $db->prepare($sql);
-            $statement->bindValue(':name', $name);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->serviceMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->serviceMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
         }catch(Exception $e){
             error_log('could not find service {}', $name, $e);
 			return null;
@@ -48,18 +49,18 @@ class ServiceDao{
 
     public function listServices(){
         global $db;
-        $sql = 'SELECT * FROM "service"';
+        $sql = 'SELECT * FROM service';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->serviceMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->serviceMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
         }catch(Exception $e){
-            error_log('could not find service', $e);
+            error_log('could not find service');
 			return null;
         }
     }

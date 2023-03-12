@@ -1,4 +1,7 @@
 <?php
+
+namespace service;
+
 include_once(__DIR__.'../../persistance/dao/LocationDao.php');
 include_once(__DIR__.'../../persistance/entity/LocationEntity.php');
 class LocationService{
@@ -35,8 +38,9 @@ class LocationService{
         }
     }
 
-    public function listLocations(){
-        syslog(LOG_INFO, 'getting locations');
+    public function listLocations(): array
+    {
+       syslog(LOG_INFO, 'getting locations');
        $locationDaoList = $this->locationDao->listLocations();
        if(empty($locationDaoList)){
         syslog(LOG_INFO, 'could not list locations');

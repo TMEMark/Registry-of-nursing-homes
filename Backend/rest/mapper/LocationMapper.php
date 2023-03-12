@@ -1,6 +1,12 @@
 <?php
-class LocationMapper {
-    public function toEntity($row){
+
+namespace mapper;
+use entity\LocationEntity;
+
+class LocationMapper
+{
+    public function toEntity($row): LocationEntity
+    {
         $location = new LocationEntity();
         $location->setId($row['id']);
         $location->setCreated($row['created']);
@@ -10,4 +16,5 @@ class LocationMapper {
         return $location;
     }
 }
+
 ?>

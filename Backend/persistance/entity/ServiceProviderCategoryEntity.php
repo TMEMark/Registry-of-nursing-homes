@@ -1,11 +1,11 @@
 <?php
-include_once('AbstractEntity.php');
-include_once('ServiceProviderEntity.php');
-include_once('CategoryEntity.php');
-class ServiceProviderCategoryEntity extends AbstractEntity{
-    private Array $serviceProvider = array(ServiceProviderEntity::class);
 
-    private Array $category = array(CategoryEntity::class);
+namespace entity;
+
+class ServiceProviderCategoryEntity extends AbstractEntity{
+    private array $serviceProvider = array(ServiceProviderEntity::class);
+
+    private array $category = array(CategoryEntity::class);
 
 
 
