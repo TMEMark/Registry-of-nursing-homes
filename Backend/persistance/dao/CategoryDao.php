@@ -5,7 +5,9 @@ namespace dao;
 use entity\CategoryEntity;
 use Exception;
 use mapper\CategoryMapper;
+use PDO;
 
+require_once '../../rest/mapper/CategoryMapper.php';
 class CategoryDao{
 
     private CategoryMapper $categoryMapper;
@@ -14,42 +16,32 @@ class CategoryDao{
         $this->categoryMapper = $categoryMapper;
     }
 
-    public function getCategoryById(int $id): ?array
+    public function getCategoryById(int $id): ?CategoryEntity
     {
         global $db;
         try{
             $sql = 'SELECT * FROM category WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
-            if ($statement->execute()) {
-                $result = [];
-                while ($row = $statement->fetch()) {
-                    $result[] = $this->categoryMapper->toEntity($row);
-                }
-                return $result;
-            }
-            return [];
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find category {}', $id, $e);
 			return null;
         }
     }
 
-    public function getCategoryByName(String $name): ?array
+    public function getCategoryByName(String $name): ?CategoryEntity
     {
         global $db;
         $sql = 'SELECT * FROM category WHERE name = :"name"';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
-            if ($statement->execute()) {
-                $result = [];
-                while ($row = $statement->fetch()) {
-                    $result[] = $this->categoryMapper->toEntity($row);
-                }
-                return $result;
-            }
-            return [];
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find category {}', $name, $e);
 			return null;
