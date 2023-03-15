@@ -1,8 +1,7 @@
 <?php
 
-namespace Category;
+namespace rest\request;
 
-use Exception;
 use service\CategoryService;
 
 class CategoryReqHandler {
