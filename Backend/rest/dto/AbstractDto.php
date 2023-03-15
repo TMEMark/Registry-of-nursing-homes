@@ -6,7 +6,7 @@ use JsonSerializable;
 
 abstract class AbstractDto implements JsonSerializable
 {
-    private int $id;
+    public int $id;
 
     /**
      * @return int
