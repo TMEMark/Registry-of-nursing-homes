@@ -2,6 +2,7 @@
 <?php
 
 use mapper\ServiceMapper;
+use rest\request\ServiceReqHandler;
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");
@@ -12,7 +13,7 @@ require_once '../../../persistance/dao/ServiceDao.php';
 require_once '../../../persistance/mapper/ServiceMapper.php';
 require_once '../../../service/ServiceService.php';
 require_once '../../../db/DatabaseConnection.php';
-require_once 'ServiceReqHandler.php';
+require_once '../request/ServiceReqHandler.php';
 
 $controller = new ServiceReqHandler(new ServiceService(new ServiceDao(new ServiceMapper())));
 $controller->handleRequests();
