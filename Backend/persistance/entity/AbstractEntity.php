@@ -2,7 +2,7 @@
 
 namespace entity;
 
-abstract class AbstractEntity{
+abstract class AbstractEntity implements \JsonSerializable {
     private int $id;
 
     private String $created;
@@ -57,5 +57,17 @@ abstract class AbstractEntity{
 		$this->id = $id;
 		return $this;
 	}
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
+    public function __toString()
+    {
+        return $this->id;
+        return $this->lastModified;
+        return $this->created;
+    }
 }
 ?>
