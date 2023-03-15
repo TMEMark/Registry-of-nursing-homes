@@ -49,12 +49,17 @@ class CategoryService{
     {
         syslog(LOG_INFO, 'getting categories');
        $categoryDaoList = $this->categoryDao->listCategories();
-       if(empty($categoryDaoList)){
+       $categoryDTOList = [];
+        foreach ($categoryDaoList as $category) {
+            $categoryDTO = $this->categoryMapper->toDto($category);
+            $categoryDTOList[] = $categoryDTO;
+        }
+       if(empty($categoryDTOList)){
         syslog(LOG_INFO, 'could not list categories');
         throw new Exception('could not list categories');
        }else{
         syslog(LOG_INFO, 'categories found');
-        return $categoryDaoList;
+        return $categoryDTOList;
        }
     }
 
