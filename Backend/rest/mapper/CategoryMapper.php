@@ -5,20 +5,21 @@ use dto\CategoryDto;
 use entity\CategoryEntity;
 
 require_once '../../persistance/entity/CategoryEntity.php';
+require_once '../dto/CategoryDto.php';
 
 class CategoryMapper
 {
 
-    public function toDto($array): CategoryDto
+    public function toDto(CategoryEntity $categoryEntity): CategoryDto
     {
         $category = new CategoryDto();
-        $category->setId($array['id']);
-        $category->setName($array['name']);
+        $category->setId($categoryEntity->getId());
+        $category->setName($categoryEntity->getName());
 
         return $category;
     }
 
-    public function toEntity($row)
+    public function toEntity($row): CategoryEntity
     {
         $category = new CategoryEntity();
         $category->setId($row['id']);
