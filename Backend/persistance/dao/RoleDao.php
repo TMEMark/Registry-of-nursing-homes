@@ -3,7 +3,9 @@
 namespace dao;
 
 use entity\RoleEntity;
+use Exception;
 use mapper\RoleMapper;
+use PDO;
 
 include_once(__DIR__.'../../mapper/RoleMapper.php');
 include_once("../../entity/RoleEntity.php");
@@ -15,45 +17,40 @@ class RoleDao{
         $this->roleMapper = $roleMapper;
     }
 
-    public function getRoleById(int $id){
+    public function getRoleById(int $id): ?RoleEntity
+    {
         global $db;
         try{
             $sql = 'SELECT * FROM "role" WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->roleMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->roleMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find role {}', $id, $e);
 			return null;
         }
     }
 
-    public function getRoleByName(String $name){
+    public function getRoleByName(String $name): ?RoleEntity
+    {
         global $db;
         $sql = 'SELECT * FROM role WHERE name = :"name"';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->roleMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->roleMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find role {}', $name, $e);
 			return null;
         }
     }
 
-    public function listRoles(){
+    public function listRoles(): ?array
+    {
         global $db;
         $sql = 'SELECT * FROM role';
         try{
@@ -71,7 +68,8 @@ class RoleDao{
         }
     }
 
-    public function insertRole(RoleEntity $role){
+    public function insertRole(RoleEntity $role): ?RoleEntity
+    {
         global $db;
         $id =  abs( crc32( uniqid() ) );;
         try{
@@ -94,7 +92,8 @@ class RoleDao{
         }
     }
 
-    public function updateRole(RoleEntity $role){
+    public function updateRole(RoleEntity $role): ?RoleEntity
+    {
         global $db;
         try{
             $db->beginTransaction();
@@ -116,7 +115,8 @@ class RoleDao{
         }
     }
 
-    public function deleteRole(int $id){
+    public function deleteRole(int $id): bool
+    {
         global $db;
         try{
             $db->beginTransaction();
