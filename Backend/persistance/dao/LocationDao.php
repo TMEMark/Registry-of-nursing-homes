@@ -3,10 +3,11 @@
 namespace dao;
 
 use entity\LocationEntity;
+use Exception;
 use mapper\LocationMapper;
+use PDO;
 
-include_once(__DIR__.'../../mapper/LocationMapper.php');
-include_once(__DIR__."../../entity/LocationEntity.php");
+require_once '../../rest/mapper/LocationMapper.php';
 class LocationDao{
 
     private LocationMapper $locationMapper;
@@ -15,7 +16,7 @@ class LocationDao{
         $this->locationMapper = $locationMapper;
     }
     
-    public function getLocationById(int $id): ?array
+    public function getLocationById(int $id): ?LocationEntity
     {
         global $db;
         try{
@@ -23,19 +24,15 @@ class LocationDao{
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->locationMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->locationMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find location {}', $id, $e);
 			return null;
         }
     }
 
-    public function getLocationByName(String $name): ?array
+    public function getLocationByName(String $name): ?LocationEntity
     {
         global $db;
         $sql = 'SELECT * FROM "location" WHERE name = :"name"';
@@ -43,9 +40,9 @@ class LocationDao{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            return $array;
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->locationMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find location {}', $name, $e);
 			return null;
