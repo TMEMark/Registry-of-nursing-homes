@@ -7,8 +7,7 @@ use Exception;
 use mapper\RoleMapper;
 use PDO;
 
-include_once(__DIR__.'../../mapper/RoleMapper.php');
-include_once("../../entity/RoleEntity.php");
+require_once '../../rest/mapper/RoleMapper.php';
 class RoleDao{
 
     private RoleMapper $roleMapper;
@@ -21,7 +20,7 @@ class RoleDao{
     {
         global $db;
         try{
-            $sql = 'SELECT * FROM "role" WHERE id = :id';
+            $sql = 'SELECT * FROM role WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
@@ -36,7 +35,7 @@ class RoleDao{
     public function getRoleByName(String $name): ?RoleEntity
     {
         global $db;
-        $sql = 'SELECT * FROM role WHERE name = :"name"';
+        $sql = 'SELECT * FROM role WHERE name = :name';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);

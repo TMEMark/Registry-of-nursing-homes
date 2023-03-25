@@ -20,14 +20,14 @@ class LocationDao{
     {
         global $db;
         try{
-            $sql = 'SELECT * FROM "location" WHERE id = :id';
+            $sql = 'SELECT * FROM location WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->locationMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find location {}', $id, $e);
+            error_log('could not find location {}', $id);
 			return null;
         }
     }
@@ -35,7 +35,7 @@ class LocationDao{
     public function getLocationByName(String $name): ?LocationEntity
     {
         global $db;
-        $sql = 'SELECT * FROM "location" WHERE name = :"name"';
+        $sql = 'SELECT * FROM location WHERE name = :name';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
@@ -44,7 +44,7 @@ class LocationDao{
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->locationMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find location {}', $name, $e);
+            error_log('could not find location {}');
 			return null;
         }
     }
@@ -76,8 +76,8 @@ class LocationDao{
 
             $db->beginTransaction();
             $db -> query = 
-            'INSERT INTO "location" (id,"name") 
-            VALUES (:id,:"name")';
+            'INSERT INTO location (id,name) 
+            VALUES (:id,:name)';
             $statement = $db->prepare($db);
             $statement->bindValue(':id', $id);
             $statement->bindValue(':name', $location->getName());
@@ -97,12 +97,12 @@ class LocationDao{
         try{
             $db->beginTransaction();
             $db -> query =
-            'UPDATE "location" SET
-            "name" = :"name",
+            'UPDATE location SET
+            "name" = :name,
             WHERE id = :id';
             $statement = $db->prepare($db);
             $statement->bindValue(':id', $location->getId());
-            $statement->bindValue(':"name"', $location->getName());
+            $statement->bindValue(':name', $location->getName());
             $statement->closeCursor();
 
             $db->commit();
@@ -119,7 +119,7 @@ class LocationDao{
         try{
             $db->beginTransaction();
             $db -> query = 
-            'DELETE FROM "location"
+            'DELETE FROM location
             WHERE id = :id ';
             $statement = $db->prepare($db);
             $statement->bindValue(':id', $id);

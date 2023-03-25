@@ -3,6 +3,7 @@
 namespace service;
 
 use dao\LocationDao;
+use Exception;
 
 include_once(__DIR__.'../../persistance/dao/LocationDao.php');
 include_once(__DIR__.'../../persistance/entity/LocationEntity.php');
