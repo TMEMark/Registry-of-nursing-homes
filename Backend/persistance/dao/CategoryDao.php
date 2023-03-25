@@ -27,7 +27,7 @@ class CategoryDao{
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find category {}', $id, $e);
+            error_log('could not find category {}', $id);
 			return null;
         }
     }
@@ -35,7 +35,7 @@ class CategoryDao{
     public function getCategoryByName(String $name): ?CategoryEntity
     {
         global $db;
-        $sql = 'SELECT * FROM category WHERE name = :"name"';
+        $sql = 'SELECT * FROM category WHERE name = :name';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
@@ -43,7 +43,7 @@ class CategoryDao{
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find category {}', $name, $e);
+            error_log('could not find category');
 			return null;
         }
     }
@@ -71,22 +71,26 @@ class CategoryDao{
     public function insertCategory(CategoryEntity $category): ?CategoryEntity
     {
         global $db;
-        $id =  abs( crc32( uniqid() ) );;
+        $id =  abs( crc32( uniqid() ) );
         try{
 
-            $db->beginTransaction();
-            $db -> query = 
-            'INSERT INTO category (id,"name") 
-            VALUES (:id,:"name")';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':name', $category->getName());
-            $statement->closeCursor();
+            $statement = $db -> prepare ('INSERT INTO category (id,name) 
+            VALUES (:id,:name)');
+
+            $db -> beginTransaction();
+
+            $statement -> execute ([':id'=>$id, ':name'=>$category->getName()]);
 
             $db->commit();
-            return $category;
+
+            $sql = 'SELECT * FROM category WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not create category {}', $category->getId(), $e);
+            error_log('could not create category {}', $id, $e);
             $db->rollback();
 			return null;
         }
@@ -96,18 +100,23 @@ class CategoryDao{
     {
         global $db;
         try{
-            $db->beginTransaction();
-            $db -> query =
+
+            $statement = $db -> prepare (
             'UPDATE category SET
-            "name" = :"name",
-            WHERE id = :id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $category->getId());
-            $statement->bindValue(':"name"', $category->getName());
-            $statement->closeCursor();
+            "name" = :name,
+            WHERE id = :id');
+
+            $db->beginTransaction();
+            $statement -> execute ([':id'=>$category->getId(), ':name'=>$category->getName()]);
 
             $db->commit();
-            return $category;
+
+            $sql = 'SELECT * FROM category WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $category->getId());
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not update category {}', $category->getId(), $e);
             $db->rollback();

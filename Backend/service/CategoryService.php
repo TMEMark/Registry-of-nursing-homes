@@ -63,35 +63,40 @@ class CategoryService{
        }
     }
 
-    public function insertCategory(CategoryEntity $category): CategoryEntity
+    public function insertCategory(array $category): \dto\CategoryDto
     {
         syslog(LOG_INFO, 'creating category');
-        $categoryDaoInsert = $this->categoryDao->insertCategory($category);
-        if($categoryDaoInsert == null){
+        $category = $this->categoryMapper->fromStdClass($category);
+        $categoryInsert = $this->categoryMapper->toDto($this->categoryDao->insertCategory($category));
+        if($categoryInsert == null){
             syslog(LOG_INFO, 'could not create category');
             throw new Exception('could not create category');
         }else{
             syslog(LOG_INFO, 'category created');
-            return $categoryDaoInsert;
+            return $categoryInsert;
         }
     }
 
-    public function updateCategory(CategoryEntity $category){
+    public function updateCategory(array $category): \dto\CategoryDto
+    {
         syslog(LOG_INFO, 'updating category');
+        $category = $this->categoryMapper->updateMapper($category);
+
         $categoryId = $category->getId();
         $categoryDaoGetById = $this->categoryDao->getCategoryById($categoryId);
         syslog(LOG_INFO, 'getting category');
+
         if(empty($categoryDaoGetById)){
             syslog(LOG_INFO, 'category not found');
             throw new Exception('no category found with id {}', $categoryId);
         }else{
-            $categoryDao = $this->categoryDao->updateCategory($category);
-            if($categoryDao == null){
+            $categoryUpdate = $this->categoryMapper->toDto($this->categoryDao->updateCategory($category));
+            if($categoryUpdate == null){
                 syslog(LOG_INFO, 'could not update category');
                 throw new Exception('could not update category');
             }else{
                 syslog(LOG_INFO, 'category updated successfully');
-                return $categoryDao;
+                return $categoryUpdate;
             }
         }
     }

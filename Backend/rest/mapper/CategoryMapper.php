@@ -29,6 +29,24 @@ class CategoryMapper
 
         return $category;
     }
+
+    public static function fromStdClass($row): CategoryEntity
+    {
+        print_r($row);
+        $category = new CategoryEntity();
+        $category->setName($row['name']);
+
+        return $category;
+    }
+
+    public function updateMapper($row): CategoryEntity
+    {
+        $category = new CategoryEntity();
+        $category->setId($row->getId());
+        $category->setName($row->getName());
+
+        return $category;
+    }
 }
 
 ?>

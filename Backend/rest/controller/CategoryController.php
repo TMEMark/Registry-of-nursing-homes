@@ -18,5 +18,5 @@ require_once '../../service/CategoryService.php';
 require_once '../../persistance/dao/CategoryDao.php';
 require_once '../mapper/CategoryMapper.php';
 
-$controller = new CategoryReqHandler(new CategoryService(new CategoryDao(new CategoryMapper()), new CategoryMapper));
+$controller = new CategoryReqHandler(new CategoryService(new CategoryDao(new CategoryMapper()), new CategoryMapper), new CategoryMapper());
 $controller->handleRequests();
