@@ -2,6 +2,7 @@
 
 namespace entity;
 
+require_once 'AbstractEntity.php';
 class RoleEntity extends AbstractEntity{
     private String $name;
 

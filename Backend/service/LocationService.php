@@ -4,22 +4,25 @@ namespace service;
 
 use dao\LocationDao;
 use Exception;
+use mapper\LocationMapper;
 
-include_once(__DIR__.'../../persistance/dao/LocationDao.php');
-include_once(__DIR__.'../../persistance/entity/LocationEntity.php');
 class LocationService{
     private LocationDao $locationDao;
 
-    public function __construct(LocationDao $locationDao) {
+    private LocationMapper $locationMapper;
+
+    public function __construct(LocationDao $locationDao, LocationMapper $locationMapper) {
         $this->locationDao = $locationDao;
+        $this->locationMapper = $locationMapper;
     }
 
     /**
      * @throws Exception
      */
-    public function getLocationById(int $id) {
+    public function getLocationById(int $id): \dto\LocationDto
+    {
         syslog(LOG_INFO, 'getting location');
-        $locationDao = $this->locationDao->getLocationById($id);
+        $locationDao = $this->locationMapper->toDto($this->locationDao->getLocationById($id));
         if(empty($locationDao)){
             syslog(LOG_INFO, 'no location found');
             throw new Exception('no location found with id {}', $id);
@@ -29,9 +32,10 @@ class LocationService{
         }
     }
 
-    public function getLocationByName(String $name){
+    public function getLocationByName(String $name): \dto\LocationDto
+    {
         syslog(LOG_INFO, 'getting location');
-        $locationDao = $this->locationDao->getLocationByName($name);
+        $locationDao = $this->locationMapper->toDto($this->locationDao->getLocationByName($name));
         if(empty($locationDao)){
             syslog(LOG_INFO, 'no location found');
             throw new Exception('no location found with name {}', $name);
@@ -45,39 +49,48 @@ class LocationService{
     {
        syslog(LOG_INFO, 'getting locations');
        $locationDaoList = $this->locationDao->listLocations();
-       if(empty($locationDaoList)){
+       $locationDTOList = [];
+        foreach ($locationDaoList as $location) {
+            $locationDTO = $this->locationMapper->toDto($location);
+            $locationDTOList[] = $locationDTO;
+        }
+       if(empty($locationDTOList)){
         syslog(LOG_INFO, 'could not list locations');
         throw new Exception('could not list locations');
        }else{
         syslog(LOG_INFO, 'locations found');
-        return $locationDaoList;
+        return $locationDTOList;
        }
     }
 
-    public function insertLocation(LocationEntity $location){
+    public function insertLocation(array $location){
         syslog(LOG_INFO, 'creating location');
-        $locationDaoInsert = $this->locationDao->insertLocation($location);
-        if($locationDaoInsert == null){
+        $location = $this->locationMapper->fromStdClass($location);
+        $locationInsert = $this->locationMapper->toDto($this->locationDao->insertLocation($location));
+        if($locationInsert == null){
             syslog(LOG_INFO, 'could not create location');
             throw new Exception('could not create location');
         }else{
             syslog(LOG_INFO, 'location created');
-            return $locationDaoInsert;
+            return $locationInsert;
         }
     }
 
-    public function updateLocation(LocationEntity $location){
+    public function updateLocation(array $location){
         syslog(LOG_INFO, 'updating location');
+        $location = $this->locationMapper->updateMapper($location);
+
         $locationId = $location->getId();
         $locationDaoGetById = $this->locationDao->getLocationById($locationId);
         syslog(LOG_INFO, 'getting location');
+
         if(empty($locationDaoGetById)){
-            syslog(LOG_INFO, 'location not found');
+            syslog(LOG_ERR, 'location not found');
             throw new Exception('no location found with id {}', $locationId);
         }else{
-            $locationDao = $this->locationDao->updateLocation($location);
+            $locationDao = $this->locationMapper->toDto($this->locationDao->updateLocation($location));
             if($locationDao == null){
-                syslog(LOG_INFO, 'could not update location');
+                syslog(LOG_ERR, 'could not update location');
                 throw new Exception('could not update location');
             }else{
                 syslog(LOG_INFO, 'location updated successfully');

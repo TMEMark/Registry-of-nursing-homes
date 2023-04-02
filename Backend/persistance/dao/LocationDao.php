@@ -69,22 +69,27 @@ class LocationDao{
         }
     }
 
-    public function insertLocation(LocationEntity $location){
+    public function insertLocation(LocationEntity $location): ?LocationEntity
+    {
         global $db;
         $id =  abs( crc32( uniqid() ) );;
         try{
+            $statement = $db -> prepare(
+                'INSERT INTO location (id,name) 
+            VALUES (:id,:name)');
 
-            $db->beginTransaction();
-            $db -> query = 
-            'INSERT INTO location (id,name) 
-            VALUES (:id,:name)';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':name', $location->getName());
-            $statement->closeCursor();
+            $db -> beginTransaction();
+
+            $statement -> execute ([':id'=>$id, ':name'=>$location->getName()]);
 
             $db->commit();
-            return $location;
+
+            $sql = 'SELECT * FROM location WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->locationMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not create location {}', $location->getId(), $e);
             $db->rollback();
@@ -92,21 +97,26 @@ class LocationDao{
         }
     }
 
-    public function updateLocation(LocationEntity $location){
+    public function updateLocation(LocationEntity $location): ?LocationEntity
+    {
         global $db;
         try{
+
+            $statement = $db -> prepare ('UPDATE location SET
+            name = :name
+            WHERE id = :id');
+
             $db->beginTransaction();
-            $db -> query =
-            'UPDATE location SET
-            "name" = :name,
-            WHERE id = :id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $location->getId());
-            $statement->bindValue(':name', $location->getName());
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$location->getId(), ':name'=>$location->getName()]);
 
             $db->commit();
-            return $location;
+
+            $sql = 'SELECT * FROM location WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $location->getId());
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->locationMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not update location {}', $location->getId(), $e);
             $db->rollback();
@@ -114,16 +124,16 @@ class LocationDao{
         }
     }
 
-    public function deleteLocation(int $id){
+    public function deleteLocation(int $id): bool
+    {
         global $db;
         try{
+
+            $statement = $db -> prepare ('DELETE FROM location
+            WHERE id = :id ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM location
-            WHERE id = :id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$id]);
 
             $db->commit();
             return true;

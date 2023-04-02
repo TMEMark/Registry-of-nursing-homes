@@ -8,11 +8,8 @@ use service\CategoryService;
 class CategoryReqHandler {
         private CategoryService $categoryService;
 
-        private CategoryMapper $categoryMapper;
-
-        public function __construct(CategoryService $categoryService, CategoryMapper $categoryMapper) {
+        public function __construct(CategoryService $categoryService) {
             $this->categoryService = $categoryService;
-            $this->categoryMapper = $categoryMapper;
         }
 
 
@@ -37,6 +34,7 @@ class CategoryReqHandler {
             if (isset($_GET['update']) && $_SERVER['REQUEST_METHOD'] === 'PUT') {
                 $body = file_get_contents("php://input");
                 $event = json_decode($body, true);
+                print_r($event);
                 $this->categoryService->updateCategory($event);
             }
 

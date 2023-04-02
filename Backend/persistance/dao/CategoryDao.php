@@ -98,12 +98,13 @@ class CategoryDao{
 
     public function updateCategory(CategoryEntity $category): ?CategoryEntity
     {
+        print_r($category);
         global $db;
         try{
 
             $statement = $db -> prepare (
             'UPDATE category SET
-            "name" = :name,
+                    name = :name
             WHERE id = :id');
 
             $db->beginTransaction();
@@ -118,7 +119,7 @@ class CategoryDao{
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not update category {}', $category->getId(), $e);
+            error_log('could not update category', $category->getId(), $e);
             $db->rollback();
 			return null;
         }
@@ -128,13 +129,12 @@ class CategoryDao{
     {
         global $db;
         try{
+
+            $statement = $db -> prepare ('DELETE FROM category
+            WHERE id = :id ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM category
-            WHERE id = :id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$id]);
 
             $db->commit();
             return true;

@@ -7,8 +7,7 @@ use Exception;
 use mapper\ServiceMapper;
 use PDO;
 
-include_once(__DIR__.'../../mapper/ServiceMapper.php');
-include(__DIR__."../../entity/ServiceEntity.php");
+require_once '../../rest/mapper/ServiceMapper.php';
 class ServiceDao{
     private ServiceMapper $serviceMapper;
 
@@ -27,6 +26,7 @@ class ServiceDao{
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->serviceMapper->toEntity($result);
         }catch(Exception $e){
+            error_log('could not find service');
 			return null;
         }
     }
@@ -34,7 +34,7 @@ class ServiceDao{
     public function getServiceByName(String $name): ?ServiceEntity
     {
         global $db;
-        $sql = 'SELECT * FROM service WHERE name = :"name"';
+        $sql = 'SELECT * FROM service WHERE name = :name';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
@@ -42,7 +42,7 @@ class ServiceDao{
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->serviceMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find service {}', $name, $e);
+            error_log('could not find service');
 			return null;
         }
     }
@@ -73,17 +73,21 @@ class ServiceDao{
         $id =  abs( crc32( uniqid() ) );;
         try{
 
+            $statement = $db -> prepare ('INSERT INTO service (id,name) 
+            VALUES (:id,:name)');
+
             $db->beginTransaction();
-            $db -> query = 
-            'INSERT INTO "service" (id,"name") 
-            VALUES (:id,:"name")';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':name', $service->getName());
-            $statement->closeCursor();
+
+            $statement -> execute ([':id'=>$id, ':name'=>$service->getName()]);
 
             $db->commit();
-            return $service;
+
+            $sql = 'SELECT * FROM service WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->serviceMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not create service {}', $service->getId(), $e);
             $db->rollback();
@@ -95,18 +99,24 @@ class ServiceDao{
     {
         global $db;
         try{
+
+            $statement = $db -> prepare (
+                'UPDATE service SET
+                    name = :name
+            WHERE id = :id');
+
             $db->beginTransaction();
-            $db -> query =
-            'UPDATE "service" SET
-            "name" = :"name",
-            WHERE id = :id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $service->getId());
-            $statement->bindValue(':"name"', $service->getName());
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$service->getId(), ':name'=>$service->getName()]);
+
 
             $db->commit();
-            return $service;
+
+            $sql = 'SELECT * FROM service WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $service->getId());
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->serviceMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not update service {}', $service->getId(), $e);
             $db->rollback();
@@ -118,13 +128,11 @@ class ServiceDao{
     {
         global $db;
         try{
+            $statement = $db -> prepare ('DELETE FROM service
+            WHERE id = :id ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM "service"
-            WHERE id = :id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$id]);
 
             $db->commit();
             return true;

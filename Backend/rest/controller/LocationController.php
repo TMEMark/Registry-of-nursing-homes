@@ -17,5 +17,5 @@ require_once '../../db/DatabaseConnection.php';
 require_once '../request/LocationReqHandler.php';
 require_once '../mapper/LocationMapper.php';
 
-$controller = new LocationReqHandler(new LocationService(new LocationDao(new LocationMapper())));
+$controller = new LocationReqHandler(new LocationService(new LocationDao(new LocationMapper()), new LocationMapper()));
 $controller->handleRequests();

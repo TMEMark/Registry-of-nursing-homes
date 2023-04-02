@@ -2,6 +2,7 @@
 
 namespace entity;
 
+require_once 'AbstractEntity.php';
 class ServiceProviderEntity extends AbstractEntity{
     private String $name;
 

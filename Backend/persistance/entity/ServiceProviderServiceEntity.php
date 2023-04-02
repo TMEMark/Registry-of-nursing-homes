@@ -2,6 +2,7 @@
 
 namespace entity;
 
+require_once 'AbstractEntity.php';
 class ServiceProviderServiceEntity extends AbstractEntity{
     private array $serviceProvider = array(ServiceProviderEntity::class);
     

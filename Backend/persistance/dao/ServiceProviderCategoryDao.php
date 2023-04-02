@@ -3,10 +3,11 @@
 namespace dao;
 
 use entity\ServiceProviderCategoryEntity;
+use Exception;
 use mapper\ServiceProviderCategoryMapper;
+use PDO;
 
-include_once(__DIR__.'../../mapper/ServiceProviderCategoryMapper.php');
-include_once(__DIR__."../../entity/ServiceProviderCategoryEntity.php");
+require_once '../../rest/mapper/ServiceProviderCategoryMapper.php';
 class ServiceProviderCategoryDao{
 
     private ServiceProviderCategoryMapper $serviceProviderCategoryMapper;
@@ -15,37 +16,36 @@ class ServiceProviderCategoryDao{
         $this->serviceProviderCategoryMapper = $serviceProviderCategoryMapper;
     }
 
-    public function getServiceProviderCategoryById(int $id){
+    public function getServiceProviderCategoryById(int $id): ?ServiceProviderCategoryEntity
+    {
         global $db;
         try{
-            $sql = 'SELECT * FROM "service_provider_category" WHERE id = :id';
+            $sql = 'SELECT * FROM service_provider_category WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->serviceProviderCategoryMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->serviceProviderCategoryMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find serviceProviderCategory {}', $id, $e);
 			return null;
         }
     }
 
-    public function listServiceProviderCategories(){
+    public function listServiceProviderCategories(): ?array
+    {
         global $db;
-        $sql = 'SELECT * FROM "service_provider_category"';
+        $sql = 'SELECT * FROM service_provider_category';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->serviceProviderCategoryMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->serviceProviderCategoryMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
             error_log('could not find serviceProviderCategory', $e);
 			return null;
@@ -55,19 +55,25 @@ class ServiceProviderCategoryDao{
     public function insertServiceProviderCategory($id, ServiceProviderCategoryEntity $serviceProviderCategory): ?ServiceProviderCategoryEntity
     {
         global $db;
+        $idServiceCat =  abs( crc32( uniqid() ) );
         try{
-            $idServiceCat =  abs( crc32( uniqid() ) );
-            $db -> query = 
-            'INSERT INTO "service_provider_category" (id,service_provider_id,"category_id") 
-            VALUES (:id,:"service_provider",:"category")';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $idServiceCat);
-            $statement->bindValue(':"service_provider"', $id);
-            $statement->bindValue(':"category"', $serviceProviderCategory->getCategory());
-            $statement->execute();
-            $statement->closeCursor();
 
-            return $serviceProviderCategory;
+            $statement = $db -> prepare ('INSERT INTO service_provider_category (id,service_provider_id,category_id) 
+            VALUES (:id,:service_provider,:category)');
+
+            $db -> beginTransaction();
+
+            $statement -> execute ([':id'=>$idServiceCat, ':service_provider'=>$id, ':category'=>$serviceProviderCategory->getCategory()]);
+
+            $db->commit();
+
+            $sql = 'SELECT * FROM service_provider_category WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->serviceProviderCategoryMapper->toEntity($result);
+
         }catch(Exception $e){
             error_log('could not create serviceProviderCategory {}', $serviceProviderCategory->getId(), $e);
 			return null;

@@ -54,13 +54,14 @@ class RoleDao{
         $sql = 'SELECT * FROM role';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->roleMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->roleMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
             error_log('could not find role', $e);
 			return null;
@@ -73,17 +74,21 @@ class RoleDao{
         $id =  abs( crc32( uniqid() ) );;
         try{
 
+            $statement = $db -> prepare ('INSERT INTO role (id,name) 
+            VALUES (:id,:name)');
+
             $db->beginTransaction();
-            $db -> query = 
-            'INSERT INTO role (id,"name") 
-            VALUES (:id,:"name")';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':name', $role->getName());
-            $statement->closeCursor();
+
+            $statement -> execute ([':id'=>$id, ':name'=>$role->getName()]);
 
             $db->commit();
-            return $role;
+
+            $sql = 'SELECT * FROM role WHERE id = :id';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->roleMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not create role {}', $role->getId(), $e);
             $db->rollback();
@@ -95,15 +100,12 @@ class RoleDao{
     {
         global $db;
         try{
+            $statement = $db -> prepare ('UPDATE role SET
+            name = :name
+            WHERE id = :id');
+
             $db->beginTransaction();
-            $db -> query =
-            'UPDATE role SET
-            "name" = :"name",
-            WHERE id = :id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $role->getId());
-            $statement->bindValue(':"name"', $role->getName());
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$role->getId(), ':name'=>$role->getName()]);
 
             $db->commit();
             return $role;
@@ -118,13 +120,11 @@ class RoleDao{
     {
         global $db;
         try{
+            $statement = $db -> prepare ('DELETE FROM role
+            WHERE id = :id ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM role
-            WHERE id = :id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$id]);
 
             $db->commit();
             return true;

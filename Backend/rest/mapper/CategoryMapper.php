@@ -42,8 +42,8 @@ class CategoryMapper
     public function updateMapper($row): CategoryEntity
     {
         $category = new CategoryEntity();
-        $category->setId($row->getId());
-        $category->setName($row->getName());
+        $category->setId($row['id']);
+        $category->setName($row['name']);
 
         return $category;
     }

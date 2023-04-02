@@ -17,5 +17,5 @@ require_once '../../service/ServiceService.php';
 require_once '../../db/DatabaseConnection.php';
 require_once '../request/ServiceReqHandler.php';
 
-$controller = new ServiceReqHandler(new ServiceService(new ServiceDao(new ServiceMapper())));
+$controller = new ServiceReqHandler(new ServiceService(new ServiceDao(new ServiceMapper()), new ServiceMapper()));
 $controller->handleRequests();

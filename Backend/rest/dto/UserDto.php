@@ -2,6 +2,7 @@
 
 namespace dto;
 
+require_once 'AbstractDto.php';
 class UserDto extends AbstractDto
 {
 

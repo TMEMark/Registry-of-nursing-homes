@@ -2,24 +2,53 @@
 
 namespace service;
 
-include_once(__DIR__.'../../persistance/dao/UserDao.php');
-include_once(__DIR__.'../../persistance/entity/UserEntity.php');
+use dao\RoleDao;
+use dao\UserDao;
+use Exception;
+use mapper\RoleMapper;
+use mapper\UserMapper;
+
 class UserService{
     private UserDao $userDao;
 
-    public function __construct(UserDao $userDao) {
+    private RoleDao $roleDao;
+    private UserMapper $userMapper;
+
+    private RoleMapper $roleMapper;
+
+    public function __construct(UserDao $userDao, RoleDao $roleDao, UserMapper $userMapper, RoleMapper $roleMapper) {
         $this->userDao = $userDao;
+
+        $this->roleDao = $roleDao;
+
+        $this->userMapper = $userMapper;
+
+        $this->roleMapper = $roleMapper;
     }
 
-    public function getUserById(int $id) {
+    public function getUserById(int $id): array
+    {
         syslog(LOG_INFO, 'getting user');
-        $userDao = $this->userDao->getUserById($id);
+        $results = array();
+
+        $users = $this->userMapper->toDto($this->userDao->getUserById($id));
+        $roles = $this->roleMapper->toDto($this->roleDao->getRoleById($id));
         if(empty($userDao)){
             syslog(LOG_INFO, 'no user found');
             throw new Exception('no user found with id {}', $id);
         }else{
-            syslog(LOG_INFO, 'user found');
-            return $userDao;
+            foreach ($users as $user) {
+                $roleId = $user->getRole();
+                foreach ($roles as $role) {
+                    if ($role->getId() === $roleId) {
+                        $user->setRole($role);
+                        break;
+                    }
+                }
+                $results[] = $user;
+            }
+
+            return $results;
         }
     }
 

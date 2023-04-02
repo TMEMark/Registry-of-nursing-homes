@@ -2,15 +2,15 @@
 
 namespace rest\request;
 
-use service\LocationService;
+use service\UserService;
 
-class LocationReqHandler
+class UserReqHandler
 {
-    private LocationService $locationService;
+    private UserService $userService;
 
-    public function __construct(LocationService $locationService)
+    public function __construct(UserService $userService)
     {
-        $this->locationService = $locationService;
+        $this->userService = $userService;
     }
 
 
@@ -20,29 +20,27 @@ class LocationReqHandler
     public function handleRequests()
     {
         if (isset($_GET['getById']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
-            echo json_encode($this->locationService->getLocationById($_GET['getById']));
+            echo json_encode($this->userService->getUserById($_GET['getById']));
         }
         if (isset($_GET['getByName']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
-            echo json_encode($this->locationService->getLocationByName($_GET['getByName']));
+            echo json_encode($this->userService->getUserByName($_GET['getByName']));
         }
         if (isset($_GET['listAll']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
-            echo json_encode($this->locationService->listLocations());
+            echo json_encode($this->userService->listUsers());
         }
         if (isset($_GET['insert']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $body = file_get_contents("php://input");
             $event = json_decode($body, true);
-            $this->locationService->insertLocation($event);
+            $this->userService->insertUser($event);
         }
         if (isset($_GET['update']) && $_SERVER['REQUEST_METHOD'] === 'PUT') {
             $body = file_get_contents("php://input");
             $event = json_decode($body, true);
-            $this->locationService->updateLocation($event);
+            $this->userService->updateUser($event);
         }
 
         if (isset($_GET['delete']) && $_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            $this->locationService->deleteLocation($_GET['delete']);
+            $this->userService->deleteUser($_GET['delete']);
         }
     }
 }
-
-?>

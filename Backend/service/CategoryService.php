@@ -3,10 +3,8 @@
 namespace service;
 
 use dao\CategoryDao;
-use entity\CategoryEntity;
 use Exception;
 use mapper\CategoryMapper;
-
 
 class CategoryService{
     private CategoryDao $categoryDao;
@@ -17,6 +15,9 @@ class CategoryService{
         $this->categoryMapper = $categoryMapper;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getCategoryById(int $id): \dto\CategoryDto
     {
         syslog(LOG_INFO, 'getting category');
@@ -87,12 +88,12 @@ class CategoryService{
         syslog(LOG_INFO, 'getting category');
 
         if(empty($categoryDaoGetById)){
-            syslog(LOG_INFO, 'category not found');
+            syslog(LOG_ERR, 'category not found');
             throw new Exception('no category found with id {}', $categoryId);
         }else{
             $categoryUpdate = $this->categoryMapper->toDto($this->categoryDao->updateCategory($category));
             if($categoryUpdate == null){
-                syslog(LOG_INFO, 'could not update category');
+                syslog(LOG_ERR, 'could not update category');
                 throw new Exception('could not update category');
             }else{
                 syslog(LOG_INFO, 'category updated successfully');

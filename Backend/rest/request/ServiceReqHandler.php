@@ -30,12 +30,12 @@ class ServiceReqHandler
         }
         if (isset($_GET['insert']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $body = file_get_contents("php://input");
-            $event = json_decode($body);
+            $event = json_decode($body, true);
             $this->serviceService->insertService($event);
         }
         if (isset($_GET['update']) && $_SERVER['REQUEST_METHOD'] === 'PUT') {
             $body = file_get_contents("php://input");
-            $event = json_decode($body);
+            $event = json_decode($body, true);
             $this->serviceService->updateService($event);
         }
 

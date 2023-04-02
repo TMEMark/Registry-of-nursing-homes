@@ -2,6 +2,7 @@
 
 namespace dto;
 
+require_once 'AbstractDto.php';
 class ServiceProviderServiceDto extends AbstractDto
 {
     public array $serviceProvider = array(ServiceProviderEntity::class);

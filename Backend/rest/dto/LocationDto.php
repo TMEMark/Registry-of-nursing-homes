@@ -2,6 +2,7 @@
 
 namespace dto;
 
+require_once 'AbstractDto.php';
 class LocationDto extends AbstractDto
 {
     private String $name;

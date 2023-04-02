@@ -3,7 +3,7 @@
 namespace entity;
 
 abstract class AbstractEntity implements \JsonSerializable {
-    private int $id;
+    private ?int $id = null;
 
     private String $created;
 
@@ -45,7 +45,7 @@ abstract class AbstractEntity implements \JsonSerializable {
 	/**
 	 * @return int
 	 */
-	public function getId(): int {
+	public function getId(): ?int {
 		return $this->id;
 	}
 	
