@@ -5,7 +5,7 @@ namespace dto;
 require_once 'AbstractDto.php';
 class RoleDto extends AbstractDto
 {
-    private String $name;
+    public String $name;
 
     /**
      * @return string

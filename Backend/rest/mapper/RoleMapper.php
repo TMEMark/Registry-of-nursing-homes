@@ -5,6 +5,8 @@ namespace mapper;
 use dto\RoleDto;
 use entity\RoleEntity;
 
+require_once '../../persistance/entity/RoleEntity.php';
+require_once '../dto/RoleDto.php';
 class RoleMapper
 {
 

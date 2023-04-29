@@ -12,7 +12,7 @@ class UserDto extends AbstractDto
 
     public String $username;
 
-    public array $role = array(RoleDto::class);
+    public int $role;
 
     /**
      * @return String
@@ -63,17 +63,17 @@ class UserDto extends AbstractDto
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function getRole(): array
+    public function getRole(): int
     {
         return $this->role;
     }
 
     /**
-     * @param Array $role
+     * @param int $role
      */
-    public function setRole(array $role): void
+    public function setRole(int $role): void
     {
         $this->role = $role;
     }

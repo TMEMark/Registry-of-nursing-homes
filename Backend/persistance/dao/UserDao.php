@@ -3,99 +3,108 @@
 namespace dao;
 
 use entity\UserEntity;
+use Exception;
+use helper\IdGenerator;
 use mapper\UserMapper;
+use PDO;
 
-include_once(__DIR__."../../mapper/UserMapper.php");
-include_once(__DIR__."../../entity/UserEntity.php");
+require_once '../../rest/mapper/UserMapper.php';
 class UserDao{
 
     private UserMapper $userMapper;
 
-    public function __construct(UserMapper $userMapper) {
+    private IdGenerator $idGenerator;
+
+    public function __construct(UserMapper $userMapper, IdGenerator $idGenerator) {
         $this->userMapper = $userMapper;
+        $this->idGenerator = $idGenerator;
     }
 
 
-    public function getUserById(int $id){
+    public function getUserById(int $id): ?UserEntity
+    {
         global $db;
+        $sql = 'SELECT * FROM user WHERE id = :id';
         try{
-            $sql = 'SELECT * FROM user WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->userMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->userMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find user {}', $id, $e);
 			return null;
         }
     }
 
-    public function getUserByUsername(String $username){
+    public function getUserByUsername(String $username): ?UserEntity
+    {
         global $db;
-        $sql = 'SELECT * FROM user WHERE username = :username';
         try{
+            $sql = 'SELECT * FROM user WHERE username = :username';
             $statement = $db->prepare($sql);
             $statement->bindValue(':username', $username);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->userMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->userMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find user {}', $username, $e);
 			return null;
         }
     }
 
-    public function listUsers(){
+    public function listUsers(): ?array
+    {
         global $db;
         $sql = 'SELECT * FROM user';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->userMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->userMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
             error_log('could not find user', $e);
 			return null;
         }
     }
 
-    public function insertUser(UserEntity $user){
+    /**
+     * @throws Exception
+     */
+    public function insertUser(UserEntity $user): ?UserEntity
+    {
         global $db;
-        $id =  abs( crc32( uniqid() ) );;
+
+        $id = $this->idGenerator->generateUniqueId($db,'user', 'id');
+
         try{
 
+            $statement = $db -> prepare ('INSERT INTO user (id,firstname, lastname, username, password, role) 
+            VALUES (:id, :firstname, :lastname, :username, :password, :role)');
+
             $db->beginTransaction();
-            $db -> query = 
-            'INSERT INTO user (id,firstname, lastname, username, "password", "role") 
-            VALUES (:id,:firstname, :lastname, :username, :"password", :"role")';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':firstname', $user->getFirstname());
-            $statement->bindValue(':lastname', $user->getLastname());
-            $statement->bindValue(':username', $user->getUsername());
-            $statement->bindValue(':password', $user->getPassword());
-            $statement->bindValue(':role', $user->getRole());
-            $statement->closeCursor();
+
+            $statement -> execute ([':id'=>$id, ':firstname'=>$user->getFirstname(), ':lastname'=>$user->getLastname(), ':username'=>$user->getUsername(), ':password'=>$user->getPassword(), ':role'=>$user->getRole()]);
+
 
             $db->commit();
-            return $user;
+
+            $sql = 'SELECT * FROM user WHERE id = :id';
+            $statement = $db->prepare($sql);
+
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->userMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not create user {}', $user->getId(), $e);
+            echo $e->getMessage();
             $db->rollback();
-			return null;
+            throw $e;
         }
     }
 

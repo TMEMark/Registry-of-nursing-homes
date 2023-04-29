@@ -13,7 +13,7 @@ class UserEntity extends AbstractEntity{
 
     private String $password;
 
-    private array $role = array(RoleEntity::class);
+    private int $role;
 
 	/**
 	 * @return string
@@ -79,20 +79,22 @@ class UserEntity extends AbstractEntity{
 		return $this;
 	}
 
-	/**
-	 * @return array
-	 */
-	public function getRole(): array {
-		return $this->role;
-	}
-	
-	/**
-	 * @param array $role 
-	 * @return self
-	 */
-	public function setRole(array $role): self {
-		$this->role = $role;
-		return $this;
-	}
+    /**
+     * @return int
+     */
+    public function getRole(): int
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param int $role
+     */
+    public function setRole(int $role): void
+    {
+        $this->role = $role;
+    }
+
+
 }
 ?>
