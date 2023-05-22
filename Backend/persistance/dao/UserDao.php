@@ -80,7 +80,9 @@ class UserDao{
     {
         global $db;
 
-        $id = $this->idGenerator->generateUniqueId($db,'user', 'id');
+        $table = 'user';
+        $column = 'id';
+        $id = $this->idGenerator->generateUniqueId($db, $table, $column);
 
         try{
 
