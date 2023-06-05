@@ -108,17 +108,21 @@ class UserService{
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function insertUser(array $user): \dto\UserDto
     {
         syslog(LOG_INFO, 'creating user');
         $user = $this->userMapper->fromStdClass($user);
-        $userDaoInsert = $this->userMapper->toDto($this->userDao->insertUser($user));
-        if($userDaoInsert == null){
+        $userDao = $this->userDao->insertUser($user);
+        if($userDao == null){
             syslog(LOG_INFO, 'could not create user');
             throw new Exception('could not create user');
         }else{
+            $userMap = $this->userMapper->toDto($userDao);
             syslog(LOG_INFO, 'user created');
-            return $userDaoInsert;
+            return $userMap;
         }
     }
 

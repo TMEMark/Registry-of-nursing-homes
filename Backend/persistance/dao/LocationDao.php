@@ -15,7 +15,12 @@ class LocationDao{
     public function __construct(LocationMapper $locationMapper) {
         $this->locationMapper = $locationMapper;
     }
-    
+
+    /**
+     * Function getLocationById gets location by id attribute in db
+     * @param int $id - $id parameter to get location by
+     * @return LocationEntity if location is found in db | null if it is not found
+     */
     public function getLocationById(int $id): ?LocationEntity
     {
         global $db;
@@ -32,6 +37,11 @@ class LocationDao{
         }
     }
 
+    /**
+     * Function getLocationByName gets location by name attribute in db
+     * @param String $name - $name parameter to get location by
+     * @return LocationEntity if location is found in db | null if it is not found
+     */
     public function getLocationByName(String $name): ?LocationEntity
     {
         global $db;
@@ -49,6 +59,10 @@ class LocationDao{
         }
     }
 
+    /**
+     * Function listLocations gets all locations in db
+     * @return array if locations are found | null if they were not found
+     */
     public function listLocations(): ?array
     {
         global $db;
@@ -69,34 +83,41 @@ class LocationDao{
         }
     }
 
+    /**
+     * Function insertLocation inserts data in location table in db
+     * @param LocationEntity $location - data to be inserted
+     * @return LocationEntity if location is inserted successfully | null if it is not
+     */
     public function insertLocation(LocationEntity $location): ?LocationEntity
     {
         global $db;
-        $id =  abs( crc32( uniqid() ) );;
         try{
             $statement = $db -> prepare(
                 'INSERT INTO location (id,name) 
-            VALUES (:id,:name)');
+            VALUES (:name)');
 
             $db -> beginTransaction();
 
-            $statement -> execute ([':id'=>$id, ':name'=>$location->getName()]);
+            $statement -> execute ([':name'=>$location->getName()]);
 
             $db->commit();
 
-            $sql = 'SELECT * FROM location WHERE id = :id';
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->locationMapper->toEntity($result);
+            $locationId = $db->lastInsertId();
+            $location->setId($locationId);
+
+            return $location;
         }catch(Exception $e){
-            error_log('could not create location {}', $location->getId(), $e);
             $db->rollback();
+            error_log('could not create location {}', $location->getId(), $e);
 			return null;
         }
     }
 
+    /**
+     * Function updateLocation updates data in location table in db
+     * @param LocationEntity $location - data to be updated
+     * @return LocationEntity if location is updated successfully | null if it is not
+     */
     public function updateLocation(LocationEntity $location): ?LocationEntity
     {
         global $db;
@@ -111,19 +132,19 @@ class LocationDao{
 
             $db->commit();
 
-            $sql = 'SELECT * FROM location WHERE id = :id';
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $location->getId());
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->locationMapper->toEntity($result);
+            return $location;
         }catch(Exception $e){
-            error_log('could not update location {}', $location->getId(), $e);
             $db->rollback();
+            error_log('could not update location {}', $location->getId(), $e);
 			return null;
         }
     }
 
+    /**
+     * Function deleteLocation delete data in location table in database by id
+     * @param int $id - $id by which location entry is deleted in db
+     * @return bool
+     */
     public function deleteLocation(int $id): bool
     {
         global $db;
@@ -138,8 +159,8 @@ class LocationDao{
             $db->commit();
             return true;
         }catch(Exception $e){
-            error_log('could not delete location {}', $id, $e);
             $db->rollback();
+            error_log('could not delete location {}', $id, $e);
 			return false;
         }
     }

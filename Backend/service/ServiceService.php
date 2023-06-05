@@ -43,6 +43,9 @@ class ServiceService{
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function listServices(): array
     {
         syslog(LOG_INFO, 'getting services');
@@ -65,13 +68,14 @@ class ServiceService{
     {
         syslog(LOG_INFO, 'creating service');
         $service = $this->serviceMapper->fromStdClass($service);
-        $serviceDaoInsert = $this->serviceMapper->toDto($this->serviceDao->insertService($service));
-        if($serviceDaoInsert == null){
+        $serviceDao = $this->serviceDao->insertService($service);
+        if($serviceDao == null){
             syslog(LOG_ERR, 'could not create service');
             throw new Exception('could not create service');
         }else{
+            $serviceMap = $this->serviceMapper->toDto($serviceDao);
             syslog(LOG_INFO, 'service created');
-            return $serviceDaoInsert;
+            return $serviceMap;
         }
     }
 

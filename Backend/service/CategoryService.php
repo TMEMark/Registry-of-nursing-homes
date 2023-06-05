@@ -64,15 +64,19 @@ class CategoryService{
        }
     }
 
+    /**
+     * @throws Exception
+     */
     public function insertCategory(array $category): \dto\CategoryDto
     {
         syslog(LOG_INFO, 'creating category');
         $category = $this->categoryMapper->fromStdClass($category);
-        $categoryInsert = $this->categoryMapper->toDto($this->categoryDao->insertCategory($category));
-        if($categoryInsert == null){
+        $categoryDao = $this->categoryDao->insertCategory($category);
+        if($categoryDao == null){
             syslog(LOG_INFO, 'could not create category');
             throw new Exception('could not create category');
         }else{
+            $categoryInsert = $this->categoryMapper->toDto($categoryDao);
             syslog(LOG_INFO, 'category created');
             return $categoryInsert;
         }

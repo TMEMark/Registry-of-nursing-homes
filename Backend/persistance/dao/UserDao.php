@@ -4,7 +4,6 @@ namespace dao;
 
 use entity\UserEntity;
 use Exception;
-use helper\IdGenerator;
 use mapper\UserMapper;
 use PDO;
 
@@ -13,14 +12,15 @@ class UserDao{
 
     private UserMapper $userMapper;
 
-    private IdGenerator $idGenerator;
-
-    public function __construct(UserMapper $userMapper, IdGenerator $idGenerator) {
+    public function __construct(UserMapper $userMapper) {
         $this->userMapper = $userMapper;
-        $this->idGenerator = $idGenerator;
     }
 
-
+    /**
+     * Function getUserById gets user by id attribute in db
+     * @param int $id - $id parameter to get user by
+     * @return UserEntity if user is found in db | null if it is not found
+     */
     public function getUserById(int $id): ?UserEntity
     {
         global $db;
@@ -37,6 +37,11 @@ class UserDao{
         }
     }
 
+    /**
+     * Function getUserByUsername gets user by username attribute in db
+     * @param String $username - $username parameter to get user by
+     * @return UserEntity if user is found in db | null if it is not found
+     */
     public function getUserByUsername(String $username): ?UserEntity
     {
         global $db;
@@ -53,6 +58,10 @@ class UserDao{
         }
     }
 
+    /**
+     * Function listUsers gets all users in db
+     * @return array if users are found | null if they were not found
+     */
     public function listUsers(): ?array
     {
         global $db;
@@ -74,89 +83,88 @@ class UserDao{
     }
 
     /**
-     * @throws Exception
+     * Function insertUser inserts data into user table in database
+     * @param UserEntity $user - data to be inserted
+     * @return UserEntity if user is inserted successfully | null if it is not
      */
     public function insertUser(UserEntity $user): ?UserEntity
     {
         global $db;
-
-        $table = 'user';
-        $column = 'id';
-        $id = $this->idGenerator->generateUniqueId($db, $table, $column);
-
         try{
 
-            $statement = $db -> prepare ('INSERT INTO user (id,firstname, lastname, username, password, role) 
-            VALUES (:id, :firstname, :lastname, :username, :password, :role)');
+            $statement = $db -> prepare ('INSERT INTO user (firstname, lastname, username, password, role) 
+            VALUES (:firstname, :lastname, :username, :password, :role)');
 
             $db->beginTransaction();
 
-            $statement -> execute ([':id'=>$id, ':firstname'=>$user->getFirstname(), ':lastname'=>$user->getLastname(), ':username'=>$user->getUsername(), ':password'=>$user->getPassword(), ':role'=>$user->getRole()]);
+            $statement -> execute ([':firstname'=>$user->getFirstname(), ':lastname'=>$user->getLastname(), ':username'=>$user->getUsername(), ':password'=>$user->getPassword(), ':role'=>$user->getRole()]);
 
 
             $db->commit();
 
-            $sql = 'SELECT * FROM user WHERE id = :id';
-            $statement = $db->prepare($sql);
+            $userId = $db->lastInsertId();
+            $user->setId($userId);
 
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->userMapper->toEntity($result);
+            return $user;
         }catch(Exception $e){
-            echo $e->getMessage();
             $db->rollback();
-            throw $e;
+            error_log('could not insert user', $user->getId(), $e);
+            return null;
         }
     }
 
-    public function updateUser(UserEntity $user){
+    /**
+     * Function updateUser updates data in user table in database by id
+     * @param UserEntity $user - data to be updated
+     * @return UserEntity if user is updated successfully | null if it is not
+     */
+    public function updateUser(UserEntity $user): ?UserEntity
+    {
         global $db;
         try{
-            $db->beginTransaction();
-            $db -> query =
-            'UPDATE user SET
+            $statement = $db -> prepare('UPDATE user SET
             firstname = :firstname,
             lastname = :lastname,
             username = :username,
             "password" = :"password",
             "role" = :"role"
-            WHERE id = :id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $user->getId());
-            $statement->bindValue(':firstname', $user->getFirstname());
-            $statement->bindValue(':lastname', $user->getLastname());
-            $statement->bindValue(':username', $user->getUsername());
-            $statement->bindValue(':password', $user->getPassword());
-            $statement->bindValue(':role', $user->getRole());
-            $statement->closeCursor();
+            WHERE id = :id');
+
+            $db->beginTransaction();
+
+            $statement -> execute ([':id'=>$user->getId(),':firstname'=>$user->getFirstname(), ':lastname'=>$user->getLastname(), ':username'=>$user->getUsername(), ':password'=>$user->getPassword(), ':role'=>$user->getRole()]);
 
             $db->commit();
             return $user;
         }catch(Exception $e){
-            error_log('could not update user {}', $user->getId(), $e);
             $db->rollback();
+            error_log('could not update user {}', $user->getId(), $e);
 			return null;
         }
     }
 
-    public function deleteUser(int $id){
+    /**
+     * Function deleteUser delete data in user table in database by id
+     * @param int $id - $id by which user entry is deleted in db
+     * @return bool
+     */
+    public function deleteUser(int $id): bool
+    {
         global $db;
         try{
+
+            $statement = $db -> prepare ('DELETE FROM user
+            WHERE id = :id ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM user 
-            WHERE id = :id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$id]);
 
             $db->commit();
             return true;
         }catch(Exception $e){
-            error_log('could not delete user {}', $id, $e);
             $db->rollback();
-			return false;
+            error_log('could not delete user {}', $id, $e);
+            return false;
         }
     }
 }

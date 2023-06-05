@@ -3,6 +3,7 @@
 namespace service;
 
 use dao\LocationDao;
+use dto\LocationDto;
 use Exception;
 use mapper\LocationMapper;
 
@@ -19,7 +20,7 @@ class LocationService{
     /**
      * @throws Exception
      */
-    public function getLocationById(int $id): \dto\LocationDto
+    public function getLocationById(int $id): LocationDto
     {
         syslog(LOG_INFO, 'getting location');
         $locationDao = $this->locationMapper->toDto($this->locationDao->getLocationById($id));
@@ -32,7 +33,7 @@ class LocationService{
         }
     }
 
-    public function getLocationByName(String $name): \dto\LocationDto
+    public function getLocationByName(String $name): LocationDto
     {
         syslog(LOG_INFO, 'getting location');
         $locationDao = $this->locationMapper->toDto($this->locationDao->getLocationByName($name));
@@ -63,16 +64,23 @@ class LocationService{
        }
     }
 
-    public function insertLocation(array $location){
+    /**
+     * @param array $location
+     * @return LocationDto
+     * @throws Exception
+     */
+    public function insertLocation(array $location): LocationDto
+    {
         syslog(LOG_INFO, 'creating location');
         $location = $this->locationMapper->fromStdClass($location);
-        $locationInsert = $this->locationMapper->toDto($this->locationDao->insertLocation($location));
-        if($locationInsert == null){
+        $locationDao = $this->locationDao->insertLocation($location);
+        if($locationDao == null){
             syslog(LOG_INFO, 'could not create location');
             throw new Exception('could not create location');
         }else{
+            $locationMap = $this->locationMapper->toDto($locationDao);
             syslog(LOG_INFO, 'location created');
-            return $locationInsert;
+            return $locationMap;
         }
     }
 

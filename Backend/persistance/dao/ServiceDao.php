@@ -15,6 +15,11 @@ class ServiceDao{
         $this->serviceMapper = $serviceMapper;
     }
 
+    /**
+     * Function getServiceById gets service by id attribute in db
+     * @param int $id $id parameter to get service by
+     * @return ServiceEntity if service is found in db | null if it is not found
+     */
     public function getServiceById(int $id): ?ServiceEntity
     {
         global $db;
@@ -31,6 +36,11 @@ class ServiceDao{
         }
     }
 
+    /**
+     * Function getServiceByName gets service by name attribute in db
+     * @param String $name - $name parameter to get service by
+     * @return ServiceEntity if service is found in db | null if it is not found
+     */
     public function getServiceByName(String $name): ?ServiceEntity
     {
         global $db;
@@ -47,6 +57,10 @@ class ServiceDao{
         }
     }
 
+    /**
+     * Function listServices gets all services in db
+     * @return array if services are found | null if they were not found
+     */
     public function listServices(): ?array
     {
         global $db;
@@ -67,34 +81,41 @@ class ServiceDao{
         }
     }
 
-    public function insertService(serviceEntity $service): ?ServiceEntity
+    /**
+     * Function insertService inserts data into service table in database
+     * @param ServiceEntity $service - data to be inserted
+     * @return ServiceEntity if service is inserted successfully | null if it is not
+     */
+    public function insertService(ServiceEntity $service): ?ServiceEntity
     {
         global $db;
-        $id =  abs( crc32( uniqid() ) );;
         try{
 
-            $statement = $db -> prepare ('INSERT INTO service (id,name) 
-            VALUES (:id,:name)');
+            $statement = $db -> prepare ('INSERT INTO service (name) 
+            VALUES (:name)');
 
             $db->beginTransaction();
 
-            $statement -> execute ([':id'=>$id, ':name'=>$service->getName()]);
+            $statement -> execute ([':name'=>$service->getName()]);
 
             $db->commit();
 
-            $sql = 'SELECT * FROM service WHERE id = :id';
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->serviceMapper->toEntity($result);
+            $serviceId = $db->lastInsertId();
+            $service->setId($serviceId);
+
+            return $service;
         }catch(Exception $e){
-            error_log('could not create service {}', $service->getId(), $e);
             $db->rollback();
+            error_log('could not create service {}', $service->getId(), $e);
 			return null;
         }
     }
 
+    /**
+     * Function updateService updates data in service table in database by id
+     * @param ServiceEntity $service - data to be updated
+     * @return ServiceEntity if service is updated successfully | null if it is not
+     */
     public function updateService(serviceEntity $service): ?ServiceEntity
     {
         global $db;
@@ -108,22 +129,21 @@ class ServiceDao{
             $db->beginTransaction();
             $statement -> execute ([':id'=>$service->getId(), ':name'=>$service->getName()]);
 
-
             $db->commit();
 
-            $sql = 'SELECT * FROM service WHERE id = :id';
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $service->getId());
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->serviceMapper->toEntity($result);
+            return $service;
         }catch(Exception $e){
-            error_log('could not update service {}', $service->getId(), $e);
             $db->rollback();
+            error_log('could not update service {}', $service->getId(), $e);
 			return null;
         }
     }
 
+    /**
+     * Function deleteService delete data in service table in database by id
+     * @param int $id - $id by which service entry is deleted in db
+     * @return bool
+     */
     public function deleteService(int $id): bool
     {
         global $db;

@@ -16,6 +16,11 @@ class CategoryDao{
         $this->categoryMapper = $categoryMapper;
     }
 
+    /**
+     * Function getCategoryById gets category by id attribute in db
+     * @param int $id - $id parameter to get category by
+     * @return CategoryEntity if category is found in db | null if it is not found
+     */
     public function getCategoryById(int $id): ?CategoryEntity
     {
         global $db;
@@ -32,6 +37,11 @@ class CategoryDao{
         }
     }
 
+    /**
+     * Function getCategoryByName gets category by name attribute in db
+     * @param String $name - $name parameter to get category by
+     * @return CategoryEntity if category is found in db | null if it is not found
+     */
     public function getCategoryByName(String $name): ?CategoryEntity
     {
         global $db;
@@ -48,6 +58,10 @@ class CategoryDao{
         }
     }
 
+    /**
+     * Function listCategories gets all categories in db
+     * @return array if categories are found | null if they were not found
+     */
     public function listCategories(): ?array
     {
         global $db;
@@ -68,37 +82,43 @@ class CategoryDao{
         }
     }
 
+    /**
+     * Function insertCategory inserts data into category table in database
+     * @param CategoryEntity $category - data to be inserted
+     * @return CategoryEntity if category is inserted successfully | null if it is not
+     */
     public function insertCategory(CategoryEntity $category): ?CategoryEntity
     {
         global $db;
-        $id =  abs( crc32( uniqid() ) );
         try{
 
-            $statement = $db -> prepare ('INSERT INTO category (id,name) 
-            VALUES (:id,:name)');
+            $statement = $db -> prepare ('INSERT INTO category (name) 
+            VALUES (:name)');
 
             $db -> beginTransaction();
 
-            $statement -> execute ([':id'=>$id, ':name'=>$category->getName()]);
+            $statement -> execute ([':name'=>$category->getName()]);
 
             $db->commit();
 
-            $sql = 'SELECT * FROM category WHERE id = :id';
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->categoryMapper->toEntity($result);
+            $categoryId = $db->lastInsertId();
+            $category->setId($categoryId);
+
+            return $category;
         }catch(Exception $e){
-            error_log('could not create category {}', $id, $e);
             $db->rollback();
-			return null;
+            error_log('could not insert category', $category->getId(), $e);
+            return null;
         }
     }
 
+    /**
+     * Function updateCategory updates data in category table in database by id
+     * @param CategoryEntity $category - data to be updated
+     * @return CategoryEntity if category is updated successfully | null if it is not
+     */
     public function updateCategory(CategoryEntity $category): ?CategoryEntity
     {
-        print_r($category);
         global $db;
         try{
 
@@ -112,19 +132,19 @@ class CategoryDao{
 
             $db->commit();
 
-            $sql = 'SELECT * FROM category WHERE id = :id';
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $category->getId());
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->categoryMapper->toEntity($result);
+            return $category;
         }catch(Exception $e){
-            error_log('could not update category', $category->getId(), $e);
             $db->rollback();
+            error_log('could not update category', $category->getId(), $e);
 			return null;
         }
     }
 
+    /**
+     * Function deleteCategory delete data in category table in database by id
+     * @param int $id - $id by which category entry is deleted in db
+     * @return bool
+     */
     public function deleteCategory(int $id): bool
     {
         global $db;
