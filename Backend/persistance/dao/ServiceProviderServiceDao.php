@@ -3,10 +3,12 @@
 namespace dao;
 
 use entity\ServiceProviderServiceEntity;
+use Exception;
 use mapper\ServiceProviderServiceMapper;
+use PDO;
 
-include_once(__DIR__.'../../mapper/ServiceProviderServiceMapper.php');
-include_once(__DIR__."../../entity/ServiceProviderServiceEntity.php");
+require_once '../../rest/mapper/ServiceProviderServiceMapper.php';
+
 class ServiceProviderServiceDao{
 
     private ServiceProviderServiceMapper $serviceProviderServiceMapper;
@@ -15,105 +17,105 @@ class ServiceProviderServiceDao{
         $this->serviceProviderServiceMapper = $serviceProviderServiceMapper;
     }
 
-    public function getServiceProviderServiceById(int $id){
+    public function getServiceProviderServiceById(int $id): ?ServiceProviderServiceEntity
+    {
         global $db;
         try{
-            $sql = 'SELECT * FROM "service_provider_service" WHERE id = :id';
+            $sql = 'SELECT * FROM service_provider_service WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->serviceProviderServiceMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->serviceProviderServiceMapper->toEntity($result);
         }catch(Exception $e){
             error_log('could not find serviceProviderService {}', $id, $e);
-			return null;
+            return null;
         }
     }
 
-    public function listServiceProviderServices(){
+    public function listServiceProviderServices(): ?array
+    {
         global $db;
-        $sql = 'SELECT * FROM "service_provider_service"';
+        $sql = 'SELECT * FROM service_provider_service';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->serviceProviderServiceMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->serviceProviderServiceMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
             error_log('could not find serviceProviderService', $e);
-			return null;
+            return null;
         }
     }
 
-    public function insertServiceProviderService($id, ServiceProviderServiceEntity $serviceProviderService){
+    public function insertServiceProviderService($serviceProviderId, ServiceProviderServiceEntity $serviceProviderService): ?ServiceProviderServiceEntity
+    {
         global $db;
         try{
-            $idService =  abs( crc32( uniqid() ) );
-            $db -> query = 
-            'INSERT INTO "service_provider_service" (id,service_provider_id,"service_id") 
-            VALUES (:id,:"service_provider",:"service")';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $idService);
-            $statement->bindValue(':"service_provider"', $id);
-            $statement->bindValue(':"service"', $serviceProviderService->getService());
-            $statement->execute();
-            $statement->closeCursor();
+            $statement = $db -> prepare('INSERT INTO service_provider_service (service_provider_id,service_id) 
+            VALUES (:service_provider,:service)');
+
+
+            $db -> beginTransaction();
+
+            $statement -> execute ([':service_provider'=>$serviceProviderId, ':service'=>$serviceProviderService->getService()]);
+
+            $db->commit();
+
+            $serviceProviderServiceId = $db->lastInsertId();
+            $serviceProviderService->setId($serviceProviderServiceId);
 
             return $serviceProviderService;
         }catch(Exception $e){
+            $db->rollBack();
             error_log('could not create serviceProviderService {}', $serviceProviderService->getId(), $e);
 			return null;
         }
     }
 
-    public function updateServiceProviderService(ServiceProviderServiceEntity $serviceProviderService){
+    public function updateServiceProviderService(int $serviceProviderId, ServiceProviderServiceEntity $serviceProviderService): ?ServiceProviderServiceEntity
+    {
         global $db;
         try{
+            $statement = $db -> prepare('UPDATE service_provider_service SET
+            service_provider_id = :service_provider,
+            service_id = :service,
+            WHERE service_provider_id = :service_provider');
+
             $db->beginTransaction();
-            $db -> query =
-            'UPDATE "service_provider_service" SET
-            "service_provider_id" = :"service_provider",
-            "service_id" = :"service",
-            WHERE id = :id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $serviceProviderService->getId());
-            $statement->bindValue(':"service_provider"', $serviceProviderService->getServiceProvider());
-            $statement->bindValue(':"service"', $serviceProviderService->getService());
-            $statement->closeCursor();
+
+            $statement -> execute ([':service_provider'=>$serviceProviderId, ':service'=>$serviceProviderService->getService()]);
 
             $db->commit();
             return $serviceProviderService;
         }catch(Exception $e){
-            error_log('could not update serviceProviderService {}', $serviceProviderService->getId(), $e);
             $db->rollback();
+            error_log('could not update serviceProviderService {}', $serviceProviderService->getId(), $e);
 			return null;
         }
     }
 
-    public function deleteServiceProviderService(int $id){
+    public function deleteServiceProviderService(int $serviceProviderId): bool
+    {
         global $db;
         try{
+            $statement = $db -> prepare ('DELETE FROM service_provider_service
+            WHERE service_provider_id = :serviceProviderId ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM "service_provider_service"
-            WHERE id = :id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->closeCursor();
+            $statement -> execute ([':serviceProviderId'=>$serviceProviderId]);
 
             $db->commit();
             return true;
         }catch(Exception $e){
-            error_log('could not delete serviceProviderService {}', $id, $e);
             $db->rollback();
-			return false;
+            error_log('could not delete user {}', $serviceProviderId, $e);
+            return false;
         }
     }
 }

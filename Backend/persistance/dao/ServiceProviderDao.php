@@ -3,10 +3,12 @@
 namespace dao;
 
 use entity\ServiceProviderEntity;
+use Exception;
 use mapper\ServiceProviderMapper;
+use PDO;
 
-include_once(__DIR__.'../../mapper/ServiceProviderMapper.php');
-include_once(__DIR__."../../entity/ServiceProviderEntity.php");
+require_once '../../rest/mapper/ServiceProviderMapper.php';
+
 class ServiceProviderDao{
     private ServiceProviderMapper $serviceProviderMapper;
 
@@ -14,101 +16,93 @@ class ServiceProviderDao{
         $this->serviceProviderMapper = $serviceProviderMapper;
     }
 
-    public function getServiceProviderById(int $id){
+    public function getServiceProviderById(int $id): ?ServiceProviderEntity
+    {
         global $db;
         try{
-            $sql = 'SELECT * FROM "service_provider" WHERE id = :id';
+            $sql = 'SELECT * FROM service_provider WHERE id = :id';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();                                           
-            foreach ($array as $row){
-                $array[] = $this->serviceProviderMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->serviceProviderMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find service provider {}', $id, $e);
-			return null;
+            error_log('could not find service provider');
+            return null;
         }
     }
 
-    public function getServiceProviderByName(String $name){
+    public function getServiceProviderByName(String $name): ?ServiceProviderEntity
+    {
         global $db;
-        $sql = 'SELECT * FROM "service_provider" WHERE name = :"name"';
+        $sql = 'SELECT * FROM service_provider WHERE name = :name';
         try{
             $statement = $db->prepare($sql);
             $statement->bindValue(':name', $name);
             $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->serviceProviderMapper->toEntity($row);
-            }
-            return $array;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->serviceProviderMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find service provider {}', $name, $e);
-			return null;
+            error_log('could not find service provider');
+            return null;
         }
     }
 
-    public function listServiceProviders(){
+    public function listServiceProviders(): ?array
+    {
         global $db;
-        $sql = 'SELECT * FROM "service_provider"';
+        $sql = 'SELECT * FROM service_provider';
         try{
             $statement = $db->prepare($sql);
-            $statement->execute();
-            $array = $statement->fetchAll();
-            $statement->closeCursor();
-            foreach ($array as $row){
-                $array[] = $this->serviceProviderMapper->toEntity($row);
+            if ($statement->execute()) {
+                $result = [];
+                while ($row = $statement->fetch()) {
+                    $result[] = $this->serviceProviderMapper->toEntity($row);
+                }
+                return $result;
             }
-            return $array;
+            return [];
         }catch(Exception $e){
-            error_log('could not find service provider', $e);
-			return null;
+            error_log('could not find service providers');
+            return null;
         }
     }
 
-    public function insertServiceProvider($id, serviceProviderEntity $service): ?serviceProviderEntity
+    public function insertServiceProvider($id, serviceProviderEntity $serviceProvider): ?serviceProviderEntity
     {
         global $db;
         try{
-            $db -> query = 
-            'INSERT INTO "service_provider" (id,"name","email",contact_number,adress,adress_number,work_time,website_url,remark,longitude,latitude,"location",oib) 
-            VALUES (:id,:"name",:"email",:contact_number,:adress,:adress_number,:work_time,:website_url,:remark,:longitude,:latitude,:"location",:oib)';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->bindValue(':name', $service->getName());
-            $statement->bindValue(':email', $service->getEmail());
-            $statement->bindValue(':contact_number', $service->getContactNumber());
-            $statement->bindValue(':adress', $service->getAdress());
-            $statement->bindValue(':adress_number', $service->getAdressNumber());
-            $statement->bindValue(':work_time', $service->getWorkTime());
-            $statement->bindValue(':website_url', $service->getWebsiteUrl());
-            $statement->bindValue(':remark', $service->getRemark());
-            $statement->bindValue(':longitude', $service->getLongitude());
-            $statement->bindValue(':latitude', $service->getLatitude());
-            $statement->bindValue(':location', $service->getLocation());
-            $statement->bindValue(':oib', $service->getOib());
-            $statement->execute();
-            $statement->closeCursor();
 
-            return $service;
+            $statement = $db -> prepare ('INSERT INTO service_provider (name,email,contact_number,adress,adress_number,work_time,website_url,remark,longitude,latitude,location,oib) 
+            VALUES (:name,:email,:contact_number,:adress,:adress_number,:work_time,:website_url,:remark,:longitude,:latitude,:location,:oib)');
+
+            $db->beginTransaction();
+
+            $statement -> execute ([':name'=>$serviceProvider->getName(), ':email'=>$serviceProvider->getEmail(), ':contact_number'=>$serviceProvider->getContactNumber(), ':adress'=>$serviceProvider->getAdress(),
+                ':adress_number'=>$serviceProvider->getAdressNumber(), ':work_time'=>$serviceProvider->getWorkTime(), ':website_url'=>$serviceProvider->getWebsiteUrl(), ':remark'=>$serviceProvider->getRemark(),
+                ':longitude'=>$serviceProvider->getLongitude(), ':latitude'=>$serviceProvider->getLatitude(), ':location'=>$serviceProvider->getLocation(), ':oib'=>$serviceProvider->getOib()]);
+
+            $db->commit();
+
+            $serviceProviderId = $db->lastInsertId();
+            $serviceProvider->setId($serviceProviderId);
+
+            return $serviceProvider;
         }catch(Exception $e){
+            $db->rollback();
             error_log('could not create service provider {}', $service->getId(), $e);
 			return null;
         }
     }
 
-    public function updateServiceProvider(serviceProviderEntity $service): ?serviceProviderEntity
+    public function updateServiceProvider(serviceProviderEntity $serviceProvider): ?serviceProviderEntity
     {
         global $db;
         try{
-            $db -> query =
-            'UPDATE "service_provider" SET
-            "name" = :"name",
-            "email" = :"email",
+
+            $statement = $db -> prepare ('UPDATE service_provider SET
+            name = :name,
+            email = :email,
             contact_number = :contactNumber,
             adress = :adress,
             adress_number = :adressNumber,
@@ -117,28 +111,21 @@ class ServiceProviderDao{
             remark = :remark,
             longitude = :longitude,
             latitude = :latitude,
-            "location" = :"location",
+            location = :location,
             oib = :oib
-            WHERE id = :id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $service->getId());
-            $statement->bindValue(':name', $service->getName());
-            $statement->bindValue(':email', $service->getEmail());
-            $statement->bindValue(':contact_number', $service->getContactNumber());
-            $statement->bindValue(':adress', $service->getAdress());
-            $statement->bindValue(':adress_number', $service->getAdressNumber());
-            $statement->bindValue(':work_time', $service->getWorkTime());
-            $statement->bindValue(':website_url', $service->getWebsiteUrl());
-            $statement->bindValue(':remark', $service->getRemark());
-            $statement->bindValue(':longitude', $service->getLongitude());
-            $statement->bindValue(':latitude', $service->getLatitude());
-            $statement->bindValue(':location', $service->getLocation());
-            $statement->bindValue(':oib', $service->getOib());
-            $statement->execute();
-            $statement->closeCursor();
+            WHERE id = :id');
 
-            return $service;
+            $db->beginTransaction();
+
+            $statement -> execute ([':id'=>$serviceProvider->getId(),':name'=>$serviceProvider->getName(), ':email'=>$serviceProvider->getEmail(), ':contact_number'=>$serviceProvider->getContactNumber(), ':adress'=>$serviceProvider->getAdress(),
+                ':adress_number'=>$serviceProvider->getAdressNumber(), ':work_time'=>$serviceProvider->getWorkTime(), ':website_url'=>$serviceProvider->getWebsiteUrl(), ':remark'=>$serviceProvider->getRemark(),
+                ':longitude'=>$serviceProvider->getLongitude(), ':latitude'=>$serviceProvider->getLatitude(), ':location'=>$serviceProvider->getLocation(), ':oib'=>$serviceProvider->getOib()]);
+
+            $db->commit();
+
+            return $serviceProvider;
         }catch(Exception $e){
+            $db->rollback();
             error_log('could not update service provider {}', $service->getId(), $e);
 			return null;
         }
@@ -148,20 +135,19 @@ class ServiceProviderDao{
     {
         global $db;
         try{
+
+            $statement = $db -> prepare ('DELETE FROM service_provider
+            WHERE id = :id ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM "service_provider"
-            WHERE id = :id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':id', $id);
-            $statement->closeCursor();
+            $statement -> execute ([':id'=>$id]);
 
             $db->commit();
             return true;
         }catch(Exception $e){
-            error_log('could not delete service provider {}', $id, $e);
             $db->rollback();
-			return false;
+            error_log('could not delete user {}', $id, $e);
+            return false;
         }
     }
 }

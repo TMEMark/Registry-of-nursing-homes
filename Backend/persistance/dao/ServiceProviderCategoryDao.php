@@ -52,10 +52,9 @@ class ServiceProviderCategoryDao{
         }
     }
 
-    public function insertServiceProviderCategory($id, ServiceProviderCategoryEntity $serviceProviderCategory): ?ServiceProviderCategoryEntity
+    public function insertServiceProviderCategory($serviceProviderId, ServiceProviderCategoryEntity $serviceProviderCategory): ?ServiceProviderCategoryEntity
     {
         global $db;
-        $idServiceCat =  abs( crc32( uniqid() ) );
         try{
 
             $statement = $db -> prepare ('INSERT INTO service_provider_category (id,service_provider_id,category_id) 
@@ -63,18 +62,17 @@ class ServiceProviderCategoryDao{
 
             $db -> beginTransaction();
 
-            $statement -> execute ([':id'=>$idServiceCat, ':service_provider'=>$id, ':category'=>$serviceProviderCategory->getCategory()]);
+            $statement -> execute ([':service_provider'=>$serviceProviderId, ':category'=>$serviceProviderCategory->getCategory()]);
 
             $db->commit();
 
-            $sql = 'SELECT * FROM service_provider_category WHERE id = :id';
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->serviceProviderCategoryMapper->toEntity($result);
+            $serviceProviderCategoryId = $db->lastInsertId();
+            $serviceProviderCategory->setId($serviceProviderCategoryId);
+
+            return $serviceProviderCategory;
 
         }catch(Exception $e){
+            $db->rollback();
             error_log('could not create serviceProviderCategory {}', $serviceProviderCategory->getId(), $e);
 			return null;
         }
@@ -84,17 +82,16 @@ class ServiceProviderCategoryDao{
     {
         global $db;
         try{
-            $db -> query =
-            'UPDATE "service_provider_category" SET
-            "service_provider_id" = :"service_provider_id",
-            "category_id" = :"category",
-            WHERE service_provider_id = :service_provider_id';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':service_provider_id', $serviceProviderId);
-            $statement->bindValue(':"service_provider"', $serviceProviderCategory->getServiceProvider());
-            $statement->bindValue(':"category"', $serviceProviderCategory->getCategory());
-            $statement->execute();
-            $statement->closeCursor();
+            $statement = $db -> prepare('UPDATE service_provider_category SET
+            "service_provider_id" = :service_provider_id,
+            "category_id" = :category,
+            WHERE service_provider_id = :service_provider_id');
+
+            $db -> beginTransaction();
+
+            $statement -> execute ([':service_provider'=>$serviceProviderId, ':category'=>$serviceProviderCategory->getCategory()]);
+
+            $db->commit();
 
             return $serviceProviderCategory;
         }catch(Exception $e){
@@ -107,20 +104,18 @@ class ServiceProviderCategoryDao{
     {
         global $db;
         try{
+            $statement = $db -> prepare ('DELETE FROM service_provider_category
+            WHERE service_provider_id = :serviceProviderId ');
+
             $db->beginTransaction();
-            $db -> query = 
-            'DELETE FROM "service_provider_category"
-            WHERE service_provider_id = :service_provider_id ';
-            $statement = $db->prepare($db);
-            $statement->bindValue(':service_provider_id', $serviceProviderId);
-            $statement->closeCursor();
+            $statement -> execute ([':serviceProviderId'=>$serviceProviderId]);
 
             $db->commit();
             return true;
         }catch(Exception $e){
-            error_log('could not delete serviceProviderCategory {}', $serviceProviderId, $e);
             $db->rollback();
-			return false;
+            error_log('could not delete user {}', $serviceProviderId, $e);
+            return false;
         }
     }
 }
