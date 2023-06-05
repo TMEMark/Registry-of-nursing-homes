@@ -16,6 +16,10 @@ class ServiceProviderCategoryDao{
         $this->serviceProviderCategoryMapper = $serviceProviderCategoryMapper;
     }
 
+    /**
+     * @param int $id
+     * @return ServiceProviderCategoryEntity|null
+     */
     public function getServiceProviderCategoryById(int $id): ?ServiceProviderCategoryEntity
     {
         global $db;

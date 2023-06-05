@@ -51,7 +51,7 @@ class UserMapper
     public static function updateMapper($row): UserEntity
     {
         $user = new UserEntity();
-        $user->setFirstname($row['id']);
+        $user->setId($row['id']);
         $user->setFirstname($row['firstname']);
         $user->setLastname($row['lastname']);
         $user->setUsername($row['username']);

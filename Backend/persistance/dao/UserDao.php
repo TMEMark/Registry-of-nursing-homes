@@ -126,8 +126,8 @@ class UserDao{
             firstname = :firstname,
             lastname = :lastname,
             username = :username,
-            "password" = :"password",
-            "role" = :"role"
+            password = :password,
+            role = :role
             WHERE id = :id');
 
             $db->beginTransaction();

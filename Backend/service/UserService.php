@@ -126,7 +126,7 @@ class UserService{
         }
     }
 
-    public function updateUser(UserEntity $user): \dto\UserDto
+    public function updateUser(array $user): \dto\UserDto
     {
         syslog(LOG_INFO, 'updating user');
         $user = $this->userMapper->updateMapper($user);
@@ -138,13 +138,14 @@ class UserService{
             syslog(LOG_INFO, 'user not found');
             throw new Exception('no user found with id {}', $userId);
         }else{
-            $userDao = $this->userMapper->toDto($this->userDao->updateUser($user));
+            $userDao = $this->userDao->updateUser($user);
             if($userDao == null){
                 syslog(LOG_INFO, 'could not update user');
                 throw new Exception('could not update user');
             }else{
+                $userMap = $this->userMapper->toDto($userDao);
                 syslog(LOG_INFO, 'user updated successfully');
-                return $userDao;
+                return $userMap;
             }
         }
     }
