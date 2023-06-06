@@ -18,7 +18,7 @@ class CategoryReqHandler {
          */
         public function handleRequests() {
             if (isset($_GET['getById']) && $_SERVER['REQUEST_METHOD'] === 'GET'){
-                echo json_encode($this->categoryService->getCategoryById($_GET['getById']));
+                    echo json_encode($this->categoryService->getCategoryById($_GET['getById']));
             }
             if (isset($_GET['getByName']) && $_SERVER['REQUEST_METHOD'] === 'GET'){
                 echo json_encode($this->categoryService->getCategoryByName($_GET['getByName']));
