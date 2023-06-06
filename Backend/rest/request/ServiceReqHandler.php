@@ -2,47 +2,93 @@
 
 namespace rest\request;
 
+use Exception;
 use service\ServiceService;
 
 class ServiceReqHandler
 {
+
     private ServiceService $serviceService;
 
-    public function __construct(ServiceService $serviceService)
-    {
+    public function __construct($serviceService) {
         $this->serviceService = $serviceService;
     }
 
+    public function handleRequest($method, $id = null, $name = null) {
+        switch ($method) {
+            case 'GET':
+                if ($id !== null) {
+                    $this->getServiceById($id);
+                } else if($name !== null){
+                    $this->getServiceByName($name);
+                }else{
+                    $this->listServices();
+                }
+                break;
+            case 'POST':
+                $this->createService();
+                break;
+            case 'PUT':
+                $this->updateService();
+                break;
+            case 'DELETE':
+                $this->deleteService($id);
+                break;
+            default:
+                // Handle invalid method
+                break;
+        }
+    }
 
-    /**
-     * @throws Exception
-     */
-    public function handleRequests()
-    {
-        if (isset($_GET['getById']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
-            echo json_encode($this->serviceService->getServiceById($_GET['getById']));
-        }
-        if (isset($_GET['getByName']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
-            echo json_encode($this->serviceService->getServiceByName($_GET['getByName']));
-        }
-        if (isset($_GET['listAll']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    private function listServices() {
+        try {
             echo json_encode($this->serviceService->listServices());
+        }catch (Exception $e){
+            return http_response_code(404);
         }
-        if (isset($_GET['insert']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            $body = file_get_contents("php://input");
-            $event = json_decode($body, true);
-            $this->serviceService->insertService($event);
-        }
-        if (isset($_GET['update']) && $_SERVER['REQUEST_METHOD'] === 'PUT') {
-            $body = file_get_contents("php://input");
-            $event = json_decode($body, true);
-            $this->serviceService->updateService($event);
-        }
+    }
 
-        if (isset($_GET['delete']) && $_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            $this->serviceService->deleteService($_GET['delete']);
+    private function getServiceById(int $id) {
+        try {
+            echo json_encode($this->serviceService->getServiceById($id));
+        }catch (Exception $e){
+            return http_response_code(404);
+        }
+    }
+
+    private function getServiceByName(String $name) {
+        try {
+            echo json_encode($this->serviceService->getServiceByName($name));
+        }catch (Exception $e){
+            return http_response_code(404);
+        }
+    }
+
+    private function createService() {
+        $data = file_get_contents("php://input");
+        $data = json_decode($data, true);
+        try {
+            return $this->serviceService->insertService($data) && http_response_code(201);
+        }catch (Exception $e){
+            return http_response_code(417);
+        }
+    }
+
+    private function updateService() {
+        $data = file_get_contents("php://input");
+        $data = json_decode($data, true);
+        try {
+            return $this->serviceService->updateService($data) && http_response_code(202);
+        }catch (Exception $e){
+            return http_response_code(417);
+        }
+    }
+
+    private function deleteService(int $id) {
+        try {
+            return $this->serviceService->deleteService($id) && http_response_code(202);
+        }catch (Exception $e){
+            return http_response_code(417);
         }
     }
 }
-
-?>

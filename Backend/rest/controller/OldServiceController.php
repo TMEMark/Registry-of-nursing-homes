@@ -1,3 +1,4 @@
+
 <?php
 
 use dao\ServiceDao;
@@ -12,14 +13,9 @@ header('Content-type: application/json');
 
 require_once '../../persistance/dao/ServiceDao.php';
 require_once '../mapper/ServiceMapper.php';
-require_once '../request/ServiceReqHandler.php';
-require_once '../../db/DatabaseConnection.php';
 require_once '../../service/ServiceService.php';
+require_once '../../db/DatabaseConnection.php';
+require_once '../request/OldServiceReqHandler.php';
 
-$reqHandler = new ServiceReqHandler(new ServiceService(new ServiceDao(new ServiceMapper()), new ServiceMapper()));
-
-$method = $_SERVER['REQUEST_METHOD'];
-$id = $_GET['id'] ?? null;
-$name = $_GET['name'] ?? null;
-
-$reqHandler->handleRequest($method, $id, $name);
+$controller = new ServiceReqHandler(new ServiceService(new ServiceDao(new ServiceMapper()), new ServiceMapper()));
+$controller->handleRequests();

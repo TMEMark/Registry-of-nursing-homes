@@ -1,6 +1,8 @@
 <?php
 
-use request\CategoryReqHandler;
+namespace Category;
+
+use rest\request\OldCategoryReqHandler;
 use dao\CategoryDao;
 use mapper\CategoryMapper;
 use service\CategoryService;
@@ -16,10 +18,5 @@ require_once '../../service/CategoryService.php';
 require_once '../../persistance/dao/CategoryDao.php';
 require_once '../mapper/CategoryMapper.php';
 
-$reqHandler = new CategoryReqHandler(new CategoryService(new CategoryDao(new CategoryMapper()), new CategoryMapper));
-
-$method = $_SERVER['REQUEST_METHOD'];
-$id = $_GET['id'] ?? null;
-$name = $_GET['name'] ?? null;
-
-$reqHandler->handleRequest($method, $id, $name);
+$controller = new OldCategoryReqHandler(new CategoryService(new CategoryDao(new CategoryMapper()), new CategoryMapper));
+$controller->handleRequests();
