@@ -69,6 +69,7 @@ class LocationReqHandler
         try {
             return $this->locationService->insertLocation($data) && http_response_code(201);
         }catch (Exception $e){
+            echo $e;
             return http_response_code(417);
         }
     }

@@ -93,7 +93,7 @@ class LocationDao{
         global $db;
         try{
             $statement = $db -> prepare(
-                'INSERT INTO location (id,name) 
+                'INSERT INTO location (name) 
             VALUES (:name)');
 
             $db -> beginTransaction();
