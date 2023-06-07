@@ -3,6 +3,7 @@
 namespace request;
 
 use Exception;
+use service\LocationService;
 
 class LocationReqHandler
 {
