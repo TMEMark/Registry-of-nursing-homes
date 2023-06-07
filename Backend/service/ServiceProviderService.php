@@ -2,12 +2,13 @@
 
 namespace service;
 
-include_once(__DIR__.'../../persistance/dao/ServiceProviderDao.php');
-include_once(__DIR__.'../../persistance/dao/ServiceProviderCategoryDao.php');
-include_once(__DIR__.'../../persistance/dao/ServiceProviderServiceDao.php');
-include_once(__DIR__.'../../persistance/entity/ServiceProviderEntity.php');
-include_once(__DIR__.'../../persistance/entity/ServiceProviderEntity.php');
-include_once(__DIR__.'../../persistance/entity/ServiceProviderCategoryEntity.php');
+use dao\CategoryDao;
+use dao\ServiceDao;
+use dao\ServiceProviderCategoryDao;
+use dao\ServiceProviderDao;
+use dao\ServiceProviderServiceDao;
+use mapper\ServiceProviderMapper;
+
 class ServiceProviderService{
 
     private ServiceProviderDao $serviceProviderDao;
@@ -16,28 +17,28 @@ class ServiceProviderService{
 
     private ServiceProviderServiceDao $serviceProviderServiceDao;
 
+    private CategoryDao $categoryDao;
 
-    public function __construct(ServiceProviderDao $serviceProviderDao, ServiceProviderCategoryDao $serviceProviderCategoryDao, ServiceProviderServiceDao $serviceProviderServiceDao) {
+    private ServiceDao $serviceDao;
+
+    private ServiceProviderMapper $serviceProviderMapper;
+
+    public function __construct(ServiceProviderDao $serviceProviderDao, ServiceProviderCategoryDao $serviceProviderCategoryDao,
+                                ServiceProviderServiceDao $serviceProviderServiceDao, CategoryDao $categoryDao, ServiceDao $serviceDao, ServiceProviderMapper $serviceProviderMapper) {
         $this->serviceProviderDao = $serviceProviderDao;
         $this->serviceProviderCategoryDao = $serviceProviderCategoryDao;
         $this->serviceProviderServiceDao = $serviceProviderServiceDao;
+        $this->categoryDao = $categoryDao;
+        $this->serviceDao=$serviceDao;
+        $this->serviceProviderMapper=$serviceProviderMapper;
     }
 
     public function listServiceProviderWithCategoryAndService(){
-        $serviceProvider = $this->serviceProviderDao->listServiceProviders();
-        $serviceProviderCategory = $this->serviceProviderCategoryDao->listServiceProviderCategories();
-        $serviceProviderService = $this->serviceProviderServiceDao->listServiceProviderServices();
-
-        $array = [];
-
-        echo array_push($array, $serviceProvider, $serviceProviderCategory, $serviceProviderService);
-
-        if(empty($array)){
-            syslog(LOG_INFO, 'could not list service provider');
-            return null;
-        }else{
-            syslog(LOG_INFO, 'service list found');
-            return $array;
+        $serviceProviderDao = $this->serviceProviderDao->listServiceProviders();
+        $serviceProviderDtoList = [];
+        foreach ($serviceProviderDao as $service) {
+            $serviceProviderDTO = $this->serviceProviderMapper->toDto($service);
+            $serviceProviderDtoList = $serviceProviderDTO;
         }
     }
 
