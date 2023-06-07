@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: *");
 header('Content-type: application/json');
 
 require_once '../../db/DatabaseConnection.php';
-require_once '../request/OldCategoryReqHandler.php';
+require_once '../request/CategoryReqHandler.php';
 require_once '../../service/CategoryService.php';
 require_once '../../persistance/dao/CategoryDao.php';
 require_once '../mapper/CategoryMapper.php';

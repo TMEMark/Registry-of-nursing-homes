@@ -43,6 +43,7 @@ class LocationReqHandler
         try {
             echo json_encode($this->locationService->listLocations());
         }catch (Exception $e){
+            echo $e;
             return http_response_code(404);
         }
     }
@@ -51,6 +52,7 @@ class LocationReqHandler
         try {
             echo json_encode($this->locationService->getLocationById($id));
         }catch (Exception $e){
+            echo $e;
             return http_response_code(404);
         }
     }
@@ -59,6 +61,7 @@ class LocationReqHandler
         try {
             echo json_encode($this->locationService->getLocationByName($name));
         }catch (Exception $e){
+            echo $e;
             return http_response_code(404);
         }
     }
@@ -80,6 +83,7 @@ class LocationReqHandler
         try {
             return $this->locationService->updateLocation($data) && http_response_code(202);
         }catch (Exception $e){
+            echo $e;
             return http_response_code(417);
         }
     }
@@ -88,6 +92,7 @@ class LocationReqHandler
         try {
             return $this->locationService->deleteLocation($id) && http_response_code(202);
         }catch (Exception $e){
+            echo $e;
             return http_response_code(417);
         }
     }

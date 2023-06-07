@@ -50,15 +50,15 @@ class LocationService{
     {
        syslog(LOG_INFO, 'getting locations');
        $locationDaoList = $this->locationDao->listLocations();
+        if(empty($locationDaoList)) {
+            syslog(LOG_INFO, 'could not list locations');
+            throw new Exception('could not list locations');
+        }else{
        $locationDTOList = [];
         foreach ($locationDaoList as $location) {
             $locationDTO = $this->locationMapper->toDto($location);
             $locationDTOList[] = $locationDTO;
         }
-       if(empty($locationDTOList)){
-        syslog(LOG_INFO, 'could not list locations');
-        throw new Exception('could not list locations');
-       }else{
         syslog(LOG_INFO, 'locations found');
         return $locationDTOList;
        }
