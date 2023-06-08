@@ -2,7 +2,8 @@
 
 namespace mapper;
 
-
+use dto\LocationDto;
+use dto\ServiceProviderDto;
 use entity\ServiceProviderEntity;
 
 class ServiceProviderMapper
@@ -28,6 +29,34 @@ class ServiceProviderMapper
 
         return $serviceProvider;
     }
+
+    public function toDto(ServiceProviderEntity $serviceProviderEntity)
+    {
+        $serviceProviderDto = new ServiceProviderDto();
+        $serviceProviderDto->setId($serviceProviderEntity->getId());
+        $serviceProviderDto->setName($serviceProviderEntity->getName());
+        $serviceProviderDto->setEmail($serviceProviderEntity->getEmail());
+        $serviceProviderDto->setContactNumber($serviceProviderEntity->getContactNumber());
+        $serviceProviderDto->setAdress($serviceProviderEntity->getAdress());
+        $serviceProviderDto->setAdressNumber($serviceProviderEntity->getAdressNumber());
+        $serviceProviderDto->setWorkTime($serviceProviderEntity->getWorkTime());
+        $serviceProviderDto->setWebsiteUrl($serviceProviderEntity->getWebsiteUrl());
+        $serviceProviderDto->setRemark($serviceProviderEntity->getRemark());
+        $serviceProviderDto->setLongitude($serviceProviderEntity->getLongitude());
+        $serviceProviderDto->setLatitude($serviceProviderEntity->getLatitude());
+        $serviceProviderDto->setOib($serviceProviderEntity->getOib());
+
+
+        $locationEntity = $serviceProviderEntity->getLocation();
+        $locationDto = new LocationDto();
+        $locationDto->setId($locationEntity->getId());
+
+
+        $serviceProviderDto->setLocation($locationDto);
+
+        return $serviceProviderDto;
+    }
 }
+
 
 ?>
