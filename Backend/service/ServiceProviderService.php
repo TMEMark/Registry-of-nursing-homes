@@ -40,9 +40,10 @@ class ServiceProviderService{
             $serviceProviderDTO = $this->serviceProviderMapper->toDto($service);
             $serviceProviderDtoList = $serviceProviderDTO;
         }
+        return $serviceProviderDtoList;
     }
 
-    public function getServiceProviderWithCategoryAndServiceById(){
+    public function getServiceProviderWithCategoryAndServiceById($id){
         $serviceProvider = $this->serviceProviderDao->getServiceProviderById();
         $serviceProviderCategory = $this->serviceProviderCategoryDao->getServiceProviderCategoryById();
         $serviceProviderService = $this->serviceProviderServiceDao->getServiceProviderServiceById();

@@ -8,7 +8,7 @@ use entity\ServiceProviderEntity;
 
 class ServiceProviderMapper
 {
-    public function toEntity($row)
+    public function toEntity($row): ServiceProviderEntity
     {
         $serviceProvider = new ServiceProviderEntity();
         $serviceProvider->setId($row['id']);
@@ -30,7 +30,7 @@ class ServiceProviderMapper
         return $serviceProvider;
     }
 
-    public function toDto(ServiceProviderEntity $serviceProviderEntity)
+    public function toDto(ServiceProviderEntity $serviceProviderEntity): ServiceProviderDto
     {
         $serviceProviderDto = new ServiceProviderDto();
         $serviceProviderDto->setId($serviceProviderEntity->getId());
@@ -50,7 +50,6 @@ class ServiceProviderMapper
         $locationEntity = $serviceProviderEntity->getLocation();
         $locationDto = new LocationDto();
         $locationDto->setId($locationEntity->getId());
-
 
         $serviceProviderDto->setLocation($locationDto);
 

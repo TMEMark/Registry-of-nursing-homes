@@ -206,17 +206,17 @@ class ServiceProviderDto extends AbstractDto
     }
 
     /**
-     * @return LocationEntity
+     * @return LocationDto
      */
-    public function getLocation(): LocationEntity {
+    public function getLocation(): LocationDto {
         return $this->location;
     }
 
     /**
-     * @param LocationEntity $location
+     * @param LocationDto $location
      * @return self
      */
-    public function setLocation(LocationEntity $location): self {
+    public function setLocation(LocationDto $location): self {
         $this->location = $location;
         return $this;
     }
