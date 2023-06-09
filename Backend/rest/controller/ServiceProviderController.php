@@ -1,11 +1,13 @@
 <?php
 
 use dao\CategoryDao;
+use dao\LocationDao;
 use dao\ServiceDao;
 use dao\ServiceProviderCategoryDao;
 use dao\ServiceProviderDao;
 use dao\ServiceProviderServiceDao;
 use mapper\CategoryMapper;
+use mapper\LocationMapper;
 use mapper\ServiceMapper;
 use mapper\ServiceProviderCategoryMapper;
 use mapper\ServiceProviderMapper;
@@ -20,6 +22,7 @@ header('Content-type: application/json');
 
 require_once '../../persistance/dao/ServiceDao.php';
 require_once '../../persistance/dao/CategoryDao.php';
+require_once '../../persistance/dao/LocationDao.php';
 require_once '../../persistance/dao/ServiceProviderDao.php';
 require_once '../../persistance/dao/ServiceProviderCategoryDao.php';
 require_once '../../persistance/dao/ServiceProviderServiceDao.php';
@@ -34,7 +37,7 @@ require_once '../../service/ServiceProviderService.php';
 
 $reqHandler = new ServiceProviderReqHandler(new ServiceProviderService(new ServiceProviderDao(new ServiceProviderMapper()),
     new ServiceProviderCategoryDao(new ServiceProviderCategoryMapper()), new ServiceProviderServiceDao(new ServiceProviderServiceMapper()),
-    new CategoryDao(new CategoryMapper()), new ServiceDao(new ServiceMapper()), new ServiceProviderMapper()));
+    new CategoryDao(new CategoryMapper()), new ServiceDao(new ServiceMapper()), new ServiceProviderMapper(), new LocationDao(new LocationMapper()), new LocationMapper()));
 
 $method = $_SERVER['REQUEST_METHOD'];
 $id = $_GET['id'] ?? null;

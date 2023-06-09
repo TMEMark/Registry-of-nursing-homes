@@ -25,7 +25,7 @@ class ServiceProviderDto extends AbstractDto
 
     private String $latitude;
 
-    private LocationDto $location;
+    public int $location;
 
     private int $oib;
 
@@ -206,20 +206,21 @@ class ServiceProviderDto extends AbstractDto
     }
 
     /**
-     * @return LocationDto
+     * @return int
      */
-    public function getLocation(): LocationDto {
+    public function getLocation(): int
+    {
         return $this->location;
     }
 
     /**
-     * @param LocationDto $location
-     * @return self
+     * @param int $location
      */
-    public function setLocation(LocationDto $location): self {
+    public function setLocation(int $location): void
+    {
         $this->location = $location;
-        return $this;
     }
+
 
     public function jsonSerialize(): object
     {

@@ -63,7 +63,7 @@ class ServiceProviderDao{
             }
             return [];
         }catch(Exception $e){
-            error_log('could not find service providers');
+            error_log('could not find service');
             return null;
         }
     }

@@ -2,9 +2,12 @@
 
 namespace mapper;
 
-use dto\LocationDto;
 use dto\ServiceProviderDto;
 use entity\ServiceProviderEntity;
+
+require_once '../../persistance/entity/ServiceProviderEntity.php';
+require_once '../dto/ServiceProviderDto.php';
+
 
 class ServiceProviderMapper
 {
@@ -44,14 +47,8 @@ class ServiceProviderMapper
         $serviceProviderDto->setRemark($serviceProviderEntity->getRemark());
         $serviceProviderDto->setLongitude($serviceProviderEntity->getLongitude());
         $serviceProviderDto->setLatitude($serviceProviderEntity->getLatitude());
+        $serviceProviderDto->setLocation($serviceProviderEntity->getLocation());
         $serviceProviderDto->setOib($serviceProviderEntity->getOib());
-
-
-        $locationEntity = $serviceProviderEntity->getLocation();
-        $locationDto = new LocationDto();
-        $locationDto->setId($locationEntity->getId());
-
-        $serviceProviderDto->setLocation($locationDto);
 
         return $serviceProviderDto;
     }
