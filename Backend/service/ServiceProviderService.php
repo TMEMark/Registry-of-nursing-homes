@@ -149,12 +149,20 @@ class ServiceProviderService{
             $serviceProvider->locationName = $locationById[$serviceProvider->location] ?? 'Unknown';
         }
 
-        $serviceProviderById = [];
-        foreach($serviceProviderDtoList as $serviceProvider){
-
+        //new array containing data from service_provider, location, service_provider_category and service array
+        foreach($serviceProviderDtoList as $serviceProviderDtoListItem){
+            foreach ($serviceProviderCategoryDTOList as $serviceProviderCategoryDtoListItem){
+                if($serviceProviderDtoListItem["id"] == $serviceProviderCategoryDtoListItem["service_provider_id"]){
+                    foreach ($categoryDTOList as $categoryDTOListItem){
+                        if($categoryDTOListItem["id"] == $serviceProviderCategoryDtoListItem["category_id"]){
+                            $result_array[] = array_merge($serviceProviderDtoListItem, $serviceProviderCategoryDtoListItem, $categoryDTOListItem);
+                        }
+                    }
+                }
+            }
         }
 
-        return $serviceProviderDtoList;
+        return $result_array;
     }
 
     public function getServiceProviderWithCategoryAndServiceById($id){
