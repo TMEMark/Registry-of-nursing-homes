@@ -2,12 +2,12 @@
 
 namespace service;
 
-use dao\CategoryDao;
-use dao\LocationDao;
-use dao\ServiceDao;
-use dao\ServiceProviderCategoryDao;
-use dao\ServiceProviderDao;
-use dao\ServiceProviderServiceDao;
+use dao\CategoryRepository;
+use dao\LocationRepository;
+use dao\ServiceRepository;
+use dao\ServiceProviderCategoryRepository;
+use dao\ServiceProviderRepository;
+use dao\ServiceProviderServiceRepository;
 use Exception;
 use mapper\CategoryMapper;
 use mapper\LocationMapper;
@@ -18,17 +18,17 @@ use mapper\ServiceProviderServiceMapper;
 
 class ServiceProviderService{
 
-    private ServiceProviderDao $serviceProviderDao;
+    private ServiceProviderRepository $serviceProviderDao;
 
-    private ServiceProviderCategoryDao $serviceProviderCategoryDao;
+    private ServiceProviderCategoryRepository $serviceProviderCategoryDao;
 
-    private ServiceProviderServiceDao $serviceProviderServiceDao;
+    private ServiceProviderServiceRepository $serviceProviderServiceDao;
 
-    private CategoryDao $categoryDao;
+    private CategoryRepository $categoryDao;
 
-    private ServiceDao $serviceDao;
+    private ServiceRepository $serviceDao;
 
-    private LocationDao $locationDao;
+    private LocationRepository $locationDao;
 
     private LocationMapper $locationMapper;
 
@@ -42,11 +42,11 @@ class ServiceProviderService{
 
 
 
-    public function __construct(ServiceProviderDao $serviceProviderDao, ServiceProviderCategoryDao $serviceProviderCategoryDao,
-                                ServiceProviderServiceDao $serviceProviderServiceDao, CategoryDao $categoryDao, ServiceDao $serviceDao,
-                                ServiceProviderMapper $serviceProviderMapper, LocationDao $locationDao, LocationMapper $locationMapper,
-                                CategoryMapper $categoryMapper, ServiceMapper $serviceMapper, ServiceProviderCategoryMapper $serviceProviderCategoryMapper,
-                                ServiceProviderServiceMapper $serviceProviderServiceMapper) {
+    public function __construct(ServiceProviderRepository        $serviceProviderDao, ServiceProviderCategoryRepository $serviceProviderCategoryDao,
+                                ServiceProviderServiceRepository $serviceProviderServiceDao, CategoryRepository $categoryDao, ServiceRepository $serviceDao,
+                                ServiceProviderMapper            $serviceProviderMapper, LocationRepository $locationDao, LocationMapper $locationMapper,
+                                CategoryMapper                   $categoryMapper, ServiceMapper $serviceMapper, ServiceProviderCategoryMapper $serviceProviderCategoryMapper,
+                                ServiceProviderServiceMapper     $serviceProviderServiceMapper) {
         $this->serviceProviderDao = $serviceProviderDao;
         $this->serviceProviderCategoryDao = $serviceProviderCategoryDao;
         $this->serviceProviderServiceDao = $serviceProviderServiceDao;

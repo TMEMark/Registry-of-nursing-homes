@@ -1,11 +1,11 @@
 <?php
 
-use dao\CategoryDao;
-use dao\LocationDao;
-use dao\ServiceDao;
-use dao\ServiceProviderCategoryDao;
-use dao\ServiceProviderDao;
-use dao\ServiceProviderServiceDao;
+use dao\CategoryRepository;
+use dao\LocationRepository;
+use dao\ServiceRepository;
+use dao\ServiceProviderCategoryRepository;
+use dao\ServiceProviderRepository;
+use dao\ServiceProviderServiceRepository;
 use mapper\CategoryMapper;
 use mapper\LocationMapper;
 use mapper\ServiceMapper;
@@ -20,12 +20,12 @@ header("Access-Control-Allow-Methods: *");
 header("Access-Control-Allow-Headers: *");
 header('Content-type: application/json');
 
-require_once '../../persistance/dao/ServiceDao.php';
-require_once '../../persistance/dao/CategoryDao.php';
-require_once '../../persistance/dao/LocationDao.php';
-require_once '../../persistance/dao/ServiceProviderDao.php';
-require_once '../../persistance/dao/ServiceProviderCategoryDao.php';
-require_once '../../persistance/dao/ServiceProviderServiceDao.php';
+require_once '../../persistance/repository/ServiceRepository.php';
+require_once '../../persistance/repository/CategoryRepository.php';
+require_once '../../persistance/repository/LocationRepository.php';
+require_once '../../persistance/repository/ServiceProviderRepository.php';
+require_once '../../persistance/repository/ServiceProviderCategoryRepository.php';
+require_once '../../persistance/repository/ServiceProviderServiceRepository.php';
 require_once '../mapper/ServiceMapper.php';
 require_once '../mapper/CategoryMapper.php';
 require_once '../mapper/ServiceProviderMapper.php';
@@ -35,9 +35,9 @@ require_once '../request/ServiceProviderReqHandler.php';
 require_once '../../db/DatabaseConnection.php';
 require_once '../../service/ServiceProviderService.php';
 
-$reqHandler = new ServiceProviderReqHandler(new ServiceProviderService(new ServiceProviderDao(new ServiceProviderMapper()),
-    new ServiceProviderCategoryDao(new ServiceProviderCategoryMapper()), new ServiceProviderServiceDao(new ServiceProviderServiceMapper()),
-    new CategoryDao(new CategoryMapper()), new ServiceDao(new ServiceMapper()), new ServiceProviderMapper(), new LocationDao(new LocationMapper()), new LocationMapper()));
+$reqHandler = new ServiceProviderReqHandler(new ServiceProviderService(new ServiceProviderRepository(new ServiceProviderMapper()),
+    new ServiceProviderCategoryRepository(new ServiceProviderCategoryMapper()), new ServiceProviderServiceRepository(new ServiceProviderServiceMapper()),
+    new CategoryRepository(new CategoryMapper()), new ServiceRepository(new ServiceMapper()), new ServiceProviderMapper(), new LocationRepository(new LocationMapper()), new LocationMapper()));
 
 $method = $_SERVER['REQUEST_METHOD'];
 $id = $_GET['id'] ?? null;

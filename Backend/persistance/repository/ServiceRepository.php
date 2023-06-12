@@ -8,7 +8,7 @@ use mapper\ServiceMapper;
 use PDO;
 
 require_once '../../rest/mapper/ServiceMapper.php';
-class ServiceDao{
+class ServiceRepository{
     private ServiceMapper $serviceMapper;
 
     public function __construct(ServiceMapper $serviceMapper) {

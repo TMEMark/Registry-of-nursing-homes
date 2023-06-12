@@ -8,7 +8,7 @@ use mapper\UserMapper;
 use PDO;
 
 require_once '../../rest/mapper/UserMapper.php';
-class UserDao{
+class UserRepository{
 
     private UserMapper $userMapper;
 

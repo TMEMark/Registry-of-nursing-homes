@@ -8,7 +8,7 @@ use mapper\RoleMapper;
 use PDO;
 
 require_once '../../rest/mapper/RoleMapper.php';
-class RoleDao{
+class RoleRepository{
 
     private RoleMapper $roleMapper;
 

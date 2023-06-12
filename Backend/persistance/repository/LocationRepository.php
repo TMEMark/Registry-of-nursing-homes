@@ -8,7 +8,7 @@ use mapper\LocationMapper;
 use PDO;
 
 require_once '../../rest/mapper/LocationMapper.php';
-class LocationDao{
+class LocationRepository{
 
     private LocationMapper $locationMapper;
 

@@ -8,7 +8,7 @@ use mapper\CategoryMapper;
 use PDO;
 
 require_once '../../rest/mapper/CategoryMapper.php';
-class CategoryDao{
+class CategoryRepository{
 
     private CategoryMapper $categoryMapper;
 

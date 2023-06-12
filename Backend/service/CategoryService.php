@@ -2,15 +2,15 @@
 
 namespace service;
 
-use dao\CategoryDao;
+use dao\CategoryRepository;
 use Exception;
 use mapper\CategoryMapper;
 
 class CategoryService{
-    private CategoryDao $categoryDao;
+    private CategoryRepository $categoryDao;
     private CategoryMapper $categoryMapper;
 
-    public function __construct(CategoryDao $categoryDao, CategoryMapper $categoryMapper) {
+    public function __construct(CategoryRepository $categoryDao, CategoryMapper $categoryMapper) {
         $this->categoryDao = $categoryDao;
         $this->categoryMapper = $categoryMapper;
     }

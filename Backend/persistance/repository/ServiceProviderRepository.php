@@ -9,7 +9,7 @@ use PDO;
 
 require_once '../../rest/mapper/ServiceProviderMapper.php';
 
-class ServiceProviderDao{
+class ServiceProviderRepository{
     private ServiceProviderMapper $serviceProviderMapper;
 
     public function __construct(ServiceProviderMapper $serviceProviderMapper) {
@@ -51,7 +51,14 @@ class ServiceProviderDao{
     public function listServiceProviders(): ?array
     {
         global $db;
-        $sql = 'SELECT * FROM service_provider';
+        $sql = 'SELECT DISTINCT sp.name, sp.email, l.name, sp.address, sp.contact_number, sp.website_url, sp.work_time, sp.remark, sp.longitude, sp.latitude, GROUP_CONCAT(s.name) as "services", GROUP_CONCAT(c.name) as "categories", c.id, sp.id, s.id
+                FROM service s
+                INNER JOIN service_provider_service sps ON sps.service_id = s.id
+                INNER JOIN service_provider sp ON sp.id = sps.service_id
+                INNER JOIN location l ON l.id = sp.location
+                INNER JOIN service_provider_category spc ON spc.service_provider_id = sp.id
+                INNER JOIN category c ON c.id = spc.category_id
+                GROUP BY sp.name';
         try{
             $statement = $db->prepare($sql);
             if ($statement->execute()) {

@@ -2,22 +2,22 @@
 
 namespace service;
 
-use dao\RoleDao;
-use dao\UserDao;
+use dao\RoleRepository;
+use dao\UserRepository;
 use entity\UserEntity;
 use Exception;
 use mapper\RoleMapper;
 use mapper\UserMapper;
 
 class UserService{
-    private UserDao $userDao;
+    private UserRepository $userDao;
 
-    private RoleDao $roleDao;
+    private RoleRepository $roleDao;
     private UserMapper $userMapper;
 
     private RoleMapper $roleMapper;
 
-    public function __construct(UserDao $userDao, RoleDao $roleDao, UserMapper $userMapper, RoleMapper $roleMapper) {
+    public function __construct(UserRepository $userDao, RoleRepository $roleDao, UserMapper $userMapper, RoleMapper $roleMapper) {
         $this->userDao = $userDao;
 
         $this->roleDao = $roleDao;

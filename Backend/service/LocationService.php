@@ -2,17 +2,17 @@
 
 namespace service;
 
-use dao\LocationDao;
+use dao\LocationRepository;
 use dto\LocationDto;
 use Exception;
 use mapper\LocationMapper;
 
 class LocationService{
-    private LocationDao $locationDao;
+    private LocationRepository $locationDao;
 
     private LocationMapper $locationMapper;
 
-    public function __construct(LocationDao $locationDao, LocationMapper $locationMapper) {
+    public function __construct(LocationRepository $locationDao, LocationMapper $locationMapper) {
         $this->locationDao = $locationDao;
         $this->locationMapper = $locationMapper;
     }

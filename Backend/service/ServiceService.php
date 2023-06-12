@@ -2,17 +2,17 @@
 
 namespace service;
 
-use dao\ServiceDao;
+use dao\ServiceRepository;
 use Exception;
 use mapper\ServiceMapper;
 
 class ServiceService{
-    private ServiceDao $serviceDao;
+    private ServiceRepository $serviceDao;
 
     private ServiceMapper $serviceMapper;
 
 
-    public function __construct(ServiceDao $serviceDao, ServiceMapper $serviceMapper) {
+    public function __construct(ServiceRepository $serviceDao, ServiceMapper $serviceMapper) {
         $this->serviceDao = $serviceDao;
         $this->serviceMapper= $serviceMapper;
     }

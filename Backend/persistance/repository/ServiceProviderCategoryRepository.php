@@ -8,7 +8,7 @@ use mapper\ServiceProviderCategoryMapper;
 use PDO;
 
 require_once '../../rest/mapper/ServiceProviderCategoryMapper.php';
-class ServiceProviderCategoryDao{
+class ServiceProviderCategoryRepository{
 
     private ServiceProviderCategoryMapper $serviceProviderCategoryMapper;
 

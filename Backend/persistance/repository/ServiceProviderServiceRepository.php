@@ -9,7 +9,7 @@ use PDO;
 
 require_once '../../rest/mapper/ServiceProviderServiceMapper.php';
 
-class ServiceProviderServiceDao{
+class ServiceProviderServiceRepository{
 
     private ServiceProviderServiceMapper $serviceProviderServiceMapper;
 
