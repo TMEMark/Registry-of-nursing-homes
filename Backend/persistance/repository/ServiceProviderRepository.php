@@ -16,33 +16,25 @@ class ServiceProviderRepository{
         $this->serviceProviderMapper = $serviceProviderMapper;
     }
 
-    public function getServiceProviderById(int $id): ?ServiceProviderEntity
+    public function getServiceProviderById(int $id): ?array
     {
         global $db;
-        try{
-            $sql = 'SELECT * FROM service_provider WHERE id = :id';
+        try {
+            $sql = 'SELECT DISTINCT sp.name, sp.email, l.name as "location", sp.address, sp.contact_number, sp.website_url, sp.work_time, sp.remark, sp.longitude, sp.latitude, GROUP_CONCAT(s.name) as "services", GROUP_CONCAT(c.name) as "categories", c.id, sp.id, s.id
+            FROM service s
+            INNER JOIN service_provider_service sps ON sps.service_id = s.id
+            INNER JOIN service_provider sp ON sp.id = sps.service_id
+            INNER JOIN location l ON l.id = sp.location
+            INNER JOIN service_provider_category spc ON spc.service_provider_id = sp.id
+            INNER JOIN category c ON c.id = spc.category_id
+            WHERE sp.id = :id
+            GROUP BY sp.name ';
             $statement = $db->prepare($sql);
             $statement->bindValue(':id', $id);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->serviceProviderMapper->toEntity($result);
-        }catch(Exception $e){
-            error_log('could not find service provider');
-            return null;
-        }
-    }
-
-    public function getServiceProviderByName(String $name): ?ServiceProviderEntity
-    {
-        global $db;
-        $sql = 'SELECT * FROM service_provider WHERE name = :name';
-        try{
-            $statement = $db->prepare($sql);
-            $statement->bindValue(':name', $name);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->serviceProviderMapper->toEntity($result);
-        }catch(Exception $e){
+            return $result;
+        } catch (Exception $e) {
             error_log('could not find service provider');
             return null;
         }
@@ -51,7 +43,7 @@ class ServiceProviderRepository{
     public function listServiceProviders(): ?array
     {
         global $db;
-        $sql = 'SELECT DISTINCT sp.name, sp.email, l.name, sp.address, sp.contact_number, sp.website_url, sp.work_time, sp.remark, sp.longitude, sp.latitude, GROUP_CONCAT(s.name) as "services", GROUP_CONCAT(c.name) as "categories", c.id, sp.id, s.id
+        $sql = 'SELECT DISTINCT sp.name, sp.email, l.name as "location", sp.address, sp.contact_number, sp.website_url, sp.work_time, sp.remark, sp.longitude, sp.latitude, GROUP_CONCAT(s.name) as "services", GROUP_CONCAT(c.name) as "categories", c.id, sp.id, s.id
                 FROM service s
                 INNER JOIN service_provider_service sps ON sps.service_id = s.id
                 INNER JOIN service_provider sp ON sp.id = sps.service_id
@@ -62,11 +54,7 @@ class ServiceProviderRepository{
         try{
             $statement = $db->prepare($sql);
             if ($statement->execute()) {
-                $result = [];
-                while ($row = $statement->fetch()) {
-                    $result[] = $this->serviceProviderMapper->toEntity($row);
-                }
-                return $result;
+                return $statement->fetchAll(PDO::FETCH_ASSOC);
             }
             return [];
         }catch(Exception $e){

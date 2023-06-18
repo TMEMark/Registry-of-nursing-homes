@@ -37,6 +37,7 @@ class ServiceProviderReqHandler
         try {
            echo json_encode($this->serviceProviderService->listServiceProviderWithCategoryAndService());
         }catch (Exception $e){
+            echo $e;
             return http_response_code(404);
         }
     }

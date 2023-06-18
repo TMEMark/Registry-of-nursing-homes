@@ -24,45 +24,17 @@ class ServiceProviderService{
 
     private ServiceProviderServiceRepository $serviceProviderServiceDao;
 
-    private CategoryRepository $categoryDao;
-
-    private ServiceRepository $serviceDao;
-
-    private LocationRepository $locationDao;
-
-    private LocationMapper $locationMapper;
-
-    private CategoryMapper $categoryMapper;
-
-    private ServiceMapper $serviceMapper;
-
-    private ServiceProviderCategoryMapper $serviceProviderCategoryMapper;
-
-    private ServiceProviderServiceMapper $serviceProviderServiceMapper;
 
 
 
     public function __construct(ServiceProviderRepository        $serviceProviderDao, ServiceProviderCategoryRepository $serviceProviderCategoryDao,
-                                ServiceProviderServiceRepository $serviceProviderServiceDao, CategoryRepository $categoryDao, ServiceRepository $serviceDao,
-                                ServiceProviderMapper            $serviceProviderMapper, LocationRepository $locationDao, LocationMapper $locationMapper,
-                                CategoryMapper                   $categoryMapper, ServiceMapper $serviceMapper, ServiceProviderCategoryMapper $serviceProviderCategoryMapper,
-                                ServiceProviderServiceMapper     $serviceProviderServiceMapper) {
+                                ServiceProviderServiceRepository $serviceProviderServiceDao) {
         $this->serviceProviderDao = $serviceProviderDao;
         $this->serviceProviderCategoryDao = $serviceProviderCategoryDao;
         $this->serviceProviderServiceDao = $serviceProviderServiceDao;
-        $this->categoryDao = $categoryDao;
-        $this->serviceDao=$serviceDao;
-        $this->serviceProviderMapper=$serviceProviderMapper;
-        $this->locationDao=$locationDao;
-        $this->locationMapper=$locationMapper;
-        $this->categoryMapper=$categoryMapper;
-        $this->serviceMapper=$serviceMapper;
-        $this->serviceProviderCategoryMapper=$serviceProviderCategoryMapper;
-        $this->serviceProviderServiceMapper=$serviceProviderServiceMapper;
-
     }
 
-    private ServiceProviderMapper $serviceProviderMapper;
+
 
     public function listServiceProviderWithCategoryAndService(): array
     {
@@ -71,115 +43,20 @@ class ServiceProviderService{
         if (empty($serviceProviderDao)) {
             syslog(LOG_INFO, 'No service provider found');
             throw new Exception('No service provider found');
+        }else{
+            return $serviceProviderDao;
         }
-
-        $serviceProviderDtoList = [];
-        foreach ($serviceProviderDao as $service) {
-            $serviceProviderDTO = $this->serviceProviderMapper->toDto($service);
-            $serviceProviderDtoList[] = $serviceProviderDTO;
-        }
-
-        $locationDao = $this->locationDao->listLocations();
-        if (empty($locationDao)) {
-            syslog(LOG_INFO, 'No location found');
-            throw new Exception('No location found');
-        }
-
-        $locationDTOList = [];
-        foreach ($locationDao as $location) {
-            $locationDTO = $this->locationMapper->toDto($location);
-            $locationDTOList[] = $locationDTO;
-        }
-
-        $categoryDao = $this->categoryDao->listCategories();
-        if (empty($categoryDao)) {
-            syslog(LOG_INFO, 'No location found');
-            throw new Exception('No location found');
-        }
-
-        $categoryDTOList = [];
-        foreach ($categoryDao as $category) {
-            $categoryDTO = $this->categoryMapper->toDto($category);
-            $categoryDTOList[] = $categoryDTO;
-        }
-
-        $serviceDao = $this->serviceDao->listServices();
-        if (empty($serviceDao)) {
-            syslog(LOG_INFO, 'No location found');
-            throw new Exception('No location found');
-        }
-
-        $serviceDTOList = [];
-        foreach ($serviceDao as $service) {
-            $serviceDTO = $this->serviceMapper->toDto($service);
-            $serviceDTOList[] = $serviceDTO;
-        }
-
-        $serviceProviderCategoryDao = $this->serviceProviderCategoryDao->listServiceProviderCategories();
-        if (empty($serviceProviderCategoryDao)) {
-            syslog(LOG_INFO, 'No location found');
-            throw new Exception('No location found');
-        }
-
-        $serviceProviderCategoryDTOList = [];
-        foreach ($serviceProviderCategoryDao as $serviceProviderCategory) {
-            $serviceProviderCategoryDTO = $this->serviceProviderCategoryMapper->toDto($serviceProviderCategory);
-            $serviceProviderCategoryDTOList[] = $serviceProviderCategoryDTO;
-        }
-
-        $serviceProviderServiceDao = $this->serviceProviderServiceDao->listServiceProviderServices();
-        if (empty($serviceProviderServiceDao)) {
-            syslog(LOG_INFO, 'No location found');
-            throw new Exception('No location found');
-        }
-
-        $serviceProviderServiceDTOList = [];
-        foreach ($serviceProviderServiceDao as $serviceProviderService) {
-            $serviceProviderServiceDTO = $this->serviceProviderServiceMapper->toDto($serviceProviderService);
-            $serviceProviderServiceDTOList[] = $serviceProviderServiceDTO;
-        }
-
-        $locationById = [];
-        foreach ($locationDTOList as $location) {
-            $locationById[$location->id] = $location->name;
-        }
-
-        //new array containing data regarding service provider and location name by id in service provider
-        foreach ($serviceProviderDtoList as $serviceProvider) {
-            $serviceProvider->locationName = $locationById[$serviceProvider->location] ?? 'Unknown';
-        }
-
-        //new array containing data from service_provider, location, service_provider_category and service array
-        foreach($serviceProviderDtoList as $serviceProviderDtoListItem){
-            foreach ($serviceProviderCategoryDTOList as $serviceProviderCategoryDtoListItem){
-                if($serviceProviderDtoListItem["id"] == $serviceProviderCategoryDtoListItem["service_provider_id"]){
-                    foreach ($categoryDTOList as $categoryDTOListItem){
-                        if($categoryDTOListItem["id"] == $serviceProviderCategoryDtoListItem["category_id"]){
-                            $result_array[] = array_merge($serviceProviderDtoListItem, $serviceProviderCategoryDtoListItem, $categoryDTOListItem);
-                        }
-                    }
-                }
-            }
-        }
-
-        return $result_array;
     }
 
-    public function getServiceProviderWithCategoryAndServiceById($id){
-        $serviceProvider = $this->serviceProviderDao->getServiceProviderById();
-        $serviceProviderCategory = $this->serviceProviderCategoryDao->getServiceProviderCategoryById();
-        $serviceProviderService = $this->serviceProviderServiceDao->getServiceProviderServiceById();
+    public function getServiceProviderWithCategoryAndServiceById($id): \entity\ServiceProviderEntity
+    {
+        $serviceProviderDao = $this->serviceProviderDao->getServiceProviderById($id);
 
-        $array = [];
-
-        array_push($array, $serviceProvider, $serviceProviderCategory, $serviceProviderService);
-
-        if(empty($array)){
-            syslog(LOG_INFO, 'could not find service provider');
-            return null;
+        if (empty($serviceProviderDao)) {
+            syslog(LOG_INFO, 'No service provider found');
+            throw new Exception('No service provider found');
         }else{
-            syslog(LOG_INFO, 'service found');
-            return $array;
+            return $serviceProviderDao;
         }
     }
 

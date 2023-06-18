@@ -36,8 +36,7 @@ require_once '../../db/DatabaseConnection.php';
 require_once '../../service/ServiceProviderService.php';
 
 $reqHandler = new ServiceProviderReqHandler(new ServiceProviderService(new ServiceProviderRepository(new ServiceProviderMapper()),
-    new ServiceProviderCategoryRepository(new ServiceProviderCategoryMapper()), new ServiceProviderServiceRepository(new ServiceProviderServiceMapper()),
-    new CategoryRepository(new CategoryMapper()), new ServiceRepository(new ServiceMapper()), new ServiceProviderMapper(), new LocationRepository(new LocationMapper()), new LocationMapper()));
+    new ServiceProviderCategoryRepository(new ServiceProviderCategoryMapper()), new ServiceProviderServiceRepository(new ServiceProviderServiceMapper())));
 
 $method = $_SERVER['REQUEST_METHOD'];
 $id = $_GET['id'] ?? null;
