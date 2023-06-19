@@ -63,7 +63,7 @@ class ServiceProviderRepository{
         }
     }
 
-    public function insertServiceProvider($id, serviceProviderEntity $serviceProvider): ?serviceProviderEntity
+    public function insertServiceProvider(ServiceProviderEntity $serviceProvider): ?serviceProviderEntity
     {
         global $db;
         try{
@@ -134,14 +134,12 @@ class ServiceProviderRepository{
             $statement = $db -> prepare ('DELETE FROM service_provider
             WHERE id = :id ');
 
-            $db->beginTransaction();
             $statement -> execute ([':id'=>$id]);
 
-            $db->commit();
             return true;
         }catch(Exception $e){
             $db->rollback();
-            error_log('could not delete user {}', $id, $e);
+            error_log('could not delete service provider');
             return false;
         }
     }

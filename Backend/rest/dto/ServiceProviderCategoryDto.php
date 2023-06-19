@@ -5,42 +5,40 @@ namespace dto;
 require_once 'AbstractDto.php';
 class ServiceProviderCategoryDto extends AbstractDto
 {
-    private array $serviceProvider = array(ServiceProviderDto::class);
+    private int $serviceProvider;
 
-    private array $category = array(CategoryDto::class);
-
-
+    private int $category;
 
     /**
-     * @return array
+     * @return int
      */
-    public function getServiceProvider(): array {
+    public function getServiceProvider(): int
+    {
         return $this->serviceProvider;
     }
 
     /**
-     * @param array $serviceProvider
-     * @return self
+     * @param int $serviceProvider
      */
-    public function setServiceProvider(array $serviceProvider): self {
+    public function setServiceProvider(int $serviceProvider): void
+    {
         $this->serviceProvider = $serviceProvider;
-        return $this;
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function getCategory(): array {
+    public function getCategory(): int
+    {
         return $this->category;
     }
 
     /**
-     * @param array $category
-     * @return self
+     * @param int $category
      */
-    public function setCategory(array $category): self {
+    public function setCategory(int $category): void
+    {
         $this->category = $category;
-        return $this;
     }
 
     public function jsonSerialize(): object

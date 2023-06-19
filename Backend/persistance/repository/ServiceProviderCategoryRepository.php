@@ -64,11 +64,7 @@ class ServiceProviderCategoryRepository{
             $statement = $db -> prepare ('INSERT INTO service_provider_category (id,service_provider_id,category_id) 
             VALUES (:id,:service_provider,:category)');
 
-            $db -> beginTransaction();
-
             $statement -> execute ([':service_provider'=>$serviceProviderId, ':category'=>$serviceProviderCategory->getCategory()]);
-
-            $db->commit();
 
             $serviceProviderCategoryId = $db->lastInsertId();
             $serviceProviderCategory->setId($serviceProviderCategoryId);
@@ -111,10 +107,8 @@ class ServiceProviderCategoryRepository{
             $statement = $db -> prepare ('DELETE FROM service_provider_category
             WHERE service_provider_id = :serviceProviderId ');
 
-            $db->beginTransaction();
             $statement -> execute ([':serviceProviderId'=>$serviceProviderId]);
 
-            $db->commit();
             return true;
         }catch(Exception $e){
             $db->rollback();

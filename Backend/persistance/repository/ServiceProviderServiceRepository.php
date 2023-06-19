@@ -61,11 +61,8 @@ class ServiceProviderServiceRepository{
             VALUES (:service_provider,:service)');
 
 
-            $db -> beginTransaction();
-
             $statement -> execute ([':service_provider'=>$serviceProviderId, ':service'=>$serviceProviderService->getService()]);
 
-            $db->commit();
 
             $serviceProviderServiceId = $db->lastInsertId();
             $serviceProviderService->setId($serviceProviderServiceId);
@@ -107,10 +104,8 @@ class ServiceProviderServiceRepository{
             $statement = $db -> prepare ('DELETE FROM service_provider_service
             WHERE service_provider_id = :serviceProviderId ');
 
-            $db->beginTransaction();
             $statement -> execute ([':serviceProviderId'=>$serviceProviderId]);
 
-            $db->commit();
             return true;
         }catch(Exception $e){
             $db->rollback();

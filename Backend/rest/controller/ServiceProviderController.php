@@ -36,10 +36,10 @@ require_once '../../db/DatabaseConnection.php';
 require_once '../../service/ServiceProviderService.php';
 
 $reqHandler = new ServiceProviderReqHandler(new ServiceProviderService(new ServiceProviderRepository(new ServiceProviderMapper()),
-    new ServiceProviderCategoryRepository(new ServiceProviderCategoryMapper()), new ServiceProviderServiceRepository(new ServiceProviderServiceMapper())));
+    new ServiceProviderCategoryRepository(new ServiceProviderCategoryMapper()), new ServiceProviderServiceRepository(new ServiceProviderServiceMapper()),
+    new ServiceProviderMapper(), new ServiceProviderServiceMapper(), new ServiceProviderCategoryMapper()));
 
 $method = $_SERVER['REQUEST_METHOD'];
 $id = $_GET['id'] ?? null;
-$name = $_GET['name'] ?? null;
 
-$reqHandler->handleRequest($method, $id, $name);
+$reqHandler->handleRequest($method, $id);

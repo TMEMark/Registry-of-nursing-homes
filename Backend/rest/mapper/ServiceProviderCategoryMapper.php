@@ -6,12 +6,13 @@ namespace mapper;
 use dto\ServiceProviderCategoryDto;
 use entity\ServiceProviderCategoryEntity;
 
+require_once '../../persistance/entity/ServiceProviderCategoryEntity.php';
+require_once '../dto/ServiceProviderCategoryDto.php';
 class ServiceProviderCategoryMapper
 {
     public function toEntity($row): ServiceProviderCategoryEntity
     {
         $serviceProviderCategory = new ServiceProviderCategoryEntity();
-        $serviceProviderCategory->setId($row['id']);
         $serviceProviderCategory->setCreated($row['created']);
         $serviceProviderCategory->setLastModified($row['last_modified']);
         $serviceProviderCategory->setServiceProvider($row['service_provider_id']);
