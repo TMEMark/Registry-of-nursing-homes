@@ -116,6 +116,19 @@ class UserService{
         syslog(LOG_INFO, 'creating user');
         $user = $this->userMapper->fromStdClass($user);
 
+        $username = $user->getUsername();
+        $userGetByName = $this->userDao->checkUserByUsername($username);
+
+        if($userGetByName){
+            syslog(LOG_INFO, 'username already exists');
+            throw new Exception('username already exists');
+        }
+
+        if(strlen($username) < 6 || strlen($username) > 30){
+            syslog(LOG_INFO, 'username does not meet conditions');
+            throw new Exception('username does not meet conditions');
+        }
+
         $password = $user->getPassword();
         $user->setPassword(password_hash($password, PASSWORD_BCRYPT));
 

@@ -58,6 +58,23 @@ class UserRepository{
         }
     }
 
+    public function checkUserByUsername(string $username): bool
+    {
+        global $db;
+        try {
+            $sql = 'SELECT COUNT(*) FROM user WHERE username = :username';
+            $statement = $db->prepare($sql);
+            $statement->bindValue(':username', $username);
+            $statement->execute();
+
+            $count = $statement->fetchColumn();
+            return $count > 0;
+        } catch (Exception $e) {
+            error_log("Could not find user: $username" . $e->getMessage());
+            return false;
+        }
+    }
+
     /**
      * Function listUsers gets all users in db
      * @return array if users are found | null if they were not found
