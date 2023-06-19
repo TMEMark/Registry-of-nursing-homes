@@ -115,6 +115,10 @@ class UserService{
     {
         syslog(LOG_INFO, 'creating user');
         $user = $this->userMapper->fromStdClass($user);
+
+        $password = $user->getPassword();
+        $user->setPassword(password_hash($password, PASSWORD_BCRYPT));
+
         $userDao = $this->userDao->insertUser($user);
         if($userDao == null){
             syslog(LOG_INFO, 'could not create user');
