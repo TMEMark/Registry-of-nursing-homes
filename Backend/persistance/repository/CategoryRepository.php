@@ -32,8 +32,7 @@ class CategoryRepository{
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->categoryMapper->toEntity($result);
         }catch(Exception $e){
-            error_log('could not find category {}', $id);
-			return null;
+            return null;
         }
     }
 

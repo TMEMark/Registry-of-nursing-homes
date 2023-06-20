@@ -21,15 +21,14 @@ class CategoryService{
     public function getCategoryById(int $id): \dto\CategoryDto
     {
         syslog(LOG_INFO, 'getting category');
-        $categoryDao = $this->categoryMapper->toDto($this->categoryDao->getCategoryById($id));
+        $categoryDao = $this->categoryDao->getCategoryById($id);
 
-
-        if(empty($categoryDao)){
+        if($categoryDao === null){
             syslog(LOG_INFO, 'no category found');
-            throw new Exception('no category found with id {}', $id);
+            throw new Exception('no category found with id $id');
         }else{
             syslog(LOG_INFO, 'category found');
-            return $categoryDao;
+            return $this->categoryMapper->toDto($categoryDao);
         }
     }
 
@@ -37,7 +36,7 @@ class CategoryService{
     {
         syslog(LOG_INFO, 'getting category');
         $categoryDao = $this->categoryMapper->toDto($this->categoryDao->getCategoryByName($name));
-        if(empty($categoryDao)){
+        if($categoryDao === null){
             syslog(LOG_INFO, 'no category found');
             throw new Exception('no category found with name {}', $name);
         }else{

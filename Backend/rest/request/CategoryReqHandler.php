@@ -51,7 +51,7 @@ class CategoryReqHandler
         try {
             echo json_encode($this->categoryService->getCategoryById($id));
         }catch (Exception $e){
-            return http_response_code(404);
+            http_response_code(404);
         }
     }
 
