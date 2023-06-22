@@ -1,6 +1,6 @@
 <?php
 require "Components/header.html";
-require "../../Backend/select.php";
+//require "../../Backend/select.php";
 /*$query = $db->query ("SELECT p.naziv_pruzatelja, p.email, p.adresa, p.kontakt, p.URL_stranice, p.radno_vrijeme, p.napomena, p.longitude, p.latitude, l.naziv_lokacije, p.oib
 FROM pruzatelji p
 INNER JOIN lokacija l ON p.lokacija=l.idLokacije

@@ -1,16 +1,51 @@
 <?php
-abstract class AbstractEntity{
-    private int $id;
 
-    private int $created;
+namespace entity;
 
-	private int $lastModified;
+abstract class AbstractEntity implements \JsonSerializable {
+    private ?int $id = null;
+
+    private String $created;
+
+	private String $lastModified;
+
+    /**
+     * @return String
+     */
+    public function getCreated(): string
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param String $created
+     */
+    public function setCreated(string $created): void
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return String
+     */
+    public function getLastModified(): string
+    {
+        return $this->lastModified;
+    }
+
+    /**
+     * @param String $lastModified
+     */
+    public function setLastModified(string $lastModified): void
+    {
+        $this->lastModified = $lastModified;
+    }
 
 
 	/**
 	 * @return int
 	 */
-	public function getId(): int {
+	public function getId(): ?int {
 		return $this->id;
 	}
 	
@@ -23,36 +58,16 @@ abstract class AbstractEntity{
 		return $this;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getCreated(): int {
-		return $this->created;
-	}
-	
-	/**
-	 * @param int $created 
-	 * @return self
-	 */
-	public function setCreated(int $created): self {
-		$this->created = $created;
-		return $this;
-	}
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getLastModified(): int {
-		return $this->lastModified;
-	}
-	
-	/**
-	 * @param int $lastModified 
-	 * @return self
-	 */
-	public function setLastModified(int $lastModified): self {
-		$this->lastModified = $lastModified;
-		return $this;
-	}
+    public function __toString()
+    {
+        return $this->id;
+        return $this->lastModified;
+        return $this->created;
+    }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 require "Components/header.html";
-require "../../Backend/select.php";
+//require "../../Backend/select.php";
 ?>
 
 <div class="login">
@@ -13,15 +13,15 @@ require "../../Backend/select.php";
               <h3>Prijava</h3>
               <p class="mb-4">Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</p>
             </div>
-            <form action="../../Backend/Controller/LoginSystem/login.php" method="post">
+            <form action="http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/LoginController.php" method="post">
               <div class="form-group">
-                <label>Korisničko ime</label>
-                <input name="username" type="text" class="form-control" value="<?php ?>">
+                <label for="username">Korisničko ime</label>
+                <input name="username" type="text" class="form-control" required>
               </div>
 
               <div class="form-group">
-                <label>Lozinka</label>
-                <input name="password" type="password" class="form-control" value="<?php ?>">
+                <label for="password">Lozinka</label>
+                <input name="password" type="password" class="form-control" required>
               </div>
               
               <input type="submit" name="submit" value="Login" class="button">

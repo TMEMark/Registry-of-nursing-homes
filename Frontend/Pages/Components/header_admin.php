@@ -12,8 +12,14 @@
 
       <div class="content">
         <?php 
+        if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+          $userId = $_SESSION['user_id'];
+          $username = $_SESSION['username'];
         echo "<p><img src='../Assets/user.svg' alt='admin' id='admin' style= 'width:40px;'>
-        Prijavljeni ste kao: " . $_SESSION["user"] . "</p>";
+        Prijavljeni ste kao: " . $username . "</p>";
+      } else {
+        echo "Korisnik trenutno nije prijavljen.";
+    }
         ?>
         
         <table class="nav">
@@ -29,19 +35,19 @@
 
           <tr>
             <td id="celija_usluge">
-              <a href="usluge.php"><img src="../Assets/open-hand.svg" id="ikona_usluge"/></a>
+              <a href="service.php"><img src="../Assets/open-hand.svg" id="ikona_usluge"/></a>
             </td>
             <td>
-              <a href="usluge.php" id="usluge">USLUGE</a>
+              <a href="service.php" id="usluge">USLUGE</a>
             </td>
           </tr>
 
           <tr>
             <td id="celija_kategorije">
-              <a href="kategorije.php"><img src="../Assets/list-menu.svg" id="ikona_kategorije"/></a>
+              <a href="category.php"><img src="../Assets/list-menu.svg" id="ikona_kategorije"/></a>
             </td>
             <td>
-              <a href="kategorije.php" id="kategorije">KATEGORIJE</a>
+              <a href="category.php" id="kategorije">KATEGORIJE</a>
             </td>
           </tr>
 
