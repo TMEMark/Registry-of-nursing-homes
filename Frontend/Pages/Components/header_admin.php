@@ -26,10 +26,10 @@
 
           <tr>
             <td id="celija_pruzatelji">
-              <a href="pruzatelji.php" id="pruzatelji"><img src="../Assets/home.svg" id="ikona_pruzatelji"/></a>
+              <a href="serviceProvider.php" id="pruzatelji"><img src="../Assets/home.svg" id="ikona_pruzatelji"/></a>
             </td>
             <td>
-              <a href="pruzatelji.php" id="pruzatelji">PRUŽATELJI</a>
+              <a href="serviceProvider.php" id="serviceProvider">PRUŽATELJI</a>
             </td>
           </tr>
 
@@ -38,7 +38,7 @@
               <a href="service.php"><img src="../Assets/open-hand.svg" id="ikona_usluge"/></a>
             </td>
             <td>
-              <a href="service.php" id="usluge">USLUGE</a>
+              <a href="service.php" id="service">USLUGE</a>
             </td>
           </tr>
 
@@ -47,7 +47,7 @@
               <a href="category.php"><img src="../Assets/list-menu.svg" id="ikona_kategorije"/></a>
             </td>
             <td>
-              <a href="category.php" id="kategorije">KATEGORIJE</a>
+              <a href="category.php" id="category">KATEGORIJE</a>
             </td>
           </tr>
 

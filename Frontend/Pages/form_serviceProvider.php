@@ -1,44 +1,65 @@
 <?php
-//include "../../Backend/Controller/LoginSystem/session.php";
-require "Components/header.html";
-//require "../../Backend/select.php";
-
-if(isset($_GET["idPruz"]) && $_GET["idPruz"] > 0){
-  $queryPruzatelji = $db->query("SELECT * 
-  FROM lokacija l 
-  INNER JOIN pruzatelji p ON l.idLokacije =  p.lokacija
-  WHERE idPruz =" . $_GET["idPruz"]);
-  $Pruzatelji = $queryPruzatelji ->fetchAll();
- 
-  $idPruz = $_GET["idPruz"];
-  $naziv_pruzatelja = $Pruzatelji[0]["naziv_pruzatelja"];
-  $oib = $Pruzatelji[0]["oib"];
-  $email = $Pruzatelji[0]["email"];
-  $lokacija = $Pruzatelji[0]["naziv_lokacije"];
-  $adresa = $Pruzatelji[0]["adresa"];
-  $kontakt = $Pruzatelji[0]["kontakt"];
-  $URL_stranice = $Pruzatelji[0]["URL_stranice"];
-  $radno_vrijeme = $Pruzatelji[0]["radno_vrijeme"];
-  $napomena = $Pruzatelji[0]["napomena"];
-  $long = $Pruzatelji[0]["longitude"];
-  $lat = $Pruzatelji[0]["latitude"];
-}else{
-  $idPruz = "";
-  $naziv_pruzatelja = "";
-  $oib = "";
-  $pruzatelj = "";
-  $email = "";
-  $lokacija = "";
-  $adresa = "";
-  $kontakt = "";
-  $URL_stranice = "";
-  $radno_vrijeme = "";
-  $napomena = "";
-  $long = "";
-  $lat = ""; 
+require "Components/header.php";
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+  $url = "http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/serviceProviderController.php?id=" . $id;
+  $response = file_get_contents($url);
+  $data = json_decode($response, true);
+} else {
+  echo "<label style='margin: 20px'>Unosite novi podatak</label>";
 }
-$idPruzUsl = "";
-$idPruzUslKat = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Retrieve the form data
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  // $location = $_POST['location'];
+  $address = $_POST['address'];
+  $contact_number = $_POST['contact_number'];
+  $website_url = $_POST['website_url'];
+  $work_time = $_POST['work_time'];
+  $remark = $_POST['remark'];
+  // $longitude = $_POST['longitude'];
+  // $latitude = $_POST['latitude'];
+  // $services = $_POST['services'];
+  // $categories = $_POST['categories'];
+
+  // Create an associative array with the form data
+  $data = array(
+      'name' => $name,
+      'email' => $email,
+      // 'location' => $location,
+      'address' => $address,
+      'contact_number' => $contact_number,
+      'website_url' => $website_url,
+      'work_time' => $work_time,
+      'remark' => $remark,
+      // 'longitude' => $longitude,
+      // 'latitude' => $latitude,
+      // 'services' => $services,
+      // 'categories' => $categories
+  );
+  // Encode the data as JSON
+  $jsonData = json_encode($data);
+  // Send the JSON data to the backend using cURL
+  $url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/ServiceProviderController.php';
+
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+  $response = curl_exec($ch);
+
+  if ($response === false) {
+      echo 'Error: ' . curl_error($ch);
+  } else {
+      echo 'Uspješno dodan/promijenjen podatak.';
+  }
+
+  curl_close($ch);
+}
 ?>
 
   
@@ -47,23 +68,23 @@ $idPruzUslKat = "";
 <div class="formRegistry">
   
 <!--form-->
-  <form data-multi-step class="multi-step-form" action="../../Backend/Controller/pruzatelji.php" method="post">
-  <input type="hidden" name="idPruz" value="<?php echo $idPruz;?>">
+  <form data-multi-step class="multi-step-form" action="form_serviceProvider.php" method="post">
+  <input type="hidden" name="idPruz" value="<?php echo isset($data['id']) ? $data['id'] : '' ; ?>">
     <div class="card" data-step>
       <h2>Dodajte pružatelja</h2>
       <h3 class="step-title">Osnovne informacije</h3>
       <h4>1. korak od 5</h4>
       <div class="form-group">
         <div class="naziv">
-          <label for="naziv" id="label-naziv">
+          <label for="name" id="label-naziv">
           <span class="content-naziv" >
                   Naziv pružatelja
               </span><br>
-              <input type="text" autocomplete="off" id="naziv" value="<?php echo $naziv_pruzatelja;?>" name="naziv" />
+              <input type="text" autocomplete="off" id="naziv" value="<?php echo isset($data['name']) ? $data['name'] : '' ; ?>" name="name" />
           </label>
           <br />
         </div>
-        <div class="oib">
+        <!-- <div class="oib">
           <label for="oib" id="label-oib">
           <span class="content-oib">
                   OIB
@@ -71,43 +92,43 @@ $idPruzUslKat = "";
           <input type="text" autocomplete="off" id="oib" value="<?php echo $oib;?>" name="oib" />
           </label>
           <br />
-        </div>
+        </div> -->
         <div class="adresa">
-          <label for="adresa" id="label-adresa">
+          <label for="address" id="label-adresa">
           <span class="content-adresa">
                   Adresa
           </span><br>
-          <input type="text" autocomplete="off" id="adresa" value="<?php echo $adresa;?>" name="adresa" />
+          <input type="text" autocomplete="off" id="adresa" value="<?php echo isset($data['address']) ? $data['address'] : '' ; ?>" name="address" />
           </label>
           <br />
         </div>
         <div class="lokacija">
-          <label for="lokacija" id="label-lokacija">
+          <label for="location" id="label-lokacija">
           <span class="content-lokacij">
                   Županija
               </span><br>
               <select name="lokacija" id="lokacija">
                 <option value="">Odaberi županiju</option>
                 <option value="1" <?php 
-                echo ($lokacija == "Osječko-baranjska županija") ? "selected" : "";
+                echo (isset($data['location']) && $data['location'] == 1) ? "selected" : "";
                 ?>>Osječko-baranjska županija</option>
                 <option value="2" <?php 
-                echo ($lokacija == "Vukovarsko-srijemska županija") ? "selected" : "";
+                echo(isset($data['location']) && $data['location'] == 2) ? "selected" : "";
                 ?>>Vukovarsko-srijemska županija</option>
               </select>
           </label>
           <br />
         </div>
         <div class="radn_vrijeme">
-          <label for="radn_vrijeme" id="label-radn_vrijeme">
+          <label for="work_time" id="label-radn_vrijeme">
           <span class="content-radn_vrijeme">
                   Radno vrijeme
               </span><br>
-              <input type="text" autocomplete="off" id="radn_vrijeme" value="<?php echo $radno_vrijeme;?>" name="radn_vrijeme" />
+              <input type="text" autocomplete="off" id="radn_vrijeme" value="<?php echo isset($data['work_time']) ? $data['work_time'] : '' ; ?>" name="work_time" />
           </label>
           <br />
           <button type="button" data-next class="submit">Sljedeće</button>
-          <button type="button" class="quitForm"><a href="pruzatelji.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
+          <button type="button" class="quitForm"><a href="serviceProvider.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -116,11 +137,11 @@ $idPruzUslKat = "";
       <h4>2. korak od 5</h4>
       <div class="form-group">
         <div class="kontakt">
-          <label for="kontakt" id="label-kontakt">
+          <label for="contact_number" id="label-kontakt">
           <span class="content-kontakt">
                   Kontakt broj
               </span><br>
-              <input type="text" autocomplete="off" id="kontakt" value="<?php echo $kontakt;?>" name="kontakt" />
+              <input type="text" autocomplete="off" id="kontakt" value="<?php echo isset($data['contact_number']) ? $data['contact_number'] : '' ; ?>" name="contact_number" />
           </label>
           <br />
         </div>
@@ -129,21 +150,21 @@ $idPruzUslKat = "";
           <span class="content-email">
                   Email
               </span><br>
-              <input type="text" autocomplete="off" id="email" value="<?php echo $email;?>" name="email" />
+              <input type="text" autocomplete="off" id="email" value="<?php echo isset($data['email']) ? $data['email'] : '' ; ?>" name="email" />
           </label>
           <br />
         </div>
         <div class="url">
-          <label for="url" id="label-url">
+          <label for="website_url" id="label-url">
           <span class="content-url">
                   Link mrežne stranice
               </span><br>
-              <input type="text" autocomplete="off" id="url" value="<?php echo $URL_stranice;?>" name="url" />
+              <input type="text" autocomplete="off" id="url" value="<?php echo isset($data['website_url']) ? $data['website_url'] : '' ; ?>" name="website_url" />
           </label>
           <br />
           <button type="button" data-previous class="before">Prethodno</button>
           <button type="button" data-next class="submit">Sljedeće</button>
-          <button type="button" data-next class="quitForm"><a href="pruzatelji.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
+          <button type="button" data-next class="quitForm"><a href="serviceProvider.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
         </div>
       </div>
     </div>
@@ -153,11 +174,11 @@ $idPruzUslKat = "";
       <h4>3. korak od 5</h4>
       <div class="form-group">
       <div class="napomena">
-          <label for="napomena" id="label-napomena">
+          <label for="remark" id="label-napomena">
           <span class="content-naziv">
                   Napomena
               </span><br>
-              <textarea name="napomena" id="napomena" value="<?php echo $napomena;?>" cols="30" rows="10"></textarea>
+              <textarea name="remark" id="napomena" value="<?php echo isset($data['remark']) ? $data['remark'] : '' ; ?>" cols="30" rows="10"></textarea>
           </label><br>
           <button type="button" data-previous class="before">Prethodno</button>
           <input type="submit" name="submit" value="Unos" class="submit" id="unos">
@@ -172,10 +193,10 @@ $idPruzUslKat = "";
     <div class="card" data-step id="usluge">
         <h3>Usluge</h3>
         <?php
-        foreach ($getLastInserted as $key) {
-          echo "<h3>" . $key['naziv_pruzatelja'] . "</h3>";
-          $idPruz = $key['idPruz'];
-        }
+        // foreach ($getLastInserted as $key) {
+        //   echo "<h3>" . $key['naziv_pruzatelja'] . "</h3>";
+        //   $idPruz = $key['idPruz'];
+        // }
         ?>
         <h4>4. korak od 5</h4> 
         <div class="form-group">

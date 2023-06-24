@@ -1,27 +1,61 @@
 <?php
-//include "../../Backend/Controller/LoginSystem/session.php";
-require "Components/header.html";
-//require "../../Backend/select.php";
+require "Components/header.php";
 
-if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
-  $queryKategorije = $db->query("select * from kategorije WHERE idKategorija =" . $_GET["idKategorija"]);
-  $Kategorije = $queryKategorije ->fetchAll();
-
-  $id_kat = $_GET["idKategorija"];
-  $nazivKat = $Kategorije[0]["naziv_kategorije"];
-}else{
-  $id_kat = "";
-  $nazivKat = "";
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+  $url = "http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/CategoryController.php?id=" . $id;
+  $response = file_get_contents($url);
+  $data = json_decode($response, true);
+} else {
+  echo "<label style='margin: 20px'>Unosite novi podatak</label>";
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Retrieve the form data
+  $categoryName = $_POST['name'];
+  // Create an associative array with the form data
+  $data = array(
+      'name' => $categoryName,
+  );
+}elseif ($_SERVER['REQUEST_METHOD'] === 'PUT'){
+  $categoryId = $_POST['id'];
+    $categoryName = $_POST['name'];
+    $data = array(
+      'id' => $categoryId,
+      'name' => $categoryName
+    );
+  }
+  // Encode the data as JSON
+  $jsonData = json_encode($data);
+  // Send the JSON data to the backend using cURL
+  $url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/CategoryController.php';
+
+  $ch = curl_init($url);
+    if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+  } else {
+    curl_setopt($ch, CURLOPT_POST, 1);
+  }
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+  $response = curl_exec($ch);
+
+  if ($response === false) {
+      echo 'Error: ' . curl_error($ch);
+  } else {
+      echo 'Uspješno dodan/promijenjen podatak.';
+  }
+
+  curl_close($ch);
+}
 ?>
 
 </div>
 </nav>
 
-<div class="ilustracija">
-  <!--<img src="../Components/assets/ilustracija1.png" alt="Ilustracija" class="illustr">-->
-</div>
     <div class="container">
       <div class="row">
         <div class="col-md-6 contents">
@@ -30,17 +64,25 @@ if(isset($_GET["idKategorija"]) && $_GET["idKategorija"] > 0){
               <div class="mb-4">
               <h3>Dodajte novu kategoriju</h3>  
             </div>
-            <form action="../../Backend/Controller/kategorije.php" method="post">
-              <input type="hidden" name="id_kat" value="<?php echo $id_kat;?>">
+           
+            <form action="form_category.php"
+               method="post">
+              <input type="hidden" name="id" value="<?php echo isset($data['id']) ? $data['id'] : '' ; ?>">
 
               <div class="form-group">
                 <label>Naziv kategorije</label>
-                <input name="nazivKat" type="text" class="form-control" value="<?php echo $nazivKat ?>">
+                <input name="name" type="text" class="form-control" 
+                value="<?php echo isset($data['name']) ? $data['name'] : '' ; ?>">
               </div>
 
               <input type="submit" name="submit" value="Unos" class="submit">
 
-              <a href="category.php"><button type="button" class="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
+              <a href="category.php">
+                <button type="button" class="quitForm">
+                <img src="../Assets/x.svg" alt="poništavanje">
+                Odustani
+              </button>
+              </a>
 
             </form>
             <?php

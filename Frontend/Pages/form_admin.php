@@ -1,30 +1,50 @@
 <link rel="stylesheet" href="../Styles/styleAdmin.css">
 <?php
-//include "../../Backend/Controller/LoginSystem/session.php";
-require "Components/header.html";
-//require "../../Backend/select.php";
+require "Components/header.php";
 
-// if(isset($_GET["idAdmin"]) && $_GET["idAdmin"] > 0){
-//   $queryAdmin = $db->query("SELECT * 
-//   FROM administratori a 
-//   INNER JOIN uloge u ON a.uloga = u.idUloga 
-//   WHERE a.idAdmin =" . $_GET["idAdmin"]);
-//   $Admin = $queryAdmin ->fetchAll();
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+  $url = "http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/UserController.php?id=" . $id;
+  $response = file_get_contents($url);
+  $data = json_decode($response, true);
+} else {
+  echo "<label style='margin: 20px'>Unosite novi podatak</label>";
+}
 
-//   $idAdmin = $_GET["idAdmin"];
-//   $ime = $Admin[0]["ime_admina"];
-//   $prezime = $Admin[0]["prezime_admina"];
-//   $username = $Admin[0]["korisnicko_ime"];
-//   $role = $Admin[0]["uloga"];
-//   $lozinka = $Admin[0]["lozinka"];
-// }else{
-//   $idAdmin = "";
-//   $ime = "";
-//   $prezime = "";
-//   $username = "";
-//   $role = "";
-//   $lozinka = "";
-// }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Retrieve the form data
+  $firstname = $_POST['firstname'];
+  $lastname = $_POST['lastname'];
+  $username = $_POST['username'];
+  $role = $_POST['role'];
+  // Create an associative array with the form data
+  $data = array(
+      'firstname' => $firstname,
+      'lastname' => $lastname,
+      'username' => $username,
+      'role' => $role
+  );
+  // Encode the data as JSON
+  $jsonData = json_encode($data);
+  // Send the JSON data to the backend using cURL
+  $url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/UserController.php';
+
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+  $response = curl_exec($ch);
+
+  if ($response === false) {
+      echo 'Error: ' . curl_error($ch);
+  } else {
+      echo 'Uspješno dodan/promijenjen podatak.';
+  }
+
+  curl_close($ch);
+}
 ?>
 
 </div>
@@ -38,34 +58,28 @@ require "Components/header.html";
               <div class="mb-4">
               <h3>Unos novog administratora</h3>
             </div>
-            <form action="http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/UserController.php" method="POST">
-<?php
-// $rest_api_url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/UserController.php';
-// $json_data = file_get_contents($rest_api_url);
-// $response_data = json_decode($json_data);
-// foreach($response_data as $user_data){
-?>
-            <!-- <input type="hidden" name="id_admin"> -->
+            <form action="form_admin.php" method="POST">
+             <input type="hidden" name="id_admin" value="<?php echo isset($data['id']) ? $data['id'] : '' ; ?>"> 
 
             <div class="form-group">
                 <label for="firstname">Ime</label>
-                <input name="firstname" type="text" class="form-control">
+                <input name="firstname" type="text" class="form-control" value="<?php echo isset($data['firstname']) ? $data['firstname'] : '' ; ?>">
             </div>
 
             <div class="form-group">
                 <label for="lastname">Prezime</label>
-                <input name="lastname" type="text" class="form-control">
+                <input name="lastname" type="text" class="form-control" value="<?php echo isset($data['lastname']) ? $data['lastname'] : '' ; ?>">
             </div>
 
             <div class="form-group">
                 <label for="username">Korisničko ime</label>
-                <input name="username" type="text" class="form-control">
+                <input name="username" type="text" class="form-control" value="<?php echo isset($data['username']) ? $data['username'] : '' ; ?>">
             </div>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label>Lozinka</label>
-                <input name="lozinka" type="text" class="form-control">
-            </div> -->
+                <input name="lozinka" type="password" class="form-control" value="<?php echo isset($data['password']) ? $data['password'] : '' ; ?>">
+            </div>
 
             <div class="form-group">
                 <label for="role">Uloga</label>
@@ -73,12 +87,12 @@ require "Components/header.html";
                 <select name="role" id="role">
                   <option value="">Odaberi ulogu</option>
                   <option value="1" <?php 
-                  //echo ($user_data->roleName == "1") ? "selected" : "" ?>>Administrator</option>
+                   echo  (isset($data['role']) && $data['role'] == 1) ? "selected" : "" ?>>Administrator</option>
                   <option value="2" <?php 
-                  //echo ($user_data->roleName == "2") ? "selected" : "" ?>>Moderator</option>
+                   echo  (isset($data['role']) && $data['role'] == 2) ? "selected" : "" ?>>Moderator</option>
                 </select>
             </div>
-            
+          
               
             <input type="submit" name="submit" value="Unos" class="submit">
             

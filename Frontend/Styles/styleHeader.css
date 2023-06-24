@@ -79,11 +79,11 @@ nav {
   width: 20px;
   height: 20px;
 }
-#button {
+#searchButton {
   width: 90px;
   height: 30px;
   /* left: 1114px; */
-  top: 5px;
+  top: 3px;
   border-radius: 10px;
   border: none;
   background: #CF2214;

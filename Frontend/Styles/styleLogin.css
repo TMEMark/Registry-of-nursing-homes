@@ -1,4 +1,4 @@
-.login {
+[.login {
     font-family: 'Poppins', sans-serif;
 }
 h3 {
@@ -24,7 +24,22 @@ label {
     height: 40px;
     width: 140px;
     font-weight: bold;
+    background-color: #fff;
+    margin-top: 2px;
+}
+#quit:hover{
+    border-radius: 10px;
+    border-color: #8a160d;
+    height: 40px;
+    width: 140px;
+    font-weight: bold;
+    background-color: #fff;
+    text-decoration: none;
 }
 button a {
     color: #CF2214;
 }
+button a :hover{
+    color: #8a160d;
+    text-decoration: none;
+}]

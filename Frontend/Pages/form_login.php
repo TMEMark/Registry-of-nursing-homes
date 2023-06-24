@@ -1,6 +1,36 @@
 <?php
-require "Components/header.html";
-//require "../../Backend/select.php";
+require "Components/header.php";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Retrieve the form data
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  // Create an associative array with the form data
+  $data = array(
+      'username' => $username,
+      'password' => $password
+  );
+  // Encode the data as JSON
+  $jsonData = json_encode($data);
+  // Send the JSON data to the backend using cURL
+  $url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/AuthController.php?action=login';
+
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+  $response = curl_exec($ch);
+
+  if ($response === false) {
+      echo 'Error: ' . curl_error($ch);
+  } else {
+      echo '';
+  }
+
+  curl_close($ch);
+}
 ?>
 
 <div class="login">
@@ -13,7 +43,7 @@ require "Components/header.html";
               <h3>Prijava</h3>
               <p class="mb-4">Registar pružatelja socijalnih usluga Osječko-baranjske i Vukovarsko-srijemske županije</p>
             </div>
-            <form action="http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/LoginController.php" method="post">
+            <form action="form_login.php" method="POST">
               <div class="form-group">
                 <label for="username">Korisničko ime</label>
                 <input name="username" type="text" class="form-control" required>
@@ -25,7 +55,7 @@ require "Components/header.html";
               </div>
               
               <input type="submit" name="submit" value="Login" class="button">
-              <button type="button" class="btn btn-outline-secondary" id="quit"><a href="index.php"><img src="../Assets/x.svg" alt="poništavanje">Odustani</a></button>
+              <button type="button" class="btn btn-outline-secondary" id="quit"><a href="indexRegistry.php"><img src="../Assets/x.svg" alt="quit">Odustani</a></button>
 
             </form>
             <?php

@@ -1,19 +1,44 @@
 <?php
-//include "../../Backend/Controller/LoginSystem/session.php";
-require "Components/header.html";
-//require "../../Backend/select.php";
+require "Components/header.php";
 
-
-if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
-  $queryUsluge = $db->query("select * from usluge WHERE idUsluge =" . $_GET["idUsluge"]);
-  $Usluge = $queryUsluge ->fetchAll();
-
-  $idUsluge = $_GET["idUsluge"];
-  $nazivUsluge = $Usluge[0]["naziv_usluge"];
-}else{
-  $idUsluge = "";
-  $nazivUsluge = "";
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+  $url = "http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/ServiceController.php?id=" . $id;
+  $response = file_get_contents($url);
+  $data = json_decode($response, true);
+} else {
+  echo "<label style='margin: 20px'>Unosite novi podatak</label>";
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Retrieve the form data
+  $serviceName = $_POST['name'];
+  // Create an associative array with the form data
+  $data = array(
+      'name' => $serviceName,
+  );
+  // Encode the data as JSON
+  $jsonData = json_encode($data);
+  // Send the JSON data to the backend using cURL
+  $url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/ServiceController.php';
+
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+  $response = curl_exec($ch);
+
+  if ($response === false) {
+      echo 'Error: ' . curl_error($ch);
+  } else {
+      echo 'Uspješno dodan/promijenjen podatak.';
+  }
+
+  curl_close($ch);
+}
+
 
 ?>
 
@@ -33,18 +58,18 @@ if(isset($_GET["idUsluge"]) && $_GET["idUsluge"] > 0){
               <div class="mb-4">
               <h3>Dodajte novu uslugu</h3>
             </div>
-            <form action="../../Backend/Controller/usluge.php" method="post">
+            <form action="form_service.php" method="post">
 
-            <input type="hidden" name="id_usl" value="<?php echo $idUsluge;?>">
+            <input type="hidden" name="id" value="<?php echo isset($data['id']) ? $data['id'] : '' ; ?>">
 
               <div class="form-group">
                 <label>Naziv usluge</label>
-                <input name="naziv_usl" type="text" class="form-control" value="<?php echo $nazivUsluge; ?>">
+                <input name="name" type="text" class="form-control" value="<?php echo isset($data['name']) ? $data['name'] : '' ; ?>">
               </div>
 
               <input type="submit" name="submit" value="Unos" class="submit">
 
-              <a href="usluge.php"><button type="button" class="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
+              <a href="service.php"><button type="button" class="quitForm"><img src="../Assets/x.svg" alt="poništavanje">Odustani</button></a>
 
             </form>
             <?php
