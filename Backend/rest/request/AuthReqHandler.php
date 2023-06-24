@@ -32,7 +32,7 @@ class AuthReqHandler
 
         if ($this->authService->login($username, $password)) {
             // Redirect to the home page or any other desired location
-            header('Location: home.php');
+            header('Location: ../../../Frontend/Pages/serviceProvider.php');
         } else {
             // Redirect to the login page with an error message
             header('Location: login.php?error=1');
