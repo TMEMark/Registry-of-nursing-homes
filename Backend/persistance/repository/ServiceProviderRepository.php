@@ -32,9 +32,7 @@ class ServiceProviderRepository{
                 sp.latitude,
                 GROUP_CONCAT(DISTINCT s.name) AS "services",
                 GROUP_CONCAT(DISTINCT c.name) AS "categories",
-                c.id,
-                sp.id,
-                s.id
+                sp.id as "service_provider_id"
 FROM service s
 INNER JOIN service_provider_service sps ON sps.service_id = s.id
 INNER JOIN service_provider sp ON sp.id = sps.service_provider_id
@@ -69,9 +67,7 @@ GROUP BY sp.name';
                 sp.latitude,
                 GROUP_CONCAT(DISTINCT s.name) AS "services",
                 GROUP_CONCAT(DISTINCT c.name) AS "categories",
-                c.id,
-                sp.id,
-                s.id
+                sp.id as "service_provider_id"
 FROM service s
 INNER JOIN service_provider_service sps ON sps.service_id = s.id
 INNER JOIN service_provider sp ON sp.id = sps.service_provider_id

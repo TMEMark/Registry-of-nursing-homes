@@ -25,7 +25,7 @@ class DynamicSearchReqHandler
 
     private function dynamicSearch($search, $location, $service, $category) {
         try {
-            echo json_encode($this->dynamicSearchService->dynamicSearch($search, $location, $service, $category));
+            return json_encode($this->dynamicSearchService->dynamicSearch($search, $location, $service, $category));
         }catch (Exception $e){
             return http_response_code(404);
         }

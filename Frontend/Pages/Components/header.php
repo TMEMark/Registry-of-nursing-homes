@@ -1,34 +1,3 @@
-<?php
-if (isset($_GET['search'])) {
-  $searchTerm = $_GET['search'];
-
-  $url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/DynamicSearchController.php';
-
-
-  $url .= '?search=' . urlencode($searchTerm);
-
-
-  $ch = curl_init();
-
-
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-
-  $response = curl_exec($ch);
-
-  if (curl_errno($ch)) {
-      // Handle the error, e.g., display an error message
-      echo 'cURL error: ' . curl_error($ch);
-  }
-
-  curl_close($ch);
-
-  echo $response;
-
-}
-?>
-
 <!DOCTYPE html>
 <html lang="hr">
 
@@ -67,10 +36,10 @@ if (isset($_GET['search'])) {
       </a>
     </div>
     <div class="searchBar">
-      <form action="header.php" method="get">
+      <form action="http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/DynamicSearchController.php" method="get">
         <img src="../Assets/search.svg" id="imgSearchBar">
         <input class="inputField" type="search" name="search" id="search" placeholder="Pretražite domove">
-        <button type="button" name="button" id="searchButton">Pretražite</button>
+        <button type="submit" name="button" id="searchButton">Pretražite</button>
       </form>
     </div>
     <div class="login">
