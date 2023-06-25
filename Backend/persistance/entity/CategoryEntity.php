@@ -1,9 +1,12 @@
 <?php
-include_once('AbstractEntity.php');
-class CategoryEntity extends AbstractEntity{
+
+namespace entity;
+
+require_once 'AbstractEntity.php';
+class CategoryEntity extends AbstractEntity implements \JsonSerializable {
     private String $name;
 
-	/**
+    /**
 	 * @return string
 	 */
 	public function getName(): string {
@@ -18,5 +21,15 @@ class CategoryEntity extends AbstractEntity{
 		$this->name = $name;
 		return $this;
 	}
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
 ?>

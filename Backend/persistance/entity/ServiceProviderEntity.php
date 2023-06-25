@@ -1,6 +1,8 @@
 <?php
-include_once('AbstractEntity.php');
-include_once('LocationEntity.php');
+
+namespace entity;
+
+require_once 'AbstractEntity.php';
 class ServiceProviderEntity extends AbstractEntity{
     private String $name;
 
@@ -22,7 +24,7 @@ class ServiceProviderEntity extends AbstractEntity{
 
     private String $latitude;
 
-    private LocationEntity $location;
+    private int $location;
 
     private int $oib;
 
@@ -202,20 +204,20 @@ class ServiceProviderEntity extends AbstractEntity{
 		return $this;
 	}
 
-	/**
-	 * @return LocationEntity
-	 */
-	public function getLocation(): LocationEntity {
-		return $this->location;
-	}
-	
-	/**
-	 * @param LocationEntity $location 
-	 * @return self
-	 */
-	public function setLocation(LocationEntity $location): self {
-		$this->location = $location;
-		return $this;
-	}
+    /**
+     * @return int
+     */
+    public function getLocation(): int
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param int $location
+     */
+    public function setLocation(int $location): void
+    {
+        $this->location = $location;
+    }
 }
 ?>

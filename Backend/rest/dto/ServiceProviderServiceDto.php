@@ -1,9 +1,10 @@
 <?php
 
-namespace entity;
+namespace dto;
 
-require_once 'AbstractEntity.php';
-class ServiceProviderServiceEntity extends AbstractEntity{
+require_once 'AbstractDto.php';
+class ServiceProviderServiceDto extends AbstractDto
+{
     public int $serviceProvider;
 
     public int $service;
@@ -39,5 +40,9 @@ class ServiceProviderServiceEntity extends AbstractEntity{
     {
         $this->service = $service;
     }
+
+    public function jsonSerialize(): object
+    {
+        return (object) get_object_vars($this);
+    }
 }
-?>
