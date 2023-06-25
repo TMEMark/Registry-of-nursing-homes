@@ -22,7 +22,7 @@ class AuthService
         // Fetch user from the database by username
         $user = $this->userRepository->getUserByUsername($username);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user->getPassword())) {
             $this->startSession($user);
             return true;
         }
