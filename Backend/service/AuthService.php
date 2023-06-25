@@ -12,12 +12,6 @@ class AuthService
         $this->userRepository = $userRepository;
     }
 
-    private function startSession($user) {
-        session_start();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-    }
-
     public function login(string $username, string $password): bool {
         // Fetch user from the database by username
         $user = $this->userRepository->getUserByUsername($username);
@@ -29,6 +23,13 @@ class AuthService
 
         return false;
     }
+    private function startSession($user) {
+        session_start();
+        $_SESSION['user_id'] = $user->getId();
+        $_SESSION['username'] = $user->getUsername();
+    }
+
+
 
     public function logout() {
         // Destroy the session
