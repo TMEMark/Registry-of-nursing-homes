@@ -11,13 +11,25 @@ class DynamicSearchRepository
     {
         global $db;
 
-        $query = "SELECT DISTINCT sp.name, sp.email, l.name as 'location', sp.address, sp.contact_number, sp.website_url, sp.work_time, sp.remark, sp.longitude, sp.latitude, GROUP_CONCAT(s.name) as 'services', GROUP_CONCAT(c.name) as 'categories', c.id, sp.id, s.id
-        FROM service s
-        INNER JOIN service_provider_service sps ON sps.service_id = s.id
-        INNER JOIN service_provider sp ON sp.id = sps.service_provider_id
-        INNER JOIN location l ON l.id = sp.location
-        INNER JOIN service_provider_category spc ON spc.service_provider_id = sp.id
-        INNER JOIN category c ON c.id = spc.category_id";
+        $query = 'SELECT DISTINCT sp.name,
+                sp.email,
+                l.name AS "location",
+                sp.address,
+                sp.contact_number,
+                sp.website_url,
+                sp.work_time,
+                sp.remark,
+                sp.longitude,
+                sp.latitude,
+                GROUP_CONCAT(DISTINCT s.name) AS "services",
+                GROUP_CONCAT(DISTINCT c.name) AS "categories",
+                sp.id as "service_provider_id"
+FROM service s
+INNER JOIN service_provider_service sps ON sps.service_id = s.id
+INNER JOIN service_provider sp ON sp.id = sps.service_provider_id
+INNER JOIN LOCATION l ON l.id = sp.location
+INNER JOIN service_provider_category spc ON spc.service_provider_id = sp.id
+INNER JOIN category c ON c.id = spc.category_id';
 
         $conditions = [];
         $parameters = [];
@@ -70,14 +82,26 @@ class DynamicSearchRepository
     {
         global $db;
 
-        $query = "SELECT DISTINCT sp.name, sp.email, l.name as 'location', sp.address, sp.contact_number, sp.website_url, sp.work_time, sp.remark, sp.longitude, sp.latitude, GROUP_CONCAT(s.name) as 'services', GROUP_CONCAT(c.name) as 'categories', c.id, sp.id, s.id
-        FROM service s
-        INNER JOIN service_provider_service sps ON sps.service_id = s.id
-        INNER JOIN service_provider sp ON sp.id = sps.service_provider_id
-        INNER JOIN location l ON l.id = sp.location
-        INNER JOIN service_provider_category spc ON spc.service_provider_id = sp.id
-        INNER JOIN category c ON c.id = spc.category_id
-        GROUP BY sp.name";
+        $query = 'SELECT DISTINCT sp.name,
+                sp.email,
+                l.name AS "location",
+                sp.address,
+                sp.contact_number,
+                sp.website_url,
+                sp.work_time,
+                sp.remark,
+                sp.longitude,
+                sp.latitude,
+                GROUP_CONCAT(DISTINCT s.name) AS "services",
+                GROUP_CONCAT(DISTINCT c.name) AS "categories",
+                sp.id as "service_provider_id"
+FROM service s
+INNER JOIN service_provider_service sps ON sps.service_id = s.id
+INNER JOIN service_provider sp ON sp.id = sps.service_provider_id
+INNER JOIN LOCATION l ON l.id = sp.location
+INNER JOIN service_provider_category spc ON spc.service_provider_id = sp.id
+INNER JOIN category c ON c.id = spc.category_id
+GROUP BY sp.name';
 
         try{
             $statement = $db->prepare($query);
