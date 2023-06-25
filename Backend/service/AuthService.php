@@ -3,6 +3,7 @@
 namespace service;
 
 use dao\UserRepository;
+use entity\UserEntity;
 
 class AuthService
 {
@@ -23,13 +24,11 @@ class AuthService
 
         return false;
     }
-    private function startSession($user) {
+    private function startSession(UserEntity $user) {
         session_start();
         $_SESSION['user_id'] = $user->getId();
         $_SESSION['username'] = $user->getUsername();
     }
-
-
 
     public function logout() {
         // Destroy the session
