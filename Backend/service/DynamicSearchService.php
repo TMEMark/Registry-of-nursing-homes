@@ -33,4 +33,15 @@ class DynamicSearchService
             return $dynamicSearchDao;
         }
     }
+
+    function getAllDataFromDb(): array
+    {
+        $getAllDataFromDbDao = $this->dynamicSearchRepository->getAllDataFromDb();
+        if (empty($getAllDataFromDbDao)) {
+            syslog(LOG_INFO, 'No data found');
+            throw new Exception('No data found');
+        } else {
+            return $getAllDataFromDbDao;
+        }
+    }
 }

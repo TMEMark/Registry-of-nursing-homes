@@ -2,6 +2,9 @@
 
 namespace dao;
 
+use Exception;
+use PDO;
+
 class DynamicSearchRepository
 {
     function dynamicSearch($search, $location, $service, $category)
@@ -47,7 +50,9 @@ class DynamicSearchRepository
             $parameters[] = $category;
         }
 
-        if (!empty($conditions)) {
+        if (empty($conditions)) {
+            $query .= " WHERE 1";
+        } else {
             $query .= " WHERE " . implode(" AND ", $conditions);
         }
 
@@ -59,5 +64,30 @@ class DynamicSearchRepository
         $statement->closeCursor();
 
         return $results;
+    }
+
+    function getAllDataFromDb()
+    {
+        global $db;
+
+        $query = "SELECT DISTINCT sp.name, sp.email, l.name as 'location', sp.address, sp.contact_number, sp.website_url, sp.work_time, sp.remark, sp.longitude, sp.latitude, GROUP_CONCAT(s.name) as 'services', GROUP_CONCAT(c.name) as 'categories', c.id, sp.id, s.id
+        FROM service s
+        INNER JOIN service_provider_service sps ON sps.service_id = s.id
+        INNER JOIN service_provider sp ON sp.id = sps.service_provider_id
+        INNER JOIN location l ON l.id = sp.location
+        INNER JOIN service_provider_category spc ON spc.service_provider_id = sp.id
+        INNER JOIN category c ON c.id = spc.category_id
+        GROUP BY sp.name";
+
+        try{
+            $statement = $db->prepare($query);
+            if ($statement->execute()) {
+                return $statement->fetchAll(PDO::FETCH_ASSOC);
+            }
+            return [];
+        }catch(Exception $e){
+            error_log('could not find service');
+            return null;
+        }
     }
 }
