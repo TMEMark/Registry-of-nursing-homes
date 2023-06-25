@@ -12,10 +12,10 @@ class AuthReqHandler
         $this->authService = $authService;
     }
 
-    public function handleRequest($request, $postData = null) {
+    public function handleRequest($request, $postData) {
         switch ($request) {
             case 'login':
-                $this->login($postData);
+                $this->login($postData['username'], $postData['password']);
                 break;
             case 'logout':
                 $this->logout();
@@ -26,9 +26,7 @@ class AuthReqHandler
         }
     }
 
-    private function login($postData) {
-        $username = $postData['username'];
-        $password = $postData['password'];
+    private function login($username, $password) {
 
         if ($this->authService->login($username, $password)) {
             // Redirect to the home page or any other desired location

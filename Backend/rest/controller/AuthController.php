@@ -13,6 +13,8 @@ require_once '../mapper/UserMapper.php';
 
 $reqHandler = new AuthReqHandler(new AuthService(new UserRepository(new UserMapper())));
 
-$request = $_GET['action'];
+$request = $_POST['action'];
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-$reqHandler->handleRequest($request);
+$reqHandler->handleRequest($request, ['username' => $username, 'password' => $password]);
