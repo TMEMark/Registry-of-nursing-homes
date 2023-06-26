@@ -57,6 +57,7 @@ class ServiceProviderReqHandler
         try {
             return $this->serviceProviderService->insertServiceProvider($data) && http_response_code(201);
         }catch (Exception $e){
+            echo $e;
             return http_response_code(417);
         }
     }
@@ -67,6 +68,7 @@ class ServiceProviderReqHandler
         try {
             return $this->serviceProviderService->updateServiceProvider($data) && http_response_code(202);
         }catch (Exception $e){
+            echo $e;
             return http_response_code(417);
         }
     }

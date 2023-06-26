@@ -30,6 +30,15 @@ class ServiceProviderCategoryMapper
 
         return $serviceProviderCategoryDto;
     }
+
+    public function fromStdClass($row): ServiceProviderCategoryEntity
+    {
+        $serviceProviderCategory = new ServiceProviderCategoryEntity();
+        $serviceProviderCategory->setCategory($row['category_id']);
+
+        return $serviceProviderCategory;
+    }
+
 }
 
 ?>
