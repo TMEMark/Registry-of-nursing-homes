@@ -48,7 +48,7 @@ GROUP BY sp.name';
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         } catch (Exception $e) {
-            error_log('could not find service provider');
+            error_log('could not find service provider' . $e->getMessage());
             return null;
         }
     }
@@ -84,7 +84,7 @@ GROUP BY sp.name';
             }
             return [];
         }catch(Exception $e){
-            error_log('could not find service');
+            error_log('could not find service' . $e->getMessage());
             return null;
         }
     }
@@ -143,7 +143,7 @@ GROUP BY sp.name';
             return $serviceProvider;
         }catch(Exception $e){
             $db->rollback();
-            error_log('could not update service provider');
+            error_log('could not update service provider' . $e->getMessage());
 			return null;
         }
     }
@@ -161,7 +161,7 @@ GROUP BY sp.name';
             return true;
         }catch(Exception $e){
             $db->rollback();
-            error_log('could not delete service provider');
+            error_log('could not delete service provider' . $e->getMessage());
             return false;
         }
     }

@@ -168,6 +168,10 @@ class UserService{
                 syslog(LOG_INFO, 'username does not meet conditions');
                 throw new Exception('username does not meet conditions');
             }
+
+            $password = $user->getPassword();
+            $user->setPassword(password_hash($password, PASSWORD_BCRYPT));
+
             $userDao = $this->userDao->updateUser($user);
             if($userDao == null){
                 syslog(LOG_INFO, 'could not update user');
