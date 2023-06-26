@@ -27,7 +27,7 @@ class ServiceProviderDto extends AbstractDto
 
     public int $location;
 
-    private int $oib;
+    private String $oib;
 
     /**
      * @return string
@@ -190,20 +190,21 @@ class ServiceProviderDto extends AbstractDto
     }
 
     /**
-     * @return int
+     * @return String
      */
-    public function getOib(): int {
+    public function getOib(): string
+    {
         return $this->oib;
     }
 
     /**
-     * @param int $oib
-     * @return self
+     * @param String $oib
      */
-    public function setOib(int $oib): self {
+    public function setOib(string $oib): void
+    {
         $this->oib = $oib;
-        return $this;
     }
+
 
     /**
      * @return int

@@ -26,7 +26,7 @@ class ServiceProviderEntity extends AbstractEntity{
 
     private int $location;
 
-    private int $oib;
+    private String $oib;
 
 	/**
 	 * @return string
@@ -188,21 +188,21 @@ class ServiceProviderEntity extends AbstractEntity{
 		return $this;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getOib(): int {
-		return $this->oib;
-	}
-	
-	/**
-	 * @param int $oib 
-	 * @return self
-	 */
-	public function setOib(int $oib): self {
-		$this->oib = $oib;
-		return $this;
-	}
+    /**
+     * @return String
+     */
+    public function getOib(): string
+    {
+        return $this->oib;
+    }
+
+    /**
+     * @param String $oib
+     */
+    public function setOib(string $oib): void
+    {
+        $this->oib = $oib;
+    }
 
     /**
      * @return int
