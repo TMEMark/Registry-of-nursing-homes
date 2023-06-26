@@ -27,7 +27,6 @@ class AuthReqHandler
     }
 
     private function login($username, $password) {
-
         if ($this->authService->login($username, $password)) {
             // Redirect to the home page or any other desired location
             header('Location: ../../../Frontend/Pages/serviceProvider.php');

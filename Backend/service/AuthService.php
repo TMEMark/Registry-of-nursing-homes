@@ -19,6 +19,7 @@ class AuthService
 
         if ($user && password_verify($password, $user->getPassword())) {
             $this->startSession($user);
+            $_SESSION["logedIn"] = true;
             return true;
         }
 
