@@ -53,45 +53,35 @@ class ServiceProviderServiceRepository{
         }
     }
 
-    public function insertServiceProviderService($serviceProviderId, ServiceProviderServiceEntity $serviceProviderService): ?ServiceProviderServiceEntity
+    public function insertServiceProviderService($id, ServiceProviderServiceEntity $serviceProviderService, $db): ?ServiceProviderServiceEntity
     {
-        global $db;
-        try{
-            $statement = $db -> prepare('INSERT INTO service_provider_service (service_provider_id,service_id) 
-            VALUES (:service_provider,:service)');
+        try {
+            $statement = $db->prepare('INSERT INTO service_provider_service (service_provider_id, service_id) 
+        VALUES (:service_provider, :service)');
 
-
-            $statement -> execute ([':service_provider'=>$serviceProviderId, ':service'=>$serviceProviderService->getService()]);
-
+            $statement->execute(['service_provider' => $id, 'service' => $serviceProviderService->getService()]);
 
             $serviceProviderServiceId = $db->lastInsertId();
             $serviceProviderService->setId($serviceProviderServiceId);
 
             return $serviceProviderService;
-        }catch(Exception $e){
-            $db->rollBack();
-            error_log('could not create serviceProviderService {}', $serviceProviderService->getId(), $e);
-			return null;
+        } catch (Exception $e) {
+            error_log('Could not create serviceProviderService ' . $serviceProviderService->getId() . ': ' . $e->getMessage());
+            return null;
         }
     }
 
-    public function updateServiceProviderService(int $serviceProviderId, ServiceProviderServiceEntity $serviceProviderService): ?ServiceProviderServiceEntity
+    public function updateServiceProviderService(int $id, ServiceProviderServiceEntity $serviceProviderService, $db): ?ServiceProviderServiceEntity
     {
-        global $db;
         try{
             $statement = $db -> prepare('UPDATE service_provider_service SET
-            service_provider_id = :service_provider,
-            service_id = :service,
-            WHERE service_provider_id = :service_provider');
+            service_id = :service
+            WHERE service_provider_id = :service_provider_id');
 
-            $db->beginTransaction();
+            $statement -> execute ([':service_provider_id'=>$id, ':service'=>$serviceProviderService->getService()]);
 
-            $statement -> execute ([':service_provider'=>$serviceProviderId, ':service'=>$serviceProviderService->getService()]);
-
-            $db->commit();
             return $serviceProviderService;
         }catch(Exception $e){
-            $db->rollback();
             error_log('could not update serviceProviderService {}', $serviceProviderService->getId(), $e);
 			return null;
         }

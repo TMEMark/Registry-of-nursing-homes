@@ -73,24 +73,25 @@ class ServiceProviderService{
         $serviceProviderDao = $this->serviceProviderDao->insertServiceProvider($providerData);
         if($serviceProviderDao==null){
             syslog(LOG_INFO, 'could not create service provider');
-            throw new Exception('could not create service provider');
+            throw new Exception('could not create service provider ee');
         } else {
             $id = $serviceProviderDao->getId();
-            $categoryData = $this->serviceProviderCategoryMapper->toEntity($data);
-            $serviceData = $this->serviceProviderServiceMapper->toEntity($data);
+            $categoryData = $this->serviceProviderCategoryMapper->fromStdClass($data);
+            $serviceData = $this->serviceProviderServiceMapper->fromStdClass($data);
 
+            print_r($id);
             global $db;
 
             $db->beginTransaction();
 
             try {
-                $serviceProviderCategoryDao = $this->serviceProviderCategoryDao->insertServiceProviderCategory($id, $categoryData);
+                $serviceProviderCategoryDao = $this->serviceProviderCategoryDao->insertServiceProviderCategory($id, $categoryData, $db);
 
-                $serviceProviderServiceDao = $this->serviceProviderServiceDao->insertServiceProviderService($id, $serviceData);
+                $serviceProviderServiceDao = $this->serviceProviderServiceDao->insertServiceProviderService($id, $serviceData, $db);
 
                 if($serviceProviderCategoryDao == null|| $serviceProviderServiceDao == null){
-                    syslog(LOG_INFO, 'could not create service provider');
-                    throw new Exception('could not create service provider');
+                    syslog(LOG_INFO, 'could not create service provider cause category or service could not be inserted');
+                    throw new Exception('could not create service provider cause category or service could not be inserted');
                 }
 
                 $db->commit();
@@ -109,24 +110,25 @@ class ServiceProviderService{
      */
     public function updateServiceProvider($data): bool
     {
-        $providerData = $this->serviceProviderMapper->fromStdClass($data);
+        $providerData = $this->serviceProviderMapper->updateMapper($data);
         $serviceProviderDao = $this->serviceProviderDao->updateServiceProvider($providerData);
         if($serviceProviderDao==null){
-            syslog(LOG_INFO, 'could not update service provider');
+            syslog(LOG_INFO, 'could not update service provider hehe');
             throw new Exception('could not update service provider');
         } else {
-            $id = $serviceProviderDao->getId();
-            $categoryData = $this->serviceProviderCategoryMapper->toEntity($data);
-            $serviceData = $this->serviceProviderServiceMapper->toEntity($data);
+            $id = $providerData->getId();
+            $categoryData = $this->serviceProviderCategoryMapper->fromStdClass($data);
+            $serviceData = $this->serviceProviderServiceMapper->fromStdClass($data);
 
+            print_r($id);
             global $db;
 
             $db->beginTransaction();
 
             try {
-                $serviceProviderCategoryDao = $this->serviceProviderCategoryDao->updateServiceProviderCategory($id, $categoryData);
+                $serviceProviderCategoryDao = $this->serviceProviderCategoryDao->updateServiceProviderCategory($id, $categoryData, $db);
 
-                $serviceProviderServiceDao = $this->serviceProviderServiceDao->updateServiceProviderService($id, $serviceData);
+                $serviceProviderServiceDao = $this->serviceProviderServiceDao->updateServiceProviderService($id, $serviceData, $db);
 
                 if($serviceProviderCategoryDao == null|| $serviceProviderServiceDao == null){
                     syslog(LOG_INFO, 'could not update service provider');

@@ -56,42 +56,30 @@ class ServiceProviderCategoryRepository{
         }
     }
 
-    public function insertServiceProviderCategory($serviceProviderId, ServiceProviderCategoryEntity $serviceProviderCategory): ?ServiceProviderCategoryEntity
+    public function insertServiceProviderCategory($id, ServiceProviderCategoryEntity $serviceProviderCategory, $db): ?ServiceProviderCategoryEntity
     {
-        global $db;
-        try{
-
-            $statement = $db -> prepare ('INSERT INTO service_provider_category (id,service_provider_id,category_id) 
-            VALUES (:id,:service_provider,:category)');
-
-            $statement -> execute ([':service_provider'=>$serviceProviderId, ':category'=>$serviceProviderCategory->getCategory()]);
+        try {
+            $statement = $db->prepare('INSERT INTO service_provider_category (service_provider_id, category_id) VALUES (:service_provider, :category)');
+            $statement->execute(['service_provider' => $id, 'category' => $serviceProviderCategory->getCategory()]);
 
             $serviceProviderCategoryId = $db->lastInsertId();
             $serviceProviderCategory->setId($serviceProviderCategoryId);
 
             return $serviceProviderCategory;
-
-        }catch(Exception $e){
-            $db->rollback();
-            error_log('could not create serviceProviderCategory {}', $serviceProviderCategory->getId(), $e);
-			return null;
+        } catch (Exception $e) {
+            error_log('Could not create serviceProviderCategory ' . $serviceProviderCategory->getId() . ': ' . $e->getMessage());
+            return null;
         }
     }
 
-    public function updateServiceProviderCategory(int $serviceProviderId, ServiceProviderCategoryEntity $serviceProviderCategory): ?ServiceProviderCategoryEntity
+    public function updateServiceProviderCategory(int $id, ServiceProviderCategoryEntity $serviceProviderCategory, $db): ?ServiceProviderCategoryEntity
     {
-        global $db;
         try{
             $statement = $db -> prepare('UPDATE service_provider_category SET
-            "service_provider_id" = :service_provider_id,
-            "category_id" = :category,
+            category_id = :category
             WHERE service_provider_id = :service_provider_id');
 
-            $db -> beginTransaction();
-
-            $statement -> execute ([':service_provider'=>$serviceProviderId, ':category'=>$serviceProviderCategory->getCategory()]);
-
-            $db->commit();
+            $statement -> execute ([':service_provider_id'=>$id, ':category'=>$serviceProviderCategory->getCategory()]);
 
             return $serviceProviderCategory;
         }catch(Exception $e){

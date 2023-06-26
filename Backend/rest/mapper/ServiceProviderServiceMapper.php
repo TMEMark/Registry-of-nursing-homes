@@ -28,6 +28,14 @@ class ServiceProviderServiceMapper
 
         return $serviceProviderServiceDto;
     }
+
+    public function fromStdClass($row): ServiceProviderServiceEntity
+    {
+        $serviceProviderService = new ServiceProviderServiceEntity();
+        $serviceProviderService->setService($row['service_id']);
+
+        return $serviceProviderService;
+    }
 }
 
 ?>
