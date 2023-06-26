@@ -30,6 +30,7 @@ class ServiceProviderRepository{
                 sp.remark,
                 sp.longitude,
                 sp.latitude,
+                sp.oib,
                 GROUP_CONCAT(DISTINCT s.name) AS "services",
                 GROUP_CONCAT(DISTINCT c.name) AS "categories",
                 sp.id as "service_provider_id"
@@ -65,6 +66,7 @@ GROUP BY sp.name';
                 sp.remark,
                 sp.longitude,
                 sp.latitude,
+                sp.oib,
                 GROUP_CONCAT(DISTINCT s.name) AS "services",
                 GROUP_CONCAT(DISTINCT c.name) AS "categories",
                 sp.id as "service_provider_id"
