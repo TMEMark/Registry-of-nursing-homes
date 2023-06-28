@@ -42,4 +42,12 @@ class AuthService
         session_start();
         return isset($_SESSION['user_id']);
     }
+
+    public function isUserAuthenticated() {
+        if (isset($_SESSION['logedIn'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
