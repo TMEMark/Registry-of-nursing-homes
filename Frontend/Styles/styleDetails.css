@@ -26,14 +26,12 @@ h1 {
 }
 .txtDetail {
   font-style: normal;
-  font-weight: 600;
   font-size: 20px;
   color: #535353;
 }
 .txtDetailServices {
   margin-left: 150px;
   font-style: normal;
-  font-weight: 600;
   font-size: 20px;
   color: #535353;
 }
@@ -51,4 +49,10 @@ h1 {
   .txtDetailServices {
     margin-left: 0px;
   }
+}
+
+@media (max-width: 480px) {
+iframe{
+  width: 350px;
+}
 }

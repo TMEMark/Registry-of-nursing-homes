@@ -1,3 +1,4 @@
+<?php //require '../../Backend/rest/controller/AuthController.php' ?>
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-12 col-xl-12">
@@ -12,36 +13,42 @@
 
       <div class="content">
         <?php 
+        if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+          $userId = $_SESSION['user_id'];
+          $username = $_SESSION['username'];
         echo "<p><img src='../Assets/user.svg' alt='admin' id='admin' style= 'width:40px;'>
-        Prijavljeni ste kao: " . $_SESSION["user"] . "</p>";
+        Prijavljeni ste kao: " . $username . "</p>";
+      } else {
+        echo "Korisnik trenutno nije prijavljen.";
+    }
         ?>
         
         <table class="nav">
 
           <tr>
             <td id="celija_pruzatelji">
-              <a href="pruzatelji.php" id="pruzatelji"><img src="../Assets/home.svg" id="ikona_pruzatelji"/></a>
+              <a href="serviceProvider.php" id="pruzatelji"><img src="../Assets/home.svg" id="ikona_pruzatelji"/></a>
             </td>
             <td>
-              <a href="pruzatelji.php" id="pruzatelji">PRUŽATELJI</a>
+              <a href="serviceProvider.php" id="serviceProvider">PRUŽATELJI</a>
             </td>
           </tr>
 
           <tr>
             <td id="celija_usluge">
-              <a href="usluge.php"><img src="../Assets/open-hand.svg" id="ikona_usluge"/></a>
+              <a href="service.php"><img src="../Assets/open-hand.svg" id="ikona_usluge"/></a>
             </td>
             <td>
-              <a href="usluge.php" id="usluge">USLUGE</a>
+              <a href="service.php" id="service">USLUGE</a>
             </td>
           </tr>
 
           <tr>
             <td id="celija_kategorije">
-              <a href="kategorije.php"><img src="../Assets/list-menu.svg" id="ikona_kategorije"/></a>
+              <a href="category.php"><img src="../Assets/list-menu.svg" id="ikona_kategorije"/></a>
             </td>
             <td>
-              <a href="kategorije.php" id="kategorije">KATEGORIJE</a>
+              <a href="category.php" id="category">KATEGORIJE</a>
             </td>
           </tr>
 
@@ -58,3 +65,5 @@
       
     </div>
   </div>
+
+  <script src="../JavaScript/login.js" charset="utf-8" type="text/javascript"></script>
