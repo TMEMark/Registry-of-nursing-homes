@@ -1,5 +1,5 @@
 <?php
-require "Components/header.phpl";
+require "Components/header.php";
 
 $id = $_GET["id"];
 $url = "http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/ServiceProviderController.php?id=" . $id;

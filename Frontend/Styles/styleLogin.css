@@ -18,7 +18,7 @@ label {
     font-weight: bold;
     margin-right: 15px;
 }
-#quit {
+a #quit {
     border-radius: 10px;
     border-color: #CF2214;
     height: 40px;
@@ -26,6 +26,7 @@ label {
     font-weight: bold;
     background-color: #fff;
     margin-top: 2px;
+    color: #CF2214 !important;
 }
 #quit:hover{
     border-radius: 10px;

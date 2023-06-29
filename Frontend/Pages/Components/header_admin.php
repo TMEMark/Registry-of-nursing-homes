@@ -1,3 +1,4 @@
+<?php //require '../../Backend/rest/controller/AuthController.php' ?>
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-12 col-xl-12">
@@ -64,3 +65,5 @@
       
     </div>
   </div>
+
+  <script src="../JavaScript/login.js" charset="utf-8" type="text/javascript"></script>

@@ -1,11 +1,12 @@
 <?php
 require "Components/header.php";
 require "Components/header_admin.php";
+require "Components/authCheck.php";
 ?>
 
 
 <div class="container"><a href="form_category.php">
-    <img src="../Assets/dodaj_ikona.svg" alt="Dodaj" id="add"></a>
+    <img src="../Assets/dodaj_ikona.svg" alt="Add" id="add"></a>
 </div>
 <style>
   @media (max-width:991px) {
@@ -29,7 +30,7 @@ foreach ($response_data as $category_data) {
           </b></p>
       </div>
       <div class="col-2">
-        <a href="form_category.php?id=<?php echo $category_data->id ?>" data-id="<?php echo $category_data->id ?>">
+        <a href="form_category_update.php?id=<?php echo $category_data->id ?>" data-id="<?php echo $category_data->id ?>">
           <img src="../Assets/update.svg" alt="Update">
         </a>
 
@@ -61,7 +62,7 @@ foreach ($response_data as $category_data) {
             <?php echo $category_data->name; ?>
           </td>
           <td>
-            <a href="form_category.php?id=<?php echo $category_data->id ?>"
+            <a href="form_category_update.php?id=<?php echo $category_data->id ?>"
               data-id="<?php echo $category_data->id ?>"><img src="../Assets/update.svg" alt="Update"></a>
 
             <a href="#"
@@ -106,6 +107,7 @@ foreach ($response_data as $category_data) {
         console.error('Error:', error);
       });
   }
+  
 </script>
 <?php
 require "Components/footer.html";

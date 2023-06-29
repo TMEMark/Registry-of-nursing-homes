@@ -1,3 +1,6 @@
+html{
+  zoom: 90%;
+}
 .indexPage{
   font-family: 'Poppins', sans-serif;
   margin-top: 10px;
@@ -5,9 +8,11 @@
 /*MAIN GRID*/
 .filters {
   grid-area: a;
+  margin: 20px;
 }
 .filtersCollapsible {
   grid-area: a1;
+  margin-left: 120px !important;
 }
 .gridNursingHomes {
   grid-area: b
@@ -28,6 +33,17 @@
 } 
 .imgDesc{
   display: flex;
+}
+#filtersBtn{
+  width: 90px;
+    height: 30px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    background: #CF2214;
+    color: #fff;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
 }
 }
 
@@ -99,17 +115,24 @@
     "b c c c c"
   }
   #nameNursingHome {
-    color: #F1F1F1 !important;
-    font-size: 16px;
+    color: #CF2214 !important;;
+    font-weight: 800 !important;
+    font-family: 'Poppins', sans-serif;
+    background: #F9F9F9;
+    border-radius: 10px;
   }
   #nameLocation {
-    color: #fff;
+    color: #858585;
     font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 20px !important;
   }
   .mainInfo {
-    background: #CF2214;
     padding-top: 10px;
     width: 100%;
+  }
+  #img_mobile{
+    width: 90%;
   }
   .img {
     width: 100%;
@@ -119,6 +142,7 @@
     margin-top: -10px;
     z-index: -1;
   }
+
   }
   
   #filterTxtOne {
@@ -134,6 +158,10 @@
     font-size: 12px;
     line-height: 18px;
     display: inline-block;
+    margin-left: 60px !important;
+  }
+  #clickFilterTxtTwo{
+    color: #CF2214 !important;
   }
   #clickFilterTxtTwo:hover{
     cursor: pointer;

@@ -1,7 +1,7 @@
 <?php
 require "Components/header.php";
 require "Components/header_admin.php";
-
+require "Components/authCheck.php";
 ?>
 
 <div class="container"><a href="form_admin.php">

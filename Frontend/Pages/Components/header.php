@@ -36,52 +36,26 @@
       </a>
     </div>
     <div class="searchBar">
-      <form action="http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/DynamicSearchController.php" method="get">
+      <form action="#" method="get">
         <img src="../Assets/search.svg" id="imgSearchBar">
         <input class="inputField" type="search" name="search" id="search" placeholder="Pretražite domove">
         <button type="submit" name="button" id="searchButton">Pretražite</button>
       </form>
     </div>
     <div class="login">
-      <a href="form_login.php">
+      <!-- <a href="form_login.php">
         <p id="loginTxt">Login</p>
-      </a>
+      </a> -->
+      <?php
 
+      if (isset($_SESSION['isLoggedIn']) == 1) {
+        echo '<a href="../../Backend/Controller/LoginSystem/logout.php" class="d-none d-lg-block" id="logout">Logout</a>';
+      }
+      if (isset($_SESSION['isLoggedIn']) == 0) {
+        echo '<a href="../Pages/form_login.php" class="login"> <p id="loginTxt">Login</p></a>';
+        ;
+      }
+
+      ?>
     </div>
   </nav>
-
-  <script>
-  //   document.getElementById('searchButton').addEventListener('click', function () {
-  //     var searchValue = document.getElementById('search').value;
-  //     var url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/DynamicSearchController.php?search=' + encodeURIComponent(searchValue);
-
-  //     var xhr = new XMLHttpRequest();
-  //     xhr.open('GET', url, true);
-  //     xhr.onreadystatechange = function () {
-  //       if (xhr.readyState === 4 && xhr.status === 200) {
-  //         var response = xhr.responseText;
-  //         // Process the response here
-  //         console.log(response);
-  //         displaySearchResults(response);
-  //       }
-  //     };
-  //     xhr.send();
-  //   });
-  //   function displaySearchResults(results) {
-  //     // console.log(results);
-  //     // var resultContainer = document.getElementById('resultContainer');
-  //     // resultContainer.innerHTML = results;
-  //     var data = JSON.parse(results);
-
-  // // Extract the desired data
-  // var name = data[0].name;
-  // var location = data[0].location;
-  // var services = data[0].services;
-  // var categories = data[0].categories;
-
-  // // Update existing HTML elements with the extracted data
-  // document.getElementById('nameNursingHome').textContent = name;
-  // document.getElementById('nameLocation').textContent = location;
-  // document.getElementById('nameServicesCategories').textContent = services + "\n" + categories;
-  //   }
-  </script>

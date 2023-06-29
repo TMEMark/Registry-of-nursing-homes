@@ -1,6 +1,7 @@
 <?php
 require "Components/header.php";
 require "Components/header_admin.php";
+require "Components/authCheck.php";
 ?>
 <style>
   @media (max-width:991px) {

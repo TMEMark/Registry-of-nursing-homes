@@ -1,8 +1,10 @@
 <?php
 require "Components/header.php";
+require "Components/authCheck.php";
+
 if (isset($_GET["id"])) {
   $id = $_GET["id"];
-  $url = "http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/serviceProviderController.php?id=" . $id;
+  $url = "http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/ServiceProviderController.php?id=" . $id;
   $response = file_get_contents($url);
   $data = json_decode($response, true);
 } else {
@@ -13,31 +15,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Retrieve the form data
   $name = $_POST['name'];
   $email = $_POST['email'];
-  // $location = $_POST['location'];
+  $location = $_POST['location'];
   $address = $_POST['address'];
   $contact_number = $_POST['contact_number'];
   $website_url = $_POST['website_url'];
   $work_time = $_POST['work_time'];
   $remark = $_POST['remark'];
-  // $longitude = $_POST['longitude'];
-  // $latitude = $_POST['latitude'];
-  // $services = $_POST['services'];
-  // $categories = $_POST['categories'];
+  $longitude = $_POST['longitude'];
+  $latitude = $_POST['latitude'];
+  $services = $_POST['services'];
+  $categories = $_POST['categories'];
 
   // Create an associative array with the form data
   $data = array(
       'name' => $name,
       'email' => $email,
-      // 'location' => $location,
+      'location' => $location,
       'address' => $address,
       'contact_number' => $contact_number,
       'website_url' => $website_url,
       'work_time' => $work_time,
       'remark' => $remark,
-      // 'longitude' => $longitude,
-      // 'latitude' => $latitude,
-      // 'services' => $services,
-      // 'categories' => $categories
+      'longitude' => $longitude,
+      'latitude' => $latitude,
+      'services' => $services,
+      'categories' => $categories
   );
   // Encode the data as JSON
   $jsonData = json_encode($data);
@@ -69,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
 <!--form-->
   <form data-multi-step class="multi-step-form" action="form_serviceProvider.php" method="post">
-  <input type="hidden" name="idPruz" value="<?php echo isset($data['id']) ? $data['id'] : '' ; ?>">
+  <input type="hidden" name="idPruz" value="<?php echo isset($data['service_provider_id']) ? $data['service_provider_id'] : '' ; ?>">
     <div class="card" data-step>
       <h2>Dodajte pružatelja</h2>
       <h3 class="step-title">Osnovne informacije</h3>
@@ -80,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <span class="content-naziv" >
                   Naziv pružatelja
               </span><br>
-              <input type="text" autocomplete="off" id="naziv" value="<?php echo isset($data['name']) ? $data['name'] : '' ; ?>" name="name" />
+              <input type="text" autocomplete="off" id="naziv" value="<?php echo isset($data['name']) ? $data['name'] : '' ; ?>" name="name" required/>
           </label>
           <br />
         </div>

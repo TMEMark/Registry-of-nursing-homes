@@ -1,6 +1,7 @@
 <?php
 require "Components/header.php";
 require "Components/header_admin.php";
+require "Components/authCheck.php";
 ?>
 
 
@@ -62,12 +63,12 @@ require "Components/header_admin.php";
         </div>
 
         <div class="col-2">
-          <a href="form_serviceProvider.php?id=<?php echo $serviceProvider_data->id ?>">
+          <a href="form_serviceProvider.php?id=<?php echo $serviceProvider_data->service_provider_id ?>">
             <img src="../Assets/update.svg" alt="Update">
           </a>
 
           <a href="#"
-              onclick="event.preventDefault(); if(confirm('Jeste li sigurni da želite obrisati?')) { deleteServiceProvider(<?php echo $serviceProvider_data->id; ?>); }">
+              onclick="event.preventDefault(); if(confirm('Jeste li sigurni da želite obrisati?')) { deleteServiceProvider(<?php echo $serviceProvider_data->service_provider_id; ?>); }">
               <img src="../Assets/delete.svg" alt="Delete">
             </a>
         </div>
@@ -129,10 +130,10 @@ require "Components/header_admin.php";
 
 
             <td>
-            <a href="form_serviceProvider.php?id=<?php echo $serviceProvider_data->id ?>">
+            <a href="form_serviceProvider.php?id=<?php echo $serviceProvider_data->service_provider_id ?>">
               <img src="../Assets/update.svg" alt="Update">
               <a href="#"
-              onclick="event.preventDefault(); if(confirm('Jeste li sigurni da želite obrisati?')) { deleteServiceProvider(<?php echo $serviceProvider_data->id; ?>); }">
+              onclick="event.preventDefault(); if(confirm('Jeste li sigurni da želite obrisati?')) { deleteServiceProvider(<?php echo $serviceProvider_data->service_provider_id; ?>); }">
               <img src="../Assets/delete.svg" alt="Delete">
             </a>
             </td>
@@ -150,7 +151,7 @@ require "Components/header_admin.php";
   ?>
 <script>
   function deleteServiceProvider(id) {
-    const url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/ServiceProviderController.php?id=<?php echo $serviceProvider_data->id ?>';
+    const url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/ServiceProviderController.php?id=<?php echo $serviceProvider_data->service_provider_id ?>';
 
     fetch(url, {
       method: 'DELETE',

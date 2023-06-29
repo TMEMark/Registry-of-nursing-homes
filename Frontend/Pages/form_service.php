@@ -1,5 +1,6 @@
 <?php
 require "Components/header.php";
+require "Components/authCheck.php";
 
 if (isset($_GET["id"])) {
   $id = $_GET["id"];
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
               <div class="form-group">
                 <label>Naziv usluge</label>
-                <input name="name" type="text" class="form-control" value="<?php echo isset($data['name']) ? $data['name'] : '' ; ?>">
+                <input name="name" type="text" class="form-control" value="<?php echo isset($data['name']) ? $data['name'] : '' ; ?>" required>
               </div>
 
               <input type="submit" name="submit" value="Unos" class="submit">

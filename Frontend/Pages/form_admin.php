@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="../Styles/styleAdmin.css">
 <?php
 require "Components/header.php";
+require "Components/authCheck.php";
 
 if (isset($_GET["id"])) {
   $id = $_GET["id"];
@@ -11,38 +12,52 @@ if (isset($_GET["id"])) {
   echo "<label style='margin: 20px'>Unosite novi podatak</label>";
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
   // Retrieve the form data
+  $id = $_POST['id_admin'];
   $firstname = $_POST['firstname'];
   $lastname = $_POST['lastname'];
   $username = $_POST['username'];
+  $password = $_POST['lozinka'];
   $role = $_POST['role'];
+
   // Create an associative array with the form data
   $data = array(
-      'firstname' => $firstname,
-      'lastname' => $lastname,
-      'username' => $username,
-      'role' => $role
+    'id_admin' => $id,
+    'firstname' => $firstname,
+    'lastname' => $lastname,
+    'username' => $username,
+    'lozinka' => $password,
+    'role' => $role
   );
+
   // Encode the data as JSON
   $jsonData = json_encode($data);
-  // Send the JSON data to the backend using cURL
+
+  // Set the endpoint URL
   $url = 'http://localhost/Registry-of-nursing-homes/registry/Backend/rest/controller/UserController.php';
 
-  $ch = curl_init($url);
-  curl_setopt($ch, CURLOPT_POST, 1);
+  // Initialize cURL
+  $ch = curl_init();
+
+  // Set the cURL options
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, ($_SERVER['REQUEST_METHOD'] === 'PUT') ? 'PUT' : 'POST');
   curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
   curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
+  // Execute the cURL request
   $response = curl_exec($ch);
 
+  // Check for errors
   if ($response === false) {
-      echo 'Error: ' . curl_error($ch);
+    echo 'Error: ' . curl_error($ch);
   } else {
-      echo 'Uspješno dodan/promijenjen podatak.';
+    echo 'Uspješno dodan/promijenjen korisnik.';
   }
 
+  // Close the cURL session
   curl_close($ch);
 }
 ?>
@@ -63,22 +78,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="firstname">Ime</label>
-                <input name="firstname" type="text" class="form-control" value="<?php echo isset($data['firstname']) ? $data['firstname'] : '' ; ?>">
+                <input name="firstname" type="text" class="form-control" value="<?php echo isset($data['firstname']) ? $data['firstname'] : '' ; ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="lastname">Prezime</label>
-                <input name="lastname" type="text" class="form-control" value="<?php echo isset($data['lastname']) ? $data['lastname'] : '' ; ?>">
+                <input name="lastname" type="text" class="form-control" value="<?php echo isset($data['lastname']) ? $data['lastname'] : '' ; ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="username">Korisničko ime</label>
-                <input name="username" type="text" class="form-control" value="<?php echo isset($data['username']) ? $data['username'] : '' ; ?>">
+                <input name="username" type="text" class="form-control" value="<?php echo isset($data['username']) ? $data['username'] : '' ; ?>" required>
             </div>
 
             <div class="form-group">
                 <label>Lozinka</label>
-                <input name="lozinka" type="password" class="form-control" value="<?php echo isset($data['password']) ? $data['password'] : '' ; ?>">
+                <input name="lozinka" type="password" class="form-control" value="<?php echo isset($data['password']) ? $data['password'] : '' ; ?>" required>
             </div>
 
             <div class="form-group">
