@@ -1,0 +1,20 @@
+#serviceProvider{
+    text-decoration: none;
+    color: #2B3C75;
+    font-weight: 750;
+}
+#service{
+    text-decoration: none;
+    color: #D92179;
+    font-weight: 750;
+}
+#category{
+    text-decoration: none;
+    color: #3ECD32;
+    font-weight: 750;
+}
+#admin{
+    text-decoration: none;
+    color: #F4980C;
+    font-weight: 750;
+}
